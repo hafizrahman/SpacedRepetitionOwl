@@ -20,7 +20,6 @@ import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
  */
 class SubjectFragment : Fragment() {
 
-    // TODO: Customize parameters
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
