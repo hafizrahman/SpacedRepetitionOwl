@@ -1,4 +1,4 @@
-package studio.oldblack.spacedrepetitionowl
+package black.old.spacedrepetitionowl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
