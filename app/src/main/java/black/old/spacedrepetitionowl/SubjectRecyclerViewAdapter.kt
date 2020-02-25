@@ -7,12 +7,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.models.Subject
 import kotlinx.android.synthetic.main.fragment_subject.view.*
+import black.old.spacedrepetitionowl.SubjectFragment.OnListFragmentInteractionListener
 
 class SubjectRecyclerViewAdapter(
-    val subjects: List<Subject>
+    val subjects: List<Subject>,
+    val listener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<SubjectRecyclerViewAdapter.ViewHolder>() {
+    private val onClickListener: View.OnClickListener
 
     init {
+        onClickListener = View.OnClickListener { v ->
+            val item = v.tag as Subject
+            // TODO("This still uses the DummyItem, replace it with actual stuff")
+            //listener?.onListFragmentInteraction(item)
+        }
 
     }
 
@@ -24,7 +32,6 @@ class SubjectRecyclerViewAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_subject, parent, false)
         return ViewHolder(view)
-
     }
 
     override fun getItemCount(): Int = subjects.size
