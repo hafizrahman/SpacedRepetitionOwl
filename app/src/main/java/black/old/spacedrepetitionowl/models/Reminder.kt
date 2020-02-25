@@ -1,5 +1,8 @@
 package black.old.spacedrepetitionowl.models
 
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import java.util.*
 
 /*
@@ -10,9 +13,19 @@ import java.util.*
    - checked            : This is to allow user to check a Reminder once they have done the learning
                           for that date
  */
-class Reminder {
-    var id: Int? = null
-    var subjectId: Int? = null
-    var date: Date? = null
-    var checked: Boolean? = null
-}
+@Entity(
+    tableName="sro_reminders",
+    foreignKeys = [ForeignKey(
+        entity          = Subject::class,
+        parentColumns   = arrayOf("id"),
+        childColumns    = arrayOf("subjectId"),
+        onDelete        = ForeignKey.CASCADE
+        )]
+    )
+data class Reminder(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    var subjectId: Int,
+    var date: Date,
+    var checked: Boolean
+
+)

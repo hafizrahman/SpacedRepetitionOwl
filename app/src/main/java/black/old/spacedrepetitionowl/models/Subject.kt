@@ -1,5 +1,7 @@
 package black.old.spacedrepetitionowl.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
 /*
@@ -9,9 +11,10 @@ import java.util.*
    - url (optional)     : Link to a page that has more info about the content
    - start date         : When the first learning is started
  */
-class Subject {
-    var id: Int? = null
-    var content: String? = null
-    var url: String? = null
-    var startDate: Date? = null
-}
+@Entity(tableName="sro_subjects")
+data class Subject (
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    var content: String,
+    var url: String,
+    var startDate: Date
+)
