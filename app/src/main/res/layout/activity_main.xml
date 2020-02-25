@@ -15,8 +15,7 @@
         android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:hint="Enter Subject Here"
-        android:text="Enter subject here..."
+        android:hint="Enter Subject here..."
         android:paddingHorizontal="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

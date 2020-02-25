@@ -11,4 +11,5 @@
     app:layoutManager="LinearLayoutManager"
     tools:context=".SubjectFragment"
     tools:listitem="@layout/fragment_subject"
-    android:paddingTop="6dp"/>
+    android:paddingTop="6dp"
+    android:paddingBottom="24dp"/>
