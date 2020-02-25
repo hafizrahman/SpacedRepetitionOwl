@@ -15,7 +15,7 @@ class SroRepository(application: Application) {
         subjectDao?.insert(subject)
     }
 
-    suspend fun getSubjects(): LiveData<List<Subject>>? {
+    fun getSubjects(): LiveData<List<Subject>>? {
         return subjectDao?.getAllSubjects()
     }
 
@@ -23,7 +23,7 @@ class SroRepository(application: Application) {
         reminderDao?.insert(reminder)
     }
 
-    suspend fun getReminderBySubject(subjectId: Int) : LiveData<List<Reminder>>? {
+    fun getReminderBySubject(subjectId: Int) : LiveData<List<Reminder>>? {
         return reminderDao?.getRemindersBySubject(subjectId)
     }
 }
