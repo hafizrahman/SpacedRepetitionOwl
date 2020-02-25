@@ -1,6 +1,7 @@
 package black.old.spacedrepetitionowl.repositories
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import black.old.spacedrepetitionowl.database.SroDatabase
 import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
@@ -14,7 +15,7 @@ class SroRepository(application: Application) {
         subjectDao?.insert(subject)
     }
 
-    suspend fun getSubjects(): List<Subject>? {
+    suspend fun getSubjects(): LiveData<List<Subject>>? {
         return subjectDao?.getAllSubjects()
     }
 
@@ -22,7 +23,7 @@ class SroRepository(application: Application) {
         reminderDao?.insert(reminder)
     }
 
-    suspend fun getReminderBySubject(subjectId: Int) : List<Reminder>? {
+    suspend fun getReminderBySubject(subjectId: Int) : LiveData<List<Reminder>>? {
         return reminderDao?.getRemindersBySubject(subjectId)
     }
 }

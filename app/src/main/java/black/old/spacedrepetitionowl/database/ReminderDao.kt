@@ -15,11 +15,7 @@ interface ReminderDao {
     @Delete
     suspend fun delete(reminder: Reminder)
 
-
-    // Note: Current implementation of Room with coroutines does not support the use of LiveData,
-    // so instead of using LiveData<List<Reminder>> , I am using List<Reminder> instead, and will
-    // create the LiveData in the ViewModel instead.
-    // See: https://stackoverflow.com/a/56603632
+    // No need for coroutines when LiveData is used.
     @Query("SELECT * FROM sro_reminders WHERE subjectId = :subjectId ORDER BY dateTimestamp ASC")
-    suspend fun getRemindersBySubject(subjectId: Int): List<Reminder>
+    fun getRemindersBySubject(subjectId: Int): LiveData<List<Reminder>>
 }

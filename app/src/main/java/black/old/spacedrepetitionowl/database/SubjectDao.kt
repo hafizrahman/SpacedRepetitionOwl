@@ -15,11 +15,8 @@ interface SubjectDao {
     @Delete
     suspend fun delete(subject: Subject)
 
-    // Note: Current implementation of Room with coroutines does not support the use of LiveData,
-    // so instead of using LiveData<List<Subject>> , I am using List<Subject> instead, and will
-    // create the LiveData in the ViewModel instead.
-    // See: https://stackoverflow.com/a/56603632
+    // No need for coroutines when LiveData is used.
     @Query("SELECT * FROM sro_subjects")
-    suspend fun getAllSubjects(): List<Subject>
+    fun getAllSubjects(): LiveData<List<Subject>>
 
 }
