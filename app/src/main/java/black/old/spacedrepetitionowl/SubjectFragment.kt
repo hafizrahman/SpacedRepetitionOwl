@@ -9,9 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
+import black.old.spacedrepetitionowl.models.Subject
+import black.old.spacedrepetitionowl.viewmodels.SroViewModel
 
 /**
  * A fragment representing a list of Items.
@@ -32,11 +36,10 @@ class SubjectFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_subject_list, container, false)
+
+        lateinit var sroViewModel: SroViewModel
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -47,6 +50,15 @@ class SubjectFragment : Fragment() {
                 }
                 adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
             }
+
+            sroViewModel = ViewModelProvider(this).get(SroViewModel::class.java)
+            sroViewModel.getSubjects()?.observe(this,
+                Observer<List<Subject>> {
+                    // TODO
+                }
+            )
+
+
         }
         return view
     }

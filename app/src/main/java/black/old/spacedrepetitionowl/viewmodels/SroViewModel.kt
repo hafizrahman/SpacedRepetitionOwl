@@ -15,8 +15,7 @@ class SroViewModel(application: Application) : AndroidViewModel(application) {
         sroRepository.insertSubject(subject)
     }
 
-    fun getSubjects() {
-        sroRepository.getSubjects()
+    fun getSubjects(): LiveData<List<Subject>>? {
+        return sroRepository.getSubjects()
     }
-
 }
