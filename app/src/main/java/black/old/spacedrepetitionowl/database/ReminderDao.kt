@@ -10,11 +10,16 @@ import black.old.spacedrepetitionowl.models.Reminder
 @Dao
 interface ReminderDao {
     @Insert
-    fun insert(reminder: Reminder)
+    suspend fun insert(reminder: Reminder)
 
     @Delete
-    fun delete(reminder: Reminder)
+    suspend fun delete(reminder: Reminder)
 
+
+    // Note: Current implementation of Room with coroutines does not support the use of LiveData,
+    // so instead of using LiveData<List<Reminder>> , I am using List<Reminder> instead, and will
+    // create the LiveData in the ViewModel instead.
+    // See: https://stackoverflow.com/a/56603632
     @Query("SELECT * FROM sro_reminders WHERE subjectId = :subjectId ORDER BY dateTimestamp ASC")
-    fun getRemindersBySubject(subjectId: Int): LiveData<List<Reminder>>
+    suspend fun getRemindersBySubject(subjectId: Int): List<Reminder>
 }

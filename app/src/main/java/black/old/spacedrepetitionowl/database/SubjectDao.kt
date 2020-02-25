@@ -10,12 +10,16 @@ import black.old.spacedrepetitionowl.models.Subject
 @Dao
 interface SubjectDao {
     @Insert
-    fun insert(subject: Subject)
+    suspend fun insert(subject: Subject)
 
     @Delete
-    fun delete(subject: Subject)
+    suspend fun delete(subject: Subject)
 
+    // Note: Current implementation of Room with coroutines does not support the use of LiveData,
+    // so instead of using LiveData<List<Subject>> , I am using List<Subject> instead, and will
+    // create the LiveData in the ViewModel instead.
+    // See: https://stackoverflow.com/a/56603632
     @Query("SELECT * FROM sro_subjects")
-    fun getAllSubjects(): LiveData<List<Subject>>
+    suspend fun getAllSubjects(): List<Subject>
 
 }
