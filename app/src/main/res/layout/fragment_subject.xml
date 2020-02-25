@@ -1,20 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="6dp"
+    card_view:cardBackgroundColor="#ffffff"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/item_number"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:orientation="vertical"
+        android:padding="6dp">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/reminder_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/reminder_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/reminder_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/reminder_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/reminder_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+

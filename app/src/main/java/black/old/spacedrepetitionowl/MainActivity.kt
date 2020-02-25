@@ -12,6 +12,6 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
     }
 
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
-
+        // TODO: ACtually do something onListFragmentInteraction
     }
 }

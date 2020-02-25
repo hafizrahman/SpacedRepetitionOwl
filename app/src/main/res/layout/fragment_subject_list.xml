@@ -10,4 +10,5 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".SubjectFragment"
-    tools:listitem="@layout/fragment_subject" />
+    tools:listitem="@layout/fragment_subject"
+    android:paddingTop="6dp"/>
