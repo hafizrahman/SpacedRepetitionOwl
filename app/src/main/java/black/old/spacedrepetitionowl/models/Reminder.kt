@@ -30,6 +30,5 @@ data class Reminder(
     @PrimaryKey(autoGenerate = true) val id: Int,
     var subjectId: Int,
     var dateTimestamp: Long,
-    var checked: Boolean
-
+    var checked: Boolean = false
 )
