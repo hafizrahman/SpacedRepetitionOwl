@@ -7,20 +7,6 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/sro_nav_graph" />
-
-
     <EditText
         android:id="@+id/editText"
         android:layout_width="280dp"
@@ -45,6 +31,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/sro_nav_graph" />
+
+    <!--
+
+    <fragment
         android:id="@+id/main_fragment"
         android:name="black.old.spacedrepetitionowl.SubjectFragment"
         android:layout_width="match_parent"
@@ -52,5 +51,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/editText"
         tools:layout_editor_absoluteX="0dp" />
+        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
