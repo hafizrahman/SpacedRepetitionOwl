@@ -39,6 +39,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         )
 
         Log.d("SRO", "Content of Subject is $dummySubject")
+        Log.d("SRO", "Hoot! Saving to database.")
+
+        // OKAY, actually entering data now.
+        insertSubject(dummySubject)
 
         // Generate five dummy Reminders based on the Subject
         val remindersList = mutableListOf<Reminder>()
@@ -52,11 +56,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 System.currentTimeMillis()
             )
             remindersList.add(currentReminder)
-            Log.d("SRO", "Reminder $i is $currentReminder")
+            //Log.d("SRO", "Reminder $i is $currentReminder")
         }
-
-        // OKAY, actually entering data now.
-        insertSubject(dummySubject)
     }
 
     // TODO: This part needs some logic added to generate and insert Reminders based on Subject date
