@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,9 +49,12 @@ class SubjectFragment : Fragment() {
         // FAB click listener
         val addSubjectFab: View = view.fab
         addSubjectFab.setOnClickListener { view ->
+            /* Snackbar test
             Snackbar.make(view, "Thanks for clicking me.", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .show()
+             */
+            view.findNavController().navigate(R.id.action_subjectFragment_to_editSubjectFragment)
         }
         // Hide fab during scroll, and show again after scroll is finished.
         // source: https://stackoverflow.com/a/39813266
