@@ -16,6 +16,8 @@ import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
+import kotlinx.android.synthetic.main.fragment_subject_list.*
+import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
 /**
  * A fragment representing a list of Items.
@@ -25,7 +27,6 @@ import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 class SubjectFragment : Fragment() {
 
     private var columnCount = 1
-
     private var listener: OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +38,11 @@ class SubjectFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        lateinit var mainViewModel: MainViewModel
         val view = inflater.inflate(R.layout.fragment_subject_list, container, false)
 
-        lateinit var mainViewModel: MainViewModel
+        view.sro_subject_list.layoutManager = LinearLayoutManager(context)
+        view.sro_subject_list.adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
 
         // Set the adapter
         if (view is RecyclerView) {
