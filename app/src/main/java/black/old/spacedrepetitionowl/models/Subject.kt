@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName="sro_subjects")
 data class Subject (
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: Int,
     var content: String,
     var url: String,
     var startDateTimestamp: Long

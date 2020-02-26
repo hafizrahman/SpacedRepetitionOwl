@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import black.old.spacedrepetitionowl.viewmodels.MainViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +38,16 @@ class EditSubjectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_subject, container, false)
+        val view = inflater.inflate(R.layout.fragment_edit_subject, container, false)
+
+        val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+
+        val submitButton : View = view.add_subject_submit_button
+        submitButton.setOnClickListener { view ->
+            mainViewModel.dummyInsertSubject()
+        }
+
+        return view
     }
 
     companion object {
