@@ -2,20 +2,20 @@ package black.old.spacedrepetitionowl
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_subject_list.*
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
@@ -44,6 +44,27 @@ class SubjectFragment : Fragment() {
         view.sro_subject_list.layoutManager = LinearLayoutManager(context)
         view.sro_subject_list.adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
 
+        // FAB click listener
+        val addSubjectFab: View = view.fab
+        addSubjectFab.setOnClickListener { view ->
+            Snackbar.make(view, "Thanks for clicking me.", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .show()
+        }
+        // Hide fab during scroll, and show again after scroll is finished.
+        // source: https://stackoverflow.com/a/39813266
+        view.sro_subject_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0 || dy < 0 && fab.isShown) fab.hide()
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) fab.show()
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
+
+        /*
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -63,6 +84,8 @@ class SubjectFragment : Fragment() {
                 }
             )
         }
+        */
+
 
         return view
     }

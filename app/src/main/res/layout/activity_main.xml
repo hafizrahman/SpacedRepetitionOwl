@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
-
+<!--
     <EditText
         android:id="@+id/editText"
         android:layout_width="280dp"
@@ -29,6 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent" />
+        -->
 
     <!--
     <fragment
