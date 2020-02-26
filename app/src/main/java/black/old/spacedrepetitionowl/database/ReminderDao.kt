@@ -18,4 +18,8 @@ interface ReminderDao {
     // No need for coroutines when LiveData is used.
     @Query("SELECT * FROM sro_reminders WHERE subjectId = :subjectId ORDER BY dateTimestamp ASC")
     fun getRemindersBySubject(subjectId: Int): LiveData<List<Reminder>>
+
+    // Empty out table
+    @Query("DELETE FROM sro_reminders")
+    suspend fun deleteAll()
 }

@@ -20,5 +20,5 @@
         android:id="@+id/editSubjectFragment"
         android:name="black.old.spacedrepetitionowl.EditSubjectFragment"
         android:label="fragment_edit_subject"
-        tools:layout="@layout/fragment_edit_subject" />
+        tools:layout="@layout/fragment_add_subject" />
 </navigation>

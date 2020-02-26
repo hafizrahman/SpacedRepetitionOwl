@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
+import kotlinx.android.synthetic.main.fragment_add_subject.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,13 +37,18 @@ class EditSubjectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_edit_subject, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_subject, container, false)
 
         val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         val submitButton : View = view.add_subject_submit_button
         submitButton.setOnClickListener { view ->
             mainViewModel.dummyInsertSubject()
+        }
+
+        val nukeDbButton = view.nuke_db_button
+        nukeDbButton.setOnClickListener { view ->
+            mainViewModel.deleteAllData()
         }
 
         return view

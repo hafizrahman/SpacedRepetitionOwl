@@ -68,4 +68,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getSubjects(): LiveData<List<Subject>>? {
         return sroRepository.getSubjects()
     }
+
+    fun deleteAllData() = viewModelScope.launch {
+        Log.d("SRO", "Deleting everything in the DB...")
+        sroRepository.deleteAllData()
+    }
 }

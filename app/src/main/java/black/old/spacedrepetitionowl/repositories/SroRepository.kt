@@ -26,4 +26,9 @@ class SroRepository(application: Application) {
     fun getReminderBySubject(subjectId: Int) : LiveData<List<Reminder>>? {
         return reminderDao?.getRemindersBySubject(subjectId)
     }
+
+    suspend fun deleteAllData()  {
+        subjectDao?.deleteAll()
+        reminderDao?.deleteAll()
+    }
 }
