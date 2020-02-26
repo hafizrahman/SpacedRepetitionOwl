@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
 import black.old.spacedrepetitionowl.models.Subject
-import black.old.spacedrepetitionowl.viewmodels.SroViewModel
+import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +39,7 @@ class SubjectFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_subject_list, container, false)
 
-        lateinit var sroViewModel: SroViewModel
+        lateinit var mainViewModel: MainViewModel
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -51,15 +51,16 @@ class SubjectFragment : Fragment() {
                 adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
             }
 
-            sroViewModel = ViewModelProvider(this).get(SroViewModel::class.java)
-            sroViewModel.getSubjects()?.observe(this,
+            // The ViewModel is already created on the Activity level (inside MainActivity.kt),
+            // so here we are using the Activity's context
+            mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+            mainViewModel.getSubjects()?.observe(this,
                 Observer<List<Subject>> {
-                    // TODO
+                    // TODO Actually update list here
                 }
             )
-
-
         }
+
         return view
     }
 

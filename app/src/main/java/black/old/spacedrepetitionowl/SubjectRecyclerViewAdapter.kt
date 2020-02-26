@@ -18,7 +18,7 @@ class SubjectRecyclerViewAdapter(
     init {
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Subject
-            // TODO("This still uses the DummyItem, replace it with actual stuff")
+            // TODO: This still uses the DummyItem, replace it with actual stuff
             //listener?.onListFragmentInteraction(item)
         }
 
@@ -38,10 +38,10 @@ class SubjectRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentSubject = subjects[position]
-        // TODO("Fill in data into the items inside fragment_subject.xml")
+        // TODO: Fill in data into the items inside fragment_subject.xml
         holder.contentView.text = currentSubject.content
         with(holder.view) {
-            // TODO("Set click listener here?")
+            // TODO: Set click listener here?
 
         }
     }
