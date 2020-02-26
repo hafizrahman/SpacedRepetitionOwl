@@ -16,7 +16,7 @@
         tools:context=".SubjectFragment"
         tools:listitem="@layout/fragment_subject"
         android:paddingTop="6dp"
-        android:paddingBottom="100dp"
+        android:paddingBottom="80dp"
         android:clipToPadding="false" />
         <!-- ^ Adding a high bottom padding and clipToPadding to false is
         necessary to make the FAB not cover the last item in the list.

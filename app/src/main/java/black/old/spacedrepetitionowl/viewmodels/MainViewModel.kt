@@ -46,7 +46,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         // Generate five dummy Reminders based on the Subject
         var currentReminder : Reminder
-        for(i in 1..5) {
+        for(i in 1..4) {
             // Wait for 1 second to make sure the reminder IDs are unique
             TimeUnit.SECONDS.sleep(1L)
             currentReminder = Reminder(
@@ -60,7 +60,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // TODO: This part needs some logic added to generate and insert Reminders based on Subject date
+    fun processAndEnterData() {
+        // TODO: Here is the actual purpose of this app.
+        // Given the start date of a Subject entry, generate four upcoming dates
+        // where someone is supposed to learn about that Subject again to strengthen
+        // the learning memory.
+        // --------------------------------------------------------------------------
+        // The dates should be:
+        // First repetition: 1 day after
+        // Second repetition: 7 days after
+        // Third repetition: 16 days after
+        // Fourth repetition: 35 days after
+        // ...
+    }
+
     fun insertSubject(subject: Subject) = viewModelScope.launch {
         sroRepository.insertSubject(subject)
     }

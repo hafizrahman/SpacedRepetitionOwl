@@ -73,17 +73,7 @@
                 android:layout_weight="1"
                 android:text="Jan 1, 20"
                 android:textAppearance="?attr/textAppearanceListItem" />
-
-            <TextView
-                android:id="@+id/reminder_5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem" />
-        </LinearLayout>
+   </LinearLayout>
 
 
     </LinearLayout>
