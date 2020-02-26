@@ -72,6 +72,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         // Third repetition: 16 days after
         // Fourth repetition: 35 days after
         // ...
+        val repDays = intArrayOf(1, 7, 16, 35)
+        val nowTimestamp = System.currentTimeMillis()
+        val simpleDateFormat = SimpleDateFormat("dHHmmsss")
+
+        var currentReminder : Reminder
+        for(i in 0..4) {
+            // TODO: Generate Reminders and insert here
+            // Wait for 1 second to make sure the reminder IDs are unique
+            TimeUnit.SECONDS.sleep(1L)
+            currentReminder = Reminder(
+                simpleDateFormat.format(Date()).toInt(),
+                1,
+                nowTimestamp + dayToMilliseconds(repDays[i])
+            )
+        }
+
+
+    }
+
+    fun dayToMilliseconds(day: Int) : Long {
+        return TimeUnit.DAYS.toMillis(day.toLong())
     }
 
     fun insertSubject(subject: Subject) = viewModelScope.launch {
