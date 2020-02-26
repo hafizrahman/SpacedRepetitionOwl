@@ -44,7 +44,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val remindersList = mutableListOf<Reminder>()
         var currentReminder : Reminder
         for(i in 1..5) {
-            TimeUnit.SECONDS.sleep(1L) // Wait for 1 second to make sure the ID is unique
+            // Wait for 1 second to make sure the reminder IDs are unique
+            TimeUnit.SECONDS.sleep(1L)
             currentReminder = Reminder(
                 simpleDateFormat.format(Date()).toInt(),
                 dummySubjectId,
@@ -54,6 +55,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             Log.d("SRO", "Reminder $i is $currentReminder")
         }
 
+        // OKAY, actually entering data now.
+        insertSubject(dummySubject)
     }
 
     // TODO: This part needs some logic added to generate and insert Reminders based on Subject date
