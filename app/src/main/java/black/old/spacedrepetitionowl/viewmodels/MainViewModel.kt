@@ -39,13 +39,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         )
 
         Log.d("SRO", "Content of Subject is $dummySubject")
-        Log.d("SRO", "Hoot! Saving to database.")
+        Log.d("SRO", "Hoot! Saving Subject to database.")
 
         // OKAY, actually entering data now.
         insertSubject(dummySubject)
 
         // Generate five dummy Reminders based on the Subject
-        val remindersList = mutableListOf<Reminder>()
         var currentReminder : Reminder
         for(i in 1..5) {
             // Wait for 1 second to make sure the reminder IDs are unique
@@ -55,8 +54,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 dummySubjectId,
                 System.currentTimeMillis()
             )
-            remindersList.add(currentReminder)
-            //Log.d("SRO", "Reminder $i is $currentReminder")
+            insertReminder(currentReminder)
+            Log.d("SRO", "Reminder $i is $currentReminder")
+            Log.d("SRO", "Pew! Saving Reminder to database.")
         }
     }
 
@@ -67,6 +67,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getSubjects(): LiveData<List<Subject>>? {
         return sroRepository.getSubjects()
+    }
+
+    fun insertReminder(reminder: Reminder) = viewModelScope.launch {
+        sroRepository.insertReminder(reminder)
     }
 
     fun deleteAllData() = viewModelScope.launch {
