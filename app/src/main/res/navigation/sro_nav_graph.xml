@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sro_nav_graph"
+    app:startDestination="@id/subjectFragment">
+
+    <fragment
+        android:id="@+id/subjectFragment"
+        android:name="black.old.spacedrepetitionowl.SubjectFragment"
+        android:label="fragment_subject_list"
+        tools:layout="@layout/fragment_subject_list" >
+        <action
+            android:id="@+id/action_subjectFragment_to_editSubjectFragment"
+            app:destination="@id/editSubjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSubjectFragment"
+        android:name="black.old.spacedrepetitionowl.EditSubjectFragment"
+        android:label="fragment_edit_subject"
+        tools:layout="@layout/fragment_edit_subject" />
+</navigation>
