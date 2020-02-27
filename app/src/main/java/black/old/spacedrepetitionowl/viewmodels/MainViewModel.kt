@@ -44,15 +44,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         // OKAY, actually entering data now.
         insertSubject(dummySubject)
 
-        // Generate five dummy Reminders based on the Subject
+        // Generate four dummy Reminders based on the Subject
         var currentReminder : Reminder
-        for(i in 1..4) {
+        val repDays = intArrayOf(1, 7, 16, 35)
+        for(i in 0..3) {
+            // TODO: Generate Reminders and insert here
             // Wait for 1 second to make sure the reminder IDs are unique
             TimeUnit.SECONDS.sleep(1L)
             currentReminder = Reminder(
                 simpleDateFormat.format(Date()).toInt(),
                 dummySubjectId,
-                System.currentTimeMillis()
+                nowTimestamp + dayToMilliseconds(repDays[i])
             )
             insertReminder(currentReminder)
             Log.d("SRO", "Reminder $i is $currentReminder")
@@ -63,7 +65,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun processAndEnterData() {
         // TODO: Here is the actual purpose of this app.
         // Given the start date of a Subject entry, generate four upcoming dates
-        // where someone is supposed to learn about that Subject again to strengthen
+        // when someone is supposed to learn about that Subject again to strengthen
         // the learning memory.
         // --------------------------------------------------------------------------
         // The dates should be:
@@ -77,14 +79,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val simpleDateFormat = SimpleDateFormat("dHHmmsss")
 
         var currentReminder : Reminder
-        for(i in 0..4) {
+        for(i in 0..3) {
             // TODO: Generate Reminders and insert here
             // Wait for 1 second to make sure the reminder IDs are unique
             TimeUnit.SECONDS.sleep(1L)
             currentReminder = Reminder(
                 simpleDateFormat.format(Date()).toInt(),
                 1,
-                nowTimestamp + dayToMilliseconds(repDays[i])
+                nowTimestamp + dayToMilliseconds(repDays[i]) // Add x day(s) from now
             )
         }
 
@@ -110,5 +112,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAllData() = viewModelScope.launch {
         Log.d("SRO", "Deleting everything in the DB...")
         sroRepository.deleteAllData()
+        Log.d("SRO", "All deleted.")
     }
 }
