@@ -90,7 +90,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             )
         }
 
-
     }
 
     fun dayToMilliseconds(day: Int) : Long {

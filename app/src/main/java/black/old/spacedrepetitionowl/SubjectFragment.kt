@@ -2,6 +2,7 @@ package black.old.spacedrepetitionowl
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,8 +44,10 @@ class SubjectFragment : Fragment() {
         lateinit var mainViewModel: MainViewModel
         val view = inflater.inflate(R.layout.fragment_subject_list, container, false)
 
+        // Set up layout manager
         view.sro_subject_list.layoutManager = LinearLayoutManager(context)
-        view.sro_subject_list.adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
+        // Send data into adapter then assign adapter to RecyclerView
+        //view.sro_subject_list.adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
 
         // FAB click listener
         val addSubjectFab: View = view.fab
@@ -90,6 +93,19 @@ class SubjectFragment : Fragment() {
             )
         }
         */
+
+        // The ViewModel is already created on the Activity level (inside MainActivity.kt),
+        // so here we are using the Activity's context
+        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        mainViewModel.getSubjects()?.observe(viewLifecycleOwner,
+            Observer<List<Subject>> { subjects ->
+
+                // TODO Actually update list here
+                Log.d("SRO+", subjects.toString())
+                view.sro_subject_list.adapter = SubjectRecyclerViewAdapter(subjects, listener)
+
+            }
+        )
 
 
         return view
