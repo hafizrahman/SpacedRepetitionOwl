@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
+import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -96,16 +97,18 @@ class SubjectFragment : Fragment() {
 
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
+
         mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
-        mainViewModel.getSubjects()?.observe(viewLifecycleOwner,
-            Observer<List<Subject>> { subjects ->
 
-                // TODO Actually update list here
-                Log.d("SRO+", subjects.toString())
-                view.sro_subject_list.adapter = SubjectRecyclerViewAdapter(subjects, listener)
-
-            }
-        )
+        // New observer
+         mainViewModel.getAllData()?.observe(viewLifecycleOwner,
+            Observer { subjectsAndRemindersPair ->
+                Log.d("SRObert", subjectsAndRemindersPair.toString())
+                view.sro_subject_list.adapter = SubjectRecyclerViewAdapter(
+                    subjectsAndRemindersPair.first,
+                    subjectsAndRemindersPair.second,
+                    listener)
+        })
 
 
         return view

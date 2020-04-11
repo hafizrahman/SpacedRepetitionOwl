@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import black.old.spacedrepetitionowl.database.SroDatabase
+import black.old.spacedrepetitionowl.models.CombinedSubjectReminders
 import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.repositories.SroRepository
@@ -15,7 +17,14 @@ import java.util.concurrent.TimeUnit
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val sroRepository = SroRepository(application)
+
+    private lateinit var sroRepository: SroRepository
+
+    init {
+        val subjectDao = SroDatabase.getDatabase(application).subjectDao
+        val reminderDao = SroDatabase.getDatabase(application).reminderDao
+        sroRepository = SroRepository(subjectDao, reminderDao)
+    }
 
     // This is a dummy function called when the Add subject button is clicked.
     // Ignore everything and enter some dummy values into the database.
@@ -89,7 +98,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 nowTimestamp + dayToMilliseconds(repDays[i]) // Add x day(s) from now
             )
         }
-
     }
 
     fun dayToMilliseconds(day: Int) : Long {
@@ -104,8 +112,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return sroRepository.getSubjects()
     }
 
+    fun getReminders(): LiveData<List<Reminder>>? {
+        return sroRepository.getReminders()
+    }
+
+
     fun insertReminder(reminder: Reminder) = viewModelScope.launch {
         sroRepository.insertReminder(reminder)
+    }
+
+    fun getAllData(): CombinedSubjectReminders? {
+        var ldSubjects = getSubjects()
+        var ldReminders = getReminders()
+
+        if (ldSubjects != null && ldReminders != null) {
+            return CombinedSubjectReminders(ldSubjects, ldReminders)
+        }
+        return null
     }
 
     fun deleteAllData() = viewModelScope.launch {

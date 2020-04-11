@@ -1,16 +1,20 @@
 package black.old.spacedrepetitionowl
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.models.Subject
+import black.old.spacedrepetitionowl.models.Reminder
 import kotlinx.android.synthetic.main.fragment_subject.view.*
 import black.old.spacedrepetitionowl.SubjectFragment.OnListFragmentInteractionListener
+import java.text.SimpleDateFormat
 
 class SubjectRecyclerViewAdapter(
     val subjects: List<Subject>,
+    val reminders: List<Reminder>,
     val listener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<SubjectRecyclerViewAdapter.ViewHolder>() {
     private val onClickListener: View.OnClickListener
@@ -21,11 +25,14 @@ class SubjectRecyclerViewAdapter(
             // TODO: This still uses the DummyItem, replace it with actual stuff
             //listener?.onListFragmentInteraction(item)
         }
-
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val contentView: TextView = view.content
+        val reminder_0: TextView = view.reminder_0
+        val reminder_1: TextView = view.reminder_1
+        val reminder_2: TextView = view.reminder_2
+        val reminder_3: TextView = view.reminder_3
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,11 +45,34 @@ class SubjectRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentSubject = subjects[position]
-        // TODO: Fill in data into the items inside fragment_subject.xml
+        // TODO: Fill in Reminders data
         holder.contentView.text = currentSubject.content
+
+        // Get Reminders related to current Subject ID
+        val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
+        Log.d("SROacnh ->", reminderListForCurrentSubject.elementAt(0).toString())
+
+        holder.reminder_0.text =  dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+        holder.reminder_1.text =  dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+        holder.reminder_2.text =  dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+        holder.reminder_3.text =  dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+
         with(holder.view) {
             // TODO: Set click listener here?
 
         }
+    }
+
+    private fun getRemindersListBySubject(subjectId: Int) : List<Reminder> {
+        // Only get Reminders from the list that has the current subject ID
+        var currentReminders = reminders.filter {
+            it.subjectId == subjectId
+        }
+        return currentReminders.sortedBy { it.dateTimestamp } // Sort list based on timestamp, oldest first
+    }
+
+    private fun dateStringFormatter(timestamp: Long) : String {
+        val pattern = "d MMM"
+        return SimpleDateFormat(pattern).format(timestamp)
     }
 }

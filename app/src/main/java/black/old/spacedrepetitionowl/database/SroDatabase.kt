@@ -16,22 +16,25 @@ abstract class SroDatabase : RoomDatabase() {
     // Create the SroDatabase as a singleton to prevent having multiple instances of
     // the database opened at the same time.
     companion object {
-        private var instance: SroDatabase? = null
+        private var INSTANCE: SroDatabase? = null
 
-        fun getDatabase(context: Context) : SroDatabase? {
-            if(instance == null) {
-                synchronized(SroDatabase::class) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        SroDatabase::class.java,
-                        "sro_database")
-                        // Wipes and rebuilds instead of migrating
-                        // if no Migration object
-                        .fallbackToDestructiveMigration()
-                        .build()
-                }
+        fun getDatabase(context: Context) : SroDatabase {
+            val tempInstance = INSTANCE
+            if(tempInstance != null) {
+                return tempInstance
             }
-            return instance
+            synchronized(SroDatabase::class) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    SroDatabase::class.java,
+                    "sro_database")
+                    // Wipes and rebuilds instead of migrating
+                    // if no Migration object
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
         }
     }
 }

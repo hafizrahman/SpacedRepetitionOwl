@@ -35,6 +35,16 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/reminder_0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
                 android:id="@+id/reminder_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -56,16 +66,6 @@
 
             <TextView
                 android:id="@+id/reminder_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem" />
-
-            <TextView
-                android:id="@+id/reminder_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center"
