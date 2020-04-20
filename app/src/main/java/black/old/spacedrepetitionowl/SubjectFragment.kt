@@ -3,9 +3,7 @@ package black.old.spacedrepetitionowl
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +37,7 @@ class SubjectFragment : Fragment() {
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -110,6 +109,10 @@ class SubjectFragment : Fragment() {
                     listener)
         })
 
+        // menu
+        // Example from https://stackoverflow.com/a/50990935
+        view.sro_subject_list_toolbar.inflateMenu(R.menu.main_menu)
+        // TODO add menu clicklistener
 
         return view
     }
@@ -127,6 +130,7 @@ class SubjectFragment : Fragment() {
         super.onDetach()
         listener = null
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
