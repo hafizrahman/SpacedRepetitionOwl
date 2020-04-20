@@ -4,23 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/sro_subject_list_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary"
+        app:title="SpacedRepetitionOwl"
+        app:titleTextColor="@color/colorPrimaryDark"/>
+
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/sro_subject_list"
         android:name="black.old.spacedrepetitionowl.SubjectFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".SubjectFragment"
         tools:listitem="@layout/fragment_subject"
         android:paddingTop="6dp"
-        android:paddingBottom="80dp"
-        android:clipToPadding="false" />
+        android:paddingBottom="150dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/sro_subject_list_toolbar"/>
         <!-- ^ Adding a high bottom padding and clipToPadding to false is
         necessary to make the FAB not cover the last item in the list.
         This is from: https://stackoverflow.com/a/45408853 -->
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
