@@ -10,15 +10,17 @@ import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.models.Reminder
 import kotlinx.android.synthetic.main.fragment_subject.view.*
 import black.old.spacedrepetitionowl.SubjectFragment.OnListFragmentInteractionListener
+import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
 import kotlinx.android.synthetic.main.fragment_subject_test.view.*
 import java.text.SimpleDateFormat
 
 class SubjectRecyclerViewAdapter(
-    val subjects: List<Subject>,
-    val reminders: List<Reminder>,
+    var sortingType: Int,
     val listener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val onClickListener: View.OnClickListener
+    private lateinit var subjects: List<Subject>
+    private lateinit var reminders: List<Reminder>
 
     init {
         onClickListener = View.OnClickListener { v ->
@@ -26,6 +28,12 @@ class SubjectRecyclerViewAdapter(
             // TODO: This still uses the DummyItem, replace it with actual stuff
             //listener?.onListFragmentInteraction(item)
         }
+    }
+
+    fun setData(subjectsList: List<Subject>, remindersList: List<Reminder>) {
+        subjects = subjectsList
+        reminders = remindersList
+        notifyDataSetChanged()
     }
 
     inner class ViewHolderReal(val view: View) : RecyclerView.ViewHolder(view) {
@@ -45,10 +53,10 @@ class SubjectRecyclerViewAdapter(
     // Necessary for having multiple ViewHolders in one RecyclerView
     // Here we're returning the id for the layout to be used, which is guaranteed to be Int
     override fun getItemViewType(position: Int): Int {
-        if(position % 2 == 0) {
+        if (sortingType == SORTBY_DEFAULT)
             return R.layout.fragment_subject
-        }
-        return R.layout.fragment_subject_test
+        else
+            return R.layout.fragment_subject_test
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -114,6 +122,11 @@ class SubjectRecyclerViewAdapter(
         }
 
  */
+    }
+
+    public fun changeOrder(ordertype: Int) {
+        sortingType = ordertype
+        notifyDataSetChanged()
     }
 
     private fun getRemindersListBySubject(subjectId: Int) : List<Reminder> {

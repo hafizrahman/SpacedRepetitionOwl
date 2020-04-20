@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
+import black.old.spacedrepetitionowl.constants.SORTBY_REMINDER
 import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
 import black.old.spacedrepetitionowl.models.Reminder
@@ -30,6 +32,7 @@ class SubjectFragment : Fragment() {
 
     private var columnCount = 1
     private var listener: OnListFragmentInteractionListener? = null
+    lateinit var adapter: SubjectRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +44,10 @@ class SubjectFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        lateinit var mainViewModel: MainViewModel
         val view = inflater.inflate(R.layout.fragment_subject_list, container, false)
+
+        adapter = SubjectRecyclerViewAdapter(SORTBY_DEFAULT, listener)
+        view.sro_subject_list.adapter = adapter
 
         // Set up layout manager
         view.sro_subject_list.layoutManager = LinearLayoutManager(context)
@@ -97,24 +102,49 @@ class SubjectFragment : Fragment() {
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
 
-        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         // New observer
          mainViewModel.getAllData()?.observe(viewLifecycleOwner,
             Observer { subjectsAndRemindersPair ->
                 Log.d("SRObert", subjectsAndRemindersPair.toString())
+                adapter.setData(
+                    subjectsAndRemindersPair.first,
+                    subjectsAndRemindersPair.second)
+                /*
                 view.sro_subject_list.adapter = SubjectRecyclerViewAdapter(
                     subjectsAndRemindersPair.first,
                     subjectsAndRemindersPair.second,
+                    SORTBY_DEFAULT,
                     listener)
+
+                 */
         })
 
         // menu
         // Example from https://stackoverflow.com/a/50990935
         view.sro_subject_list_toolbar.inflateMenu(R.menu.main_menu)
-        // TODO add menu clicklistener
+        view.sro_subject_list_toolbar.setOnMenuItemClickListener { it ->
+            onOptionsItemSelected(it)
+        }
 
         return view
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        when(item.itemId) {
+            R.id.menu_sortby_default -> {
+                adapter.changeOrder(SORTBY_DEFAULT)
+
+                return true
+            }
+            R.id.menu_sortby_reminder -> {
+                adapter.changeOrder(SORTBY_REMINDER)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onAttach(context: Context) {
