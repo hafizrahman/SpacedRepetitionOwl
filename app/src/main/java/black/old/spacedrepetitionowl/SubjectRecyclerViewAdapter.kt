@@ -21,6 +21,7 @@ class SubjectRecyclerViewAdapter(
     private val onClickListener: View.OnClickListener
     private lateinit var subjects: List<Subject>
     private lateinit var reminders: List<Reminder>
+    private lateinit var remindersOrderedByDate: List<Reminder>
 
     init {
         onClickListener = View.OnClickListener { v ->
@@ -33,21 +34,34 @@ class SubjectRecyclerViewAdapter(
     fun setData(subjectsList: List<Subject>, remindersList: List<Reminder>) {
         subjects = subjectsList
         reminders = remindersList
+        remindersOrderedByDate = orderRemindersByUpcomingDate()
+        Log.d("SRIRI A", subjects.toString())
+        Log.d("SRIRI B", reminders.toString())
+        Log.d("SRIRI C", remindersOrderedByDate.toString())
         notifyDataSetChanged()
+    }
+
+    // Here we want a list of Reminders ordered by earliest timestamp, but only
+    // those with timestamps in the future, since this is for displaying upcoming reminders.
+    private fun orderRemindersByUpcomingDate() : List<Reminder> {
+        val nowTimestamp = System.currentTimeMillis()
+        return reminders
+            .sortedBy { it.dateTimestamp }      // 1. Sort `reminder` by its timestamp
+            .filter { it ->                     // 2. Remove elements with past `dateTimestamp`
+               it.dateTimestamp >= nowTimestamp
+           }
     }
 
     inner class ViewHolderReal(val view: View) : RecyclerView.ViewHolder(view) {
         val contentView: TextView = view.content
-        val reminder_0: TextView = view.reminder_0
-        val reminder_1: TextView = view.reminder_1
-        val reminder_2: TextView = view.reminder_2
-        val reminder_3: TextView = view.reminder_3
-
+        val reminder0: TextView = view.reminder_0
+        val reminder1: TextView = view.reminder_1
+        val reminder2: TextView = view.reminder_2
+        val reminder3: TextView = view.reminder_3
     }
 
     inner class ViewHolderTest(val view: View) : RecyclerView.ViewHolder(view) {
         val contentTestView: TextView = view.content_test
-
     }
 
     // Necessary for having multiple ViewHolders in one RecyclerView
@@ -77,7 +91,12 @@ class SubjectRecyclerViewAdapter(
          */
     }
 
-    override fun getItemCount(): Int = subjects.size
+    override fun getItemCount(): Int {
+        if(sortingType == SORTBY_DEFAULT)
+            return subjects.size
+        else
+            return remindersOrderedByDate.size
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -88,17 +107,15 @@ class SubjectRecyclerViewAdapter(
 
             // Get Reminders related to current Subject ID
             val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
-            Log.d("SROacnh ->", reminderListForCurrentSubject.elementAt(0).toString())
 
-            holder.reminder_0.text =  dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
-            holder.reminder_1.text =  dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
-            holder.reminder_2.text =  dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
-            holder.reminder_3.text =  dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+            holder.reminder0.text =  dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+            holder.reminder1.text =  dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+            holder.reminder2.text =  dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+            holder.reminder3.text =  dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
         }
         else if(holder is ViewHolderTest) {
-            val currentSubject = subjects[position]
-            holder.contentTestView.text = currentSubject.content
-
+            val currentReminder = remindersOrderedByDate[position]
+            holder.contentTestView.text = dateStringFormatter(currentReminder.dateTimestamp) + " -- " + currentReminder.subjectId.toString()
         }
 /*
 

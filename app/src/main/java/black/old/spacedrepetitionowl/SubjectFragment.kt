@@ -77,31 +77,8 @@ class SubjectFragment : Fragment() {
             }
         })
 
-        /*
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
-            }
-
-            // The ViewModel is already created on the Activity level (inside MainActivity.kt),
-            // so here we are using the Activity's context
-            mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
-            mainViewModel.getSubjects()?.observe(this,
-                Observer<List<Subject>> {
-                    // TODO Actually update list here
-                }
-            )
-        }
-        */
-
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
-
         var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         // New observer
@@ -111,14 +88,6 @@ class SubjectFragment : Fragment() {
                 adapter.setData(
                     subjectsAndRemindersPair.first,
                     subjectsAndRemindersPair.second)
-                /*
-                view.sro_subject_list.adapter = SubjectRecyclerViewAdapter(
-                    subjectsAndRemindersPair.first,
-                    subjectsAndRemindersPair.second,
-                    SORTBY_DEFAULT,
-                    listener)
-
-                 */
         })
 
         // menu
@@ -136,7 +105,6 @@ class SubjectFragment : Fragment() {
         when(item.itemId) {
             R.id.menu_sortby_default -> {
                 adapter.changeOrder(SORTBY_DEFAULT)
-
                 return true
             }
             R.id.menu_sortby_reminder -> {

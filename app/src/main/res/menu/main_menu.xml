@@ -7,5 +7,5 @@
         android:title="Sort by subject name" />
     <item
         android:id="@+id/menu_sortby_reminder"
-        android:title="Sort by next reminder" />
+        android:title="Show upcoming reminders" />
 </menu>
