@@ -27,7 +27,7 @@ import androidx.room.PrimaryKey
         )]
     )
 data class Reminder(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     var subjectId: Int,
     var dateTimestamp: Long,
     var checked: Boolean = false
