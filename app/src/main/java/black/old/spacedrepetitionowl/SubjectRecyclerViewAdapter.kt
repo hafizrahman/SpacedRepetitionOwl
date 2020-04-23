@@ -102,16 +102,22 @@ class SubjectRecyclerViewAdapter(
 
         if(holder is ViewHolderReal) {
             val currentSubject = subjects[position]
-            // TODO: Fill in Reminders data
-            holder.contentView.text = currentSubject.content
 
-            // Get Reminders related to current Subject ID
-            val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
+            if(currentSubject != null) {
+                holder.contentView.text = currentSubject.content
 
-            holder.reminder0.text =  dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
-            holder.reminder1.text =  dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
-            holder.reminder2.text =  dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
-            holder.reminder3.text =  dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+                // Get Reminders related to current Subject ID
+                val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
+
+                holder.reminder0.text =
+                    dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+                holder.reminder1.text =
+                    dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+                holder.reminder2.text =
+                    dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+                holder.reminder3.text =
+                    dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+            }
         }
         else if(holder is ViewHolderTest) {
             val currentReminder = remindersOrderedByDate[position]
