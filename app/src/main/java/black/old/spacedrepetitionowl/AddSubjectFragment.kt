@@ -1,6 +1,7 @@
 package black.old.spacedrepetitionowl
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +43,10 @@ class EditSubjectFragment : Fragment() {
         val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         val submitButton : View = view.add_subject_submit_button
+        val subjectField = view.layoutInputAddSubject
+        val subjectUrl = view.layoutInputAddUri
         submitButton.setOnClickListener { view ->
+            Log.d("SRISUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
             mainViewModel.dummyInsertSubject()
         }
 

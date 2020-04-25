@@ -8,8 +8,8 @@ import black.old.spacedrepetitionowl.models.Subject
 
 class SroRepository(private val subjectDao: SubjectDao, private val reminderDao: ReminderDao) {
 
-    suspend fun insertSubject(subject: Subject) {
-        subjectDao.insert(subject)
+    suspend fun insertSubject(subject: Subject) : Long {
+        return subjectDao.insert(subject)
     }
 
     fun getSubjects(): LiveData<List<Subject>>? {

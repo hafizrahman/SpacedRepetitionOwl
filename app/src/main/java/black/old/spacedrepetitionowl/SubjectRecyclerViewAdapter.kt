@@ -152,7 +152,7 @@ class SubjectRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
-    private fun getRemindersListBySubject(subjectId: Int) : List<Reminder> {
+    private fun getRemindersListBySubject(subjectId: Long) : List<Reminder> {
         // Only get Reminders from the list that has the current subject ID
         var currentReminders = reminders.filter {
             it.subjectId == subjectId

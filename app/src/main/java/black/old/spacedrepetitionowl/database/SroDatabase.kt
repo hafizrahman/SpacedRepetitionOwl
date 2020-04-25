@@ -8,7 +8,7 @@ import black.old.spacedrepetitionowl.models.*
 
 @Database(
     entities    = [Subject::class, Reminder::class],
-    version     = 2)
+    version     = 3)
 abstract class SroDatabase : RoomDatabase() {
     abstract val subjectDao: SubjectDao
     abstract val reminderDao: ReminderDao
