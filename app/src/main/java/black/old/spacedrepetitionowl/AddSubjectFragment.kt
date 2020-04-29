@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_add_subject.view.*
+import kotlinx.android.synthetic.main.fragment_subject.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,7 +48,7 @@ class EditSubjectFragment : Fragment() {
         val subjectUrl = view.layoutInputAddUri
         submitButton.setOnClickListener { view ->
             Log.d("SRISUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
-            mainViewModel.dummyInsertSubject()
+            mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString())
         }
 
         val nukeDbButton = view.nuke_db_button
