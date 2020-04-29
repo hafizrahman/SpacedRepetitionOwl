@@ -17,8 +17,11 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName="sro_subjects")
 data class Subject (
-    @PrimaryKey(autoGenerate = true) val id: Long,
     var content: String,
     var url: String,
-    var startDateTimestamp: Long
+    var startDateTimestamp: Long,
+
+    // The field below is used for primary key and automatically generated, so I'm giving it
+    // a default value of 0 so that the object creation can ignore this parameter.
+    @PrimaryKey(autoGenerate = true) val id: Long = 0
 )
