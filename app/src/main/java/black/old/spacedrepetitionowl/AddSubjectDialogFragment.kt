@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_add_subject_dialog.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,12 +25,18 @@ class AddSubjectDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_add_subject_dialog, container, false)
         // Dismiss dialog if user touched outside of the dialog
         // ref: https://stackoverflow.com/a/8761729
         dialog?.setCanceledOnTouchOutside(true)
 
+        val cancelButton = view.add_subject_dialog_cancel
+        cancelButton.setOnClickListener { view ->
+            findNavController().popBackStack()
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_subject_dialog, container, false)
+        return view
     }
 
     override fun onStart() {
