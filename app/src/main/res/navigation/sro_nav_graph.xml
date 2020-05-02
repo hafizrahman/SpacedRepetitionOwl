@@ -11,14 +11,19 @@
         android:label="fragment_subject_list"
         tools:layout="@layout/fragment_subject_list" >
         <action
-            android:id="@+id/action_subjectFragment_to_editSubjectFragment"
-            app:destination="@id/editSubjectFragment"
+            android:id="@+id/action_subjectFragment_to_editSubjectDialogFragment"
+            app:destination="@id/addSubjectDialogFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:exitAnim="@android:anim/fade_out"
+            />
     </fragment>
     <fragment
         android:id="@+id/editSubjectFragment"
         android:name="black.old.spacedrepetitionowl.EditSubjectFragment"
         android:label="fragment_edit_subject"
         tools:layout="@layout/fragment_add_subject" />
+    <dialog
+        android:id="@+id/addSubjectDialogFragment"
+        android:name="black.old.spacedrepetitionowl.AddSubjectDialogFragment"
+        android:label="AddSubjectDialogFragment" />
 </navigation>

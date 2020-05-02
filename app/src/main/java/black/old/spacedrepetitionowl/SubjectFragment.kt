@@ -62,7 +62,7 @@ class SubjectFragment : Fragment() {
                 .setAction("Action", null)
                 .show()
              */
-            view.findNavController().navigate(R.id.action_subjectFragment_to_editSubjectFragment)
+            view.findNavController().navigate(R.id.action_subjectFragment_to_editSubjectDialogFragment)
         }
         // Hide fab during scroll, and show again after scroll is finished.
         // source: https://stackoverflow.com/a/39813266
