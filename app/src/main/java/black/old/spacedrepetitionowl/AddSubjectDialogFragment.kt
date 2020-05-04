@@ -1,12 +1,16 @@
 package black.old.spacedrepetitionowl
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import black.old.spacedrepetitionowl.viewmodels.MainViewModel
+import kotlinx.android.synthetic.main.fragment_add_subject.view.*
 import kotlinx.android.synthetic.main.fragment_add_subject_dialog.view.*
 
 /**
@@ -30,6 +34,18 @@ class AddSubjectDialogFragment : DialogFragment() {
         // ref: https://stackoverflow.com/a/8761729
         dialog?.setCanceledOnTouchOutside(true)
 
+
+        // Data submission
+        val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        val submitButton : View = view.add_subject_dialog_submit
+        val subjectField = view.add_subject_dialog_subject
+        val subjectUrl = view.add_subject_dialog_uri
+        submitButton.setOnClickListener { view ->
+            Log.d("DIALOGSUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
+            mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString())
+        }
+
+        // Cancel button
         val cancelButton = view.add_subject_dialog_cancel
         cancelButton.setOnClickListener { view ->
             findNavController().popBackStack()

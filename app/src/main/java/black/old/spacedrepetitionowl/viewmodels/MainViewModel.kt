@@ -26,6 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         sroRepository = SroRepository(subjectDao, reminderDao)
     }
 
+    // Entering
     fun insertSubject(subjectText: String, uriText: String) {
         val dateNow = Date()
         val simpleDateFormat = SimpleDateFormat("dHHmmsss")

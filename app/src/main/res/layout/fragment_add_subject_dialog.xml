@@ -9,9 +9,9 @@
     android:layout_margin="12dp">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutAddSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layoutAddSubject"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,17 +20,17 @@
         android:layout_marginEnd="8dp"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_subject_dialog_subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/layoutInputAddSubject"
             android:hint="Add subject to remember"
             android:background="#ffffff" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutAddUri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layoutAddUri"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutAddSubject"
@@ -38,9 +38,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_subject_dialog_uri"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/layoutInputAddUri"
             android:hint="Add URI (optional)"
             android:background="#ffffff" />
     </com.google.android.material.textfield.TextInputLayout>

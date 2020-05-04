@@ -109,14 +109,20 @@ class SubjectRecyclerViewAdapter(
                 // Get Reminders related to current Subject ID
                 val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
 
-                holder.reminder0.text =
-                    dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
-                holder.reminder1.text =
-                    dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
-                holder.reminder2.text =
-                    dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
-                holder.reminder3.text =
-                    dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+
+                Log.d("frick", reminderListForCurrentSubject.size.toString() + reminderListForCurrentSubject)
+
+                if(reminderListForCurrentSubject.size == 4) {
+
+                    holder.reminder0.text =
+                        dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+                    holder.reminder1.text =
+                        dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+                    holder.reminder2.text =
+                        dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+                    holder.reminder3.text =
+                        dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+                }
             }
         }
         else if(holder is ViewHolderTest) {
