@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.models.Subject
@@ -16,7 +17,8 @@ import java.text.SimpleDateFormat
 
 class SubjectRecyclerViewAdapter(
     var sortingType: Int,
-    val listener: OnListFragmentInteractionListener?
+    val listener: OnListFragmentInteractionListener?,
+    val mainClickListener: (Subject) -> Unit                // clicklistener for the main card area.
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val onClickListener: View.OnClickListener
     private lateinit var subjects: List<Subject>
@@ -50,14 +52,6 @@ class SubjectRecyclerViewAdapter(
             .filter { it ->                     // 2. Remove elements with past `dateTimestamp`
                it.dateTimestamp >= nowTimestamp
            }
-    }
-
-    inner class ViewHolderReal(val view: View) : RecyclerView.ViewHolder(view) {
-        val contentView: TextView = view.content
-        val reminder0: TextView = view.reminder_0
-        val reminder1: TextView = view.reminder_1
-        val reminder2: TextView = view.reminder_2
-        val reminder3: TextView = view.reminder_3
     }
 
     inner class ViewHolderTest(val view: View) : RecyclerView.ViewHolder(view) {
@@ -109,9 +103,6 @@ class SubjectRecyclerViewAdapter(
                 // Get Reminders related to current Subject ID
                 val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
 
-
-                Log.d("frick", reminderListForCurrentSubject.size.toString() + reminderListForCurrentSubject)
-
                 if(reminderListForCurrentSubject.size == 4) {
 
                     holder.reminder0.text =
@@ -123,12 +114,16 @@ class SubjectRecyclerViewAdapter(
                     holder.reminder3.text =
                         dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
                 }
+
+                // bind mainClickListener to the LinearLayout to make it clickable
+                holder.mainBar.setOnClickListener { mainClickListener(currentSubject) }
             }
         }
         else if(holder is ViewHolderTest) {
             val currentReminder = remindersOrderedByDate[position]
             holder.contentTestView.text = dateStringFormatter(currentReminder.dateTimestamp) + " -- " + currentReminder.subjectId.toString()
         }
+
 /*
 
 
@@ -151,6 +146,15 @@ class SubjectRecyclerViewAdapter(
         }
 
  */
+    }
+
+    inner class ViewHolderReal(val view: View) : RecyclerView.ViewHolder(view) {
+        val contentView: TextView = view.content
+        val reminder0: TextView = view.reminder_0
+        val reminder1: TextView = view.reminder_1
+        val reminder2: TextView = view.reminder_2
+        val reminder3: TextView = view.reminder_3
+        val mainBar: LinearLayout = view.main_subject_bar
     }
 
     public fun changeOrder(ordertype: Int) {

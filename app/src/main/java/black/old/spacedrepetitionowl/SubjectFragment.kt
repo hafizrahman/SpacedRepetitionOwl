@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_subject.view.*
 import kotlinx.android.synthetic.main.fragment_subject_list.*
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
@@ -46,7 +48,11 @@ class SubjectFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_subject_list, container, false)
 
-        adapter = SubjectRecyclerViewAdapter(SORTBY_DEFAULT, listener)
+        adapter = SubjectRecyclerViewAdapter(
+            SORTBY_DEFAULT,
+            listener,
+            { subject : Subject -> mainSubjectBarClicked(subject) }
+        )
         view.sro_subject_list.adapter = adapter
 
         // Set up layout manager
@@ -144,6 +150,11 @@ class SubjectFragment : Fragment() {
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onListFragmentInteraction(item: DummyItem?)
+    }
+
+    // The actual action that needs to be done when a main subject bar is clicked.
+    private fun mainSubjectBarClicked(currentSubject : Subject) {
+        Log.d("CLICKER", currentSubject.toString() + " is being clicked");
     }
 
     companion object {
