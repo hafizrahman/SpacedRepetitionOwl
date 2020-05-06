@@ -9,23 +9,28 @@
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:gravity="center"
+        android:layout_height="32dp"
         android:text="Manage Subject"
+        android:layout_marginTop="12dp"
         android:textStyle="bold"
+        android:layout_marginHorizontal="12dp"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/subjects_bottom_dialog_title"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="36dp"
         android:gravity="center"
         android:text="Manage Subject"
+        android:layout_marginHorizontal="12dp"
         android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="#eee" />
 
     <TextView
         android:id="@+id/subjects_bottom_dialog_edit"
@@ -36,6 +41,7 @@
         android:gravity="start|center_vertical"
         android:text="Edit subject..."
         android:textSize="16sp" />
+
 
     <TextView
         android:id="@+id/subjects_bottom_dialog_delete"

@@ -155,7 +155,7 @@ class SubjectFragment : Fragment() {
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : Subject) {
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
-        val bottomDialog = SubjectsBottomDialogFragment()
+        val bottomDialog = SubjectsBottomDialogFragment(currentSubject.content)
         bottomDialog.show(activity!!.supportFragmentManager, "fragment_subjects_bottom_dialog")
     }
 
