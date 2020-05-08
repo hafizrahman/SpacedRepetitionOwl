@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
         // the fragment (SubjectFragment in this case) can then re-use this ViewModel by
         // setting the ViewModel() parameter to getActivity()
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        // TODO: Add clickObserver for the Add button
-
     }
 
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {

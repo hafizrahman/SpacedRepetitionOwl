@@ -22,7 +22,6 @@ class AddSubjectDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -33,7 +32,6 @@ class AddSubjectDialogFragment : DialogFragment() {
         // Dismiss dialog if user touched outside of the dialog
         // ref: https://stackoverflow.com/a/8761729
         dialog?.setCanceledOnTouchOutside(true)
-
 
         // Data submission
         val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
@@ -48,7 +46,8 @@ class AddSubjectDialogFragment : DialogFragment() {
         // Cancel button
         val cancelButton = view.add_subject_dialog_cancel
         cancelButton.setOnClickListener { view ->
-            findNavController().popBackStack()
+            //findNavController().popBackStack()
+            findNavController().navigate(R.id.action_addSubjectDialogFragment_to_subjectsBottomDialogFragment)
         }
 
         // Inflate the layout for this fragment

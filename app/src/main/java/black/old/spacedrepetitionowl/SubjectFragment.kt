@@ -68,7 +68,7 @@ class SubjectFragment : Fragment() {
                 .setAction("Action", null)
                 .show()
              */
-            view.findNavController().navigate(R.id.action_subjectFragment_to_editSubjectDialogFragment)
+            findNavController().navigate(R.id.action_subjectFragment_to_editSubjectDialogFragment)
         }
         // Hide fab during scroll, and show again after scroll is finished.
         // source: https://stackoverflow.com/a/39813266
@@ -155,8 +155,11 @@ class SubjectFragment : Fragment() {
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : Subject) {
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
-        val bottomDialog = SubjectsBottomDialogFragment(currentSubject.content)
-        bottomDialog.show(activity!!.supportFragmentManager, "fragment_subjects_bottom_dialog")
+
+        val subject_id = currentSubject.id
+        val subject_text = currentSubject.content
+        val action = SubjectFragmentDirections.actionSubjectFragmentToSubjectsBottomDialogFragment(subject_id, subject_text)
+       findNavController().navigate(action)
     }
 
     companion object {

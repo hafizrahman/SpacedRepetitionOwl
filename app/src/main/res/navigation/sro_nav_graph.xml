@@ -16,6 +16,9 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             />
+        <action
+            android:id="@+id/action_subjectFragment_to_subjectsBottomDialogFragment"
+            app:destination="@id/subjectsBottomDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/editSubjectFragment"
@@ -26,14 +29,24 @@
         android:id="@+id/addSubjectDialogFragment"
         android:name="black.old.spacedrepetitionowl.AddSubjectDialogFragment"
         android:label="AddSubjectDialogFragment"
-        tools:layout="@layout/fragment_add_subject_dialog"/>
+        tools:layout="@layout/fragment_add_subject_dialog">
+        <action
+            android:id="@+id/action_addSubjectDialogFragment_to_subjectsBottomDialogFragment"
+            app:destination="@id/subjectsBottomDialogFragment" />
+    </dialog>
     <dialog
         android:id="@+id/subjectsBottomDialogFragment"
-        android:name="black.old.spacedrepetitionowl.AddSubjectDialogFragment"
-        android:label="AddSubjectDialogFragment"
+        android:name="black.old.spacedrepetitionowl.SubjectsBottomDialogFragment"
+        android:label="SubjectsBottomDialogFragment"
         tools:layout="@layout/fragment_subjects_bottom_dialog">
         <action
             android:id="@+id/action_subjectsBottomDialogFragment_to_editSubjectFragment"
             app:destination="@id/editSubjectFragment" />
+        <argument
+            android:name="subject_id"
+            app:argType="long" />
+        <argument
+            android:name="subject_text"
+            app:argType="string" />
     </dialog>
 </navigation>
