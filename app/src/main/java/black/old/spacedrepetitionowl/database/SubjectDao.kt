@@ -20,6 +20,9 @@ interface SubjectDao {
     suspend fun delete(subject: Subject)
 
     // No need for coroutines when LiveData is used.
+    @Query("SELECT * from sro_subjects WHERE id == :subject_id")
+    fun getSubject(subject_id: Long): LiveData<Subject>
+
     @Query("SELECT * FROM sro_subjects")
     fun getAllSubjects(): LiveData<List<Subject>>
 

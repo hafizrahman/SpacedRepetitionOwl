@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
@@ -50,6 +51,14 @@ class EditSubjectFragment : Fragment() {
         val submitButton = view.add_subject_submit_button
         val subjectField = view.layoutInputAddSubject
         val subjectUrl = view.layoutInputAddUri
+
+        // fill in existing data
+        mainViewModel.getSubject(args.subjectId).observe(viewLifecycleOwner,
+            Observer { currentSubject ->
+                subjectField.setText(currentSubject.content)
+                subjectUrl.setText(currentSubject.url)
+            })
+
         submitButton.setOnClickListener { view ->
             Log.d("SRISUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
             mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString())

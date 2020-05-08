@@ -147,6 +147,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return TimeUnit.DAYS.toMillis(day.toLong())
     }
 
+    fun getSubject(subject_id: Long): LiveData<Subject> {
+        return sroRepository.getSubject(subject_id)
+    }
+
     fun getSubjects(): LiveData<List<Subject>>? {
         return sroRepository.getSubjects()
     }
