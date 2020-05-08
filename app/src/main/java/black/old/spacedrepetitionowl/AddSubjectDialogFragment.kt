@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
-import kotlinx.android.synthetic.main.fragment_add_subject.view.*
+import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
 import kotlinx.android.synthetic.main.fragment_add_subject_dialog.view.*
 
 /**

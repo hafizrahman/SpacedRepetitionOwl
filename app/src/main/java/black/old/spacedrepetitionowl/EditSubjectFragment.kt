@@ -1,17 +1,15 @@
 package black.old.spacedrepetitionowl
 
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
-import kotlinx.android.synthetic.main.fragment_add_subject.view.*
-import kotlinx.android.synthetic.main.fragment_add_subject_dialog.*
+import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +26,8 @@ class EditSubjectFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    val args: EditSubjectFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,17 +41,20 @@ class EditSubjectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_subject, container, false)
+        val view = inflater.inflate(R.layout.fragment_edit_subject, container, false)
 
+        // The ViewModel is already created on the Activity level (inside MainActivity.kt),
+        // so here we are using the Activity's context
         val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
-        val submitButton : View = view.add_subject_submit_button
+        val submitButton = view.add_subject_submit_button
         val subjectField = view.layoutInputAddSubject
         val subjectUrl = view.layoutInputAddUri
         submitButton.setOnClickListener { view ->
             Log.d("SRISUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
             mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString())
         }
+
 
         val nukeDbButton = view.nuke_db_button
         nukeDbButton.setOnClickListener { view ->

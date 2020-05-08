@@ -46,7 +46,10 @@ class SubjectsBottomDialogFragment() : BottomSheetDialogFragment() {
 
         val editSubjectText = view.subjects_bottom_dialog_edit
         editSubjectText.setOnClickListener {view ->
-            findNavController().navigate(R.id.action_subjectsBottomDialogFragment_to_editSubjectFragment)
+
+            val action = SubjectsBottomDialogFragmentDirections
+                .actionSubjectsBottomDialogFragmentToEditSubjectFragment(args.subjectId)
+            findNavController().navigate(action)
         }
 
         return view

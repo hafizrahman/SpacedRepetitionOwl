@@ -57,17 +57,10 @@ class SubjectFragment : Fragment() {
 
         // Set up layout manager
         view.sro_subject_list.layoutManager = LinearLayoutManager(context)
-        // Send data into adapter then assign adapter to RecyclerView
-        //view.sro_subject_list.adapter = MySubjectRecyclerViewAdapter(DummyContent.ITEMS, listener)
 
         // FAB click listener
         val addSubjectFab: View = view.fab
         addSubjectFab.setOnClickListener { view ->
-            /* Snackbar test
-            Snackbar.make(view, "Thanks for clicking me.", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .show()
-             */
             findNavController().navigate(R.id.action_subjectFragment_to_editSubjectDialogFragment)
         }
         // Hide fab during scroll, and show again after scroll is finished.
@@ -155,7 +148,6 @@ class SubjectFragment : Fragment() {
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : Subject) {
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
-
         val subject_id = currentSubject.id
         val subject_text = currentSubject.content
         val action = SubjectFragmentDirections.actionSubjectFragmentToSubjectsBottomDialogFragment(subject_id, subject_text)
