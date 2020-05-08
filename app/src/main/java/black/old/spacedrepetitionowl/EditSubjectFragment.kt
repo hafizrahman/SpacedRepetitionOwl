@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
 
@@ -57,12 +59,19 @@ class EditSubjectFragment : Fragment() {
             Observer { currentSubject ->
                 subjectField.setText(currentSubject.content)
                 subjectUrl.setText(currentSubject.url)
-            })
 
-        submitButton.setOnClickListener { view ->
-            Log.d("SRISUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
-            mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString())
-        }
+                submitButton.setOnClickListener { view ->
+                    val subjectToUpdate = Subject(
+                        subjectField.text.toString(),
+                        subjectUrl.text.toString(),
+                        currentSubject.startDateTimestamp,
+                        currentSubject.id
+                        )
+                    Log.d("HIKARU", "Updating these: $subjectToUpdate")
+                    mainViewModel.updateSubject(subjectToUpdate)
+                    findNavController().popBackStack()
+                }
+            })
 
 
         val nukeDbButton = view.nuke_db_button

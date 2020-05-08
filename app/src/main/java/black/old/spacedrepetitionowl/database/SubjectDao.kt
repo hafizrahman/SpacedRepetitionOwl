@@ -1,10 +1,7 @@
 package black.old.spacedrepetitionowl.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import black.old.spacedrepetitionowl.models.Subject
 
 @Dao
@@ -15,6 +12,9 @@ interface SubjectDao {
     // https://developer.android.com/training/data-storage/room/accessing-data#convenience-insert
     @Insert
     suspend fun insert(subject: Subject): Long
+
+    @Update
+    suspend fun update(subject: Subject)
 
     @Delete
     suspend fun delete(subject: Subject)

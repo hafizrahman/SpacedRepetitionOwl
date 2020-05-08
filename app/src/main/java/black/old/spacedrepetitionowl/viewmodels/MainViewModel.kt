@@ -147,6 +147,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return TimeUnit.DAYS.toMillis(day.toLong())
     }
 
+    fun updateSubject(subject: Subject) {
+        viewModelScope.launch {
+            sroRepository.updateSubject(subject)
+        }
+    }
     fun getSubject(subject_id: Long): LiveData<Subject> {
         return sroRepository.getSubject(subject_id)
     }

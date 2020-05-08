@@ -12,6 +12,10 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return subjectDao.insert(subject)
     }
 
+    suspend fun updateSubject(subject: Subject) {
+        subjectDao.update(subject)
+    }
+
     fun getSubjects(): LiveData<List<Subject>>? {
         return subjectDao.getAllSubjects()
     }
