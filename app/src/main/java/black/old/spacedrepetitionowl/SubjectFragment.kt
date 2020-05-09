@@ -96,6 +96,8 @@ class SubjectFragment : Fragment() {
             onOptionsItemSelected(it)
         }
 
+        displaySampleNotification()
+
         return view
     }
 
@@ -103,10 +105,12 @@ class SubjectFragment : Fragment() {
         var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
         when(item.itemId) {
             R.id.menu_sortby_default -> {
+                displaySampleNotification()
                 adapter.changeOrder(SORTBY_DEFAULT)
                 return true
             }
             R.id.menu_sortby_reminder -> {
+                displaySampleNotification()
                 adapter.changeOrder(SORTBY_REMINDER)
                 return true
             }
@@ -128,6 +132,16 @@ class SubjectFragment : Fragment() {
         listener = null
     }
 
+    fun displaySampleNotification() {
+        // Display example notification
+        NotificationHelper.createSampleDataNotification(
+            activity!!.applicationContext,
+            "Title",
+            "Message",
+            "Big text?",
+            true)
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -147,6 +161,7 @@ class SubjectFragment : Fragment() {
 
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : Subject) {
+        displaySampleNotification()
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
         val subject_id = currentSubject.id
         val subject_text = currentSubject.content

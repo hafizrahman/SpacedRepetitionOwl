@@ -2,6 +2,7 @@ package black.old.spacedrepetitionowl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
@@ -17,6 +18,16 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
         // the fragment (SubjectFragment in this case) can then re-use this ViewModel by
         // setting the ViewModel() parameter to getActivity()
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        // Setup notification channel
+        NotificationHelper.createNotificationChannel(
+            this,
+            NotificationManagerCompat.IMPORTANCE_HIGH,
+            false,
+            //getString(R.string.app_name),
+            "SRO CHANNEL NAME IS HERE",
+            "Spaced Repetition Owl notification channel."
+        )
     }
 
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
