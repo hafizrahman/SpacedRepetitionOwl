@@ -1,5 +1,6 @@
 package black.old.spacedrepetitionowl
 
+import android.app.AlarmManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -95,9 +96,6 @@ class SubjectFragment : Fragment() {
         view.sro_subject_list_toolbar.setOnMenuItemClickListener { it ->
             onOptionsItemSelected(it)
         }
-
-        displaySampleNotification()
-
         return view
     }
 
@@ -105,7 +103,9 @@ class SubjectFragment : Fragment() {
         var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
         when(item.itemId) {
             R.id.menu_sortby_default -> {
-                displaySampleNotification()
+               // displaySampleNotification()
+                setNotification15sFromNow()
+                Log.d("FIFTEEN", "Setting notification alarm for 15 secs from now")
                 adapter.changeOrder(SORTBY_DEFAULT)
                 return true
             }
@@ -136,10 +136,24 @@ class SubjectFragment : Fragment() {
         // Display example notification
         NotificationHelper.createSampleDataNotification(
             activity!!.applicationContext,
-            "Title",
-            "Message",
-            "Big text?",
+            "It's time to learn!",
+            "How to make coffee",
+            "How to make coffee -- 2nd Phase",
             true)
+    }
+
+    fun setNotification15sFromNow() {
+        val fifteenSecsFromNow = System.currentTimeMillis() + (5*1000)
+        Log.d("FIFTEEN", System.currentTimeMillis().toString())
+        Log.d("FIFTEEN", fifteenSecsFromNow.toString())
+        val alarmManager = activity!!.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        AlarmScheduler.scheduleAlarm(
+            activity!!.applicationContext,
+            fifteenSecsFromNow,
+            AlarmScheduler.createPendingIntent(activity!!.applicationContext),
+            alarmManager
+        )
     }
 
 
@@ -161,7 +175,7 @@ class SubjectFragment : Fragment() {
 
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : Subject) {
-        displaySampleNotification()
+        //displaySampleNotification()
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
         val subject_id = currentSubject.id
         val subject_text = currentSubject.content
