@@ -1,10 +1,13 @@
 package black.old.spacedrepetitionowl.viewmodels
 
+import android.app.AlarmManager
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import black.old.spacedrepetitionowl.AlarmScheduler
 import black.old.spacedrepetitionowl.database.SroDatabase
 import black.old.spacedrepetitionowl.models.CombinedSubjectReminders
 import black.old.spacedrepetitionowl.models.Reminder
@@ -19,11 +22,13 @@ import java.util.concurrent.TimeUnit
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private lateinit var sroRepository: SroRepository
+    private lateinit var context: Context
 
     init {
         val subjectDao = SroDatabase.getDatabase(application).subjectDao
         val reminderDao = SroDatabase.getDatabase(application).reminderDao
         sroRepository = SroRepository(subjectDao, reminderDao)
+        context = application.applicationContext
     }
 
     // Entering
@@ -64,15 +69,40 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             var currentReminder : Reminder
             val repDays = intArrayOf(1, 7, 16, 35)
             for(i in 0..3) {
+                val dateTimestamp = nowTimestamp + dayToMilliseconds(repDays[i])
                 currentReminder = Reminder(
-                    generatedSubjectId,
-                    nowTimestamp + dayToMilliseconds(repDays[i])
+                generatedSubjectId,
+                dateTimestamp
                 )
-                sroRepository.insertReminder(currentReminder)
-                Log.d("SRIROTI", "Reminder $i is $currentReminder")
-                Log.d("SRIROTI", "Pew! Saving Reminder to database.")
+                val currentReminderGeneratedId = sroRepository.insertReminder(currentReminder)
+
+                Log.d("HIOWL",
+                    "Alarm: $subjectText for $repDays[$i] ($currentReminderGeneratedId)")
+
+                addReminderNotification(context,
+                    subjectText,
+                    currentReminderGeneratedId,
+                    dateTimestamp)
+
             }
         }
+    }
+
+    fun addReminderNotification(context: Context, subjectText: String, reminderId: Long, reminderTimestamp: Long) {
+        // Create the unique pending intent for the particular reminder
+        val pendingInt = AlarmScheduler.createPendingIntentForReminder(
+            context,
+            subjectText,
+            reminderId)
+
+        // Submit pending intent to Alarm Manager to schedule it
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        AlarmScheduler.scheduleAlarm(
+            context,
+            reminderTimestamp,
+            pendingInt,
+            alarmManager
+        )
     }
 
     fun dayToMilliseconds(day: Int) : Long {
