@@ -24,8 +24,8 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return subjectDao.getSubject(subject_id)
     }
 
-    suspend fun insertReminder(reminder: Reminder) {
-        reminderDao.insert(reminder)
+    suspend fun insertReminder(reminder: Reminder): Long {
+        return reminderDao.insert(reminder)
     }
 
     fun getReminders(): LiveData<List<Reminder>>? {
