@@ -79,7 +79,7 @@ class SubjectFragment : Fragment() {
 
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
-        var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        val mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         // New observer
          mainViewModel.getAllData()?.observe(viewLifecycleOwner,
@@ -175,7 +175,6 @@ class SubjectFragment : Fragment() {
 
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : Subject) {
-        //displaySampleNotification()
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
         val subject_id = currentSubject.id
         val subject_text = currentSubject.content

@@ -16,6 +16,10 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         subjectDao.update(subject)
     }
 
+    suspend fun deleteSubjectBySubjectId(subject_id: Long) {
+        subjectDao.deleteBySubjectId(subject_id)
+    }
+
     fun getSubjects(): LiveData<List<Subject>>? {
         return subjectDao.getAllSubjects()
     }

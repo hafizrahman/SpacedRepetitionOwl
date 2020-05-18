@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import black.old.spacedrepetitionowl.AlarmScheduler
 import black.old.spacedrepetitionowl.database.SroDatabase
@@ -109,6 +110,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return TimeUnit.DAYS.toMillis(day.toLong())
     }
 
+    fun deleteSubjectBySubjectId(subject_id: Long) {
+        viewModelScope.launch {
+            sroRepository.deleteSubjectBySubjectId(subject_id)
+        }
+    }
     fun updateSubject(subject: Subject) {
         viewModelScope.launch {
             sroRepository.updateSubject(subject)

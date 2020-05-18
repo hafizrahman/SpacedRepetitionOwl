@@ -26,6 +26,9 @@ interface SubjectDao {
     @Query("SELECT * FROM sro_subjects")
     fun getAllSubjects(): LiveData<List<Subject>>
 
+    @Query("DELETE FROM sro_subjects where id == :subject_id")
+    suspend fun deleteBySubjectId(subject_id: Long)
+
     // Empty out table
     @Query("DELETE FROM sro_subjects")
     suspend fun deleteAll()
