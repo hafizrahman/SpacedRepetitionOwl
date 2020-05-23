@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginHorizontal="5dp"
-    android:layout_marginVertical="5dp"
+    android:layout_margin="7dp"
     card_view:cardBackgroundColor="@color/colorCard"
-    card_view:cardCornerRadius="4dp"
+    card_view:cardCornerRadius="7dp"
     card_view:cardElevation="1dp"
     app:strokeColor="@color/colorCardHeading"
     app:strokeWidth="1dp">
@@ -33,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:background="@color/colorCardHeading"
-                android:padding="12dp"
+                android:padding="16dp"
                 android:text="Dummy text"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="16dp"
@@ -50,8 +49,43 @@
                 android:textAppearance="?android:textAppearanceLarge"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:paddingRight="18dp"
+                android:paddingRight="16dp"
+                android:textSize="16dp"
                 android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblExpenseCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next study time: "
+                android:textColor="#404040"
+                android:padding="8dp"
+                android:textSize="18dp" />
+
+            <!-- ADDED SPACER VIEW -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="Jan 1, 20"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:padding="8dp"
+                android:layout_gravity="right"
+                />
+
         </LinearLayout>
 
 
@@ -67,19 +101,20 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingVertical="12dp">
+            android:paddingVertical="8dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/reminder_0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="Jan 1, 20"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="6dp"
-                android:paddingVertical="24dp"
+                android:padding="8dp"
+                android:paddingVertical="16dp"
                 android:textAlignment="center"/>
 
             <TextView
@@ -87,12 +122,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="Jan 1, 20"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="6dp"
-                android:paddingVertical="24dp"
+                android:padding="8dp"
+                android:paddingVertical="16dp"
                 android:textAlignment="center"/>
 
             <TextView
@@ -100,12 +135,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="Jan 1, 20"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="6dp"
-                android:paddingVertical="24dp"
+                android:padding="8dp"
+                android:paddingVertical="16dp"
                 android:textAlignment="center"/>
 
             <TextView
@@ -113,12 +148,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="Jan 1, 20"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="6dp"
-                android:paddingVertical="24dp"
+                android:padding="8dp"
+                android:paddingVertical="16dp"
                 android:textAlignment="center"/>
         </LinearLayout>
 

@@ -36,7 +36,7 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return reminderDao.getAllReminders()
     }
 
-    fun getReminderBySubject(subjectId: Int) : LiveData<List<Reminder>>? {
+    fun getReminderBySubject(subjectId: Long) : LiveData<List<Reminder>>? {
         return reminderDao.getRemindersBySubject(subjectId)
     }
 

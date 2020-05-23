@@ -52,5 +52,20 @@
         <argument
             android:name="subject_text"
             app:argType="string" />
+        <action
+            android:id="@+id/action_subjectsBottomDialogFragment_to_detailSubjectFragment"
+            app:destination="@id/detailSubjectFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/detailSubjectFragment"
+        android:name="black.old.spacedrepetitionowl.DetailSubjectFragment"
+        android:label="DetailSubjectFragment"
+        tools:layout="@layout/fragment_detail_subject" >
+        <argument
+            android:name="subject_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailSubjectFragment_to_editSubjectFragment"
+            app:destination="@id/editSubjectFragment" />
+    </fragment>
 </navigation>

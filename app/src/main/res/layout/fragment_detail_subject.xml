@@ -24,11 +24,13 @@
         android:orientation="vertical"
         android:padding="12dp">
         <TextView
+            android:id="@+id/sro_detail_subject_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Subject Title" />
 
         <TextView
+            android:id="@+id/sro_detail_subject_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Subject URL" />
@@ -49,6 +51,7 @@
                 android:text="1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingHorizontal="8dp"
                 />
             <TextView
                 android:id="@+id/sro_detail_subject_reminders_date_1"
@@ -65,6 +68,8 @@
                 android:text="2"
                 app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_1"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingHorizontal="8dp"
+
                 />
             <TextView
                 android:id="@+id/sro_detail_subject_reminders_date_2"
@@ -81,6 +86,7 @@
                 android:text="3"
                 app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_2"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingHorizontal="8dp"
                 />
             <TextView
                 android:id="@+id/sro_detail_subject_reminders_date_3"
@@ -97,6 +103,7 @@
                 android:text="4"
                 app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_3"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingHorizontal="8dp"
                 />
             <TextView
                 android:id="@+id/sro_detail_subject_reminders_date_4"

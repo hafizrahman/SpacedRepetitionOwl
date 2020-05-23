@@ -44,12 +44,21 @@ class SubjectsBottomDialogFragment() : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_subjects_bottom_dialog, container, false)
+        val view = inflater.inflate(
+            R.layout.fragment_subjects_bottom_dialog,
+            container,
+            false)
         view.subjects_bottom_dialog_title.text = args.subjectText
+
+        val detailSubjectText = view.subjects_bottom_dialog_details
+        detailSubjectText.setOnClickListener { view ->
+            val action = SubjectsBottomDialogFragmentDirections
+                .actionSubjectsBottomDialogFragmentToDetailSubjectFragment(args.subjectId)
+            findNavController().navigate(action)
+        }
 
         val editSubjectText = view.subjects_bottom_dialog_edit
         editSubjectText.setOnClickListener { view ->
-
             val action = SubjectsBottomDialogFragmentDirections
                 .actionSubjectsBottomDialogFragmentToEditSubjectFragment(args.subjectId)
             findNavController().navigate(action)
