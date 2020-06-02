@@ -92,13 +92,16 @@ class SubjectFragment : Fragment() {
 
         // menu
         // Example from https://stackoverflow.com/a/50990935
+
+        /*
         view.sro_subject_list_toolbar.inflateMenu(R.menu.main_menu)
         view.sro_subject_list_toolbar.setOnMenuItemClickListener { it ->
             onOptionsItemSelected(it)
         }
+         */
         return view
     }
-
+/*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
         when(item.itemId) {
@@ -117,7 +120,7 @@ class SubjectFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
+*/
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {

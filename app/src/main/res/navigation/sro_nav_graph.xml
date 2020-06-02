@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/subjectFragment"
         android:name="black.old.spacedrepetitionowl.SubjectFragment"
-        android:label="fragment_subject_list"
+        android:label="Spaced Repetition Owl: Subjects"
         tools:layout="@layout/fragment_subject_list" >
         <action
             android:id="@+id/action_subjectFragment_to_editSubjectDialogFragment"
@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_subjectFragment_to_subjectsBottomDialogFragment"
             app:destination="@id/subjectsBottomDialogFragment" />
+        <action
+            android:id="@+id/action_subjectFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_subjectFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editSubjectFragment"
@@ -68,4 +74,14 @@
             android:id="@+id/action_detailSubjectFragment_to_editSubjectFragment"
             app:destination="@id/editSubjectFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="black.old.spacedrepetitionowl.AboutFragment"
+        android:label="Spaced Repetition Owl: About"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="black.old.spacedrepetitionowl.settingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

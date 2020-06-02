@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/sro_subject_list_toolbar"
         android:layout_width="match_parent"
@@ -13,10 +14,9 @@
         android:background="@color/colorPrimaryDark"
         app:title="SpacedRepetitionOwl"
         app:titleTextColor="#ffffff"/>
+        -->
 
-    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sro_subject_list"
         android:name="black.old.spacedrepetitionowl.SubjectFragment"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:paddingTop="8dp"
         android:paddingBottom="160dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/sro_subject_list_toolbar"/>
+        app:layout_constraintTop_toTopOf="parent"/>
         <!-- ^ Adding a high bottom padding and clipToPadding to false is
         necessary to make the FAB not cover the last item in the list.
         This is from: https://stackoverflow.com/a/45408853 -->
