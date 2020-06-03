@@ -132,6 +132,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return sroRepository.getReminders()
     }
 
+    fun updateReminder(reminder: Reminder) {
+        viewModelScope.launch {
+            sroRepository.updateReminder(reminder)
+        }
+    }
+
     fun getRemindersBySubjectId(subject_id: Long):LiveData<List<Reminder>>? {
         return sroRepository.getReminderBySubject(subject_id)
     }

@@ -1,10 +1,7 @@
 package black.old.spacedrepetitionowl.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import black.old.spacedrepetitionowl.models.Reminder
 
 @Dao
@@ -15,6 +12,9 @@ interface ReminderDao {
 
     @Insert
     suspend fun insert(reminder: Reminder): Long
+
+    @Update
+    suspend fun update(reminder: Reminder)
 
     @Delete
     suspend fun delete(reminder: Reminder)

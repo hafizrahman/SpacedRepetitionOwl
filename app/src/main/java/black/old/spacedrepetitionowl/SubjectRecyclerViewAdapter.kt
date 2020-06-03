@@ -1,5 +1,6 @@
 package black.old.spacedrepetitionowl
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,8 @@ import java.text.SimpleDateFormat
 class SubjectRecyclerViewAdapter(
     var sortingType: Int,
     val listener: OnListFragmentInteractionListener?,
-    val mainClickListener: (Subject) -> Unit                // clicklistener for the main card area.
+    val mainClickListener: (Subject) -> Unit,                // clicklistener for the main card area.
+    val reminderClickListener: (Reminder) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val onClickListener: View.OnClickListener
     private lateinit var subjects: List<Subject>
@@ -107,12 +109,41 @@ class SubjectRecyclerViewAdapter(
 
                     holder.reminder0.text =
                         dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+                    holder.reminder0.setOnClickListener {
+                        reminderClickListener(reminderListForCurrentSubject[0])
+                    }
+                    if(reminderListForCurrentSubject[0].checked)
+                        holder.reminder0.setBackgroundColor((Color.parseColor("#00FF00")))
+
                     holder.reminder1.text =
                         dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+                    holder.reminder1.setOnClickListener {
+                        reminderClickListener(reminderListForCurrentSubject[1])
+                    }
+
+                    if(reminderListForCurrentSubject[1].checked)
+                        holder.reminder1.setBackgroundColor((Color.parseColor("#00FF00")))
+
+
                     holder.reminder2.text =
                         dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+                    holder.reminder2.setOnClickListener {
+                        reminderClickListener(reminderListForCurrentSubject[2])
+                    }
+                    if(reminderListForCurrentSubject[2].checked)
+                        holder.reminder2.setBackgroundColor((Color.parseColor("#00FF00")))
+
+
                     holder.reminder3.text =
                         dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+                    holder.reminder3.setOnClickListener {
+                        reminderClickListener(reminderListForCurrentSubject[3])
+                    }
+
+                    if(reminderListForCurrentSubject[3].checked)
+                        holder.reminder3.setBackgroundColor((Color.parseColor("#00FF00")))
+
+
                 }
 
                 // bind mainClickListener to the LinearLayout to make it clickable

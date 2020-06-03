@@ -36,6 +36,7 @@ class SubjectFragment : Fragment() {
     private var columnCount = 1
     private var listener: OnListFragmentInteractionListener? = null
     lateinit var adapter: SubjectRecyclerViewAdapter
+    lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +53,8 @@ class SubjectFragment : Fragment() {
         adapter = SubjectRecyclerViewAdapter(
             SORTBY_DEFAULT,
             listener,
-            { subject : Subject -> mainSubjectBarClicked(subject) }
+            { subject : Subject -> mainSubjectBarClicked(subject) },
+            { reminder : Reminder -> reminderIsClicked(reminder) }
         )
         view.sro_subject_list.adapter = adapter
 
@@ -79,7 +81,7 @@ class SubjectFragment : Fragment() {
 
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
-        val mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         // New observer
          mainViewModel.getAllData()?.observe(viewLifecycleOwner,
@@ -183,6 +185,21 @@ class SubjectFragment : Fragment() {
         val subject_text = currentSubject.content
         val action = SubjectFragmentDirections.actionSubjectFragmentToSubjectsBottomDialogFragment(subject_id, subject_text)
        findNavController().navigate(action)
+    }
+
+    private fun reminderIsClicked(currentReminder: Reminder) {
+        Log.d("Clicker", currentReminder.toString() + " is being clicked")
+        // TODO:
+        // Toggle Reminder's checked status and save to db
+        if (currentReminder.checked == true) {
+            currentReminder.checked = false
+        }
+        else {
+            currentReminder.checked = true
+        }
+        mainViewModel.updateReminder(currentReminder)
+        Log.d("Clicker", "Update result " + currentReminder.toString())
+        adapter.notifyDataSetChanged()
     }
 
     companion object {

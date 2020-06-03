@@ -102,7 +102,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingVertical="8dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/reminder_0"
