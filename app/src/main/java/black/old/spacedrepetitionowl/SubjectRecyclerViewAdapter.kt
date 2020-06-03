@@ -112,8 +112,11 @@ class SubjectRecyclerViewAdapter(
                     holder.reminder0.setOnClickListener {
                         reminderClickListener(reminderListForCurrentSubject[0])
                     }
+
                     if(reminderListForCurrentSubject[0].checked)
                         holder.reminder0.setBackgroundColor((Color.parseColor("#00FF00")))
+                    else
+                        holder.reminder0.setBackgroundColor((Color.parseColor("#FFFFFF")))
 
                     holder.reminder1.text =
                         dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
@@ -123,7 +126,8 @@ class SubjectRecyclerViewAdapter(
 
                     if(reminderListForCurrentSubject[1].checked)
                         holder.reminder1.setBackgroundColor((Color.parseColor("#00FF00")))
-
+                    else
+                        holder.reminder1.setBackgroundColor((Color.parseColor("#FFFFFF")))
 
                     holder.reminder2.text =
                         dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
@@ -132,7 +136,8 @@ class SubjectRecyclerViewAdapter(
                     }
                     if(reminderListForCurrentSubject[2].checked)
                         holder.reminder2.setBackgroundColor((Color.parseColor("#00FF00")))
-
+                    else
+                        holder.reminder2.setBackgroundColor((Color.parseColor("#FFFFFF")))
 
                     holder.reminder3.text =
                         dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
@@ -142,7 +147,8 @@ class SubjectRecyclerViewAdapter(
 
                     if(reminderListForCurrentSubject[3].checked)
                         holder.reminder3.setBackgroundColor((Color.parseColor("#00FF00")))
-
+                    else
+                        holder.reminder3.setBackgroundColor((Color.parseColor("#FFFFFF")))
 
                 }
 
