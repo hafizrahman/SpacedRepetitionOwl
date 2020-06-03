@@ -10,15 +10,32 @@
         android:id="@+id/menu_sortby_reminder"
         android:title="Show upcoming reminders" />
         -->
-    <item
-    android:id="@id/subjectFragment"
-    android:title="Subject" />
 
-    <item
-        android:id="@id/settingsFragment"
-        android:title="Settings" />
+    <group
+        android:id="@+id/group_lists"
+        android:checkableBehavior="single">
+        <item
+        android:id="@id/subjectFragment"
+        android:title="List View" />
 
-    <item
-        android:id="@id/aboutFragment"
-        android:title="About" />
+        <item
+            android:id="@id/subjectFragment"
+            android:title="Timeline View" />
+
+        <item
+            android:id="@id/subjectFragment"
+            android:title="Archived" />
+    </group>
+
+    <group
+        android:id="@+id/group_miscs"
+        android:checkableBehavior="single">
+        <item
+            android:id="@id/settingsFragment"
+            android:title="Settings" />
+
+        <item
+            android:id="@id/aboutFragment"
+            android:title="About" />
+    </group>
 </menu>
