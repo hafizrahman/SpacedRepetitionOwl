@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_subjectFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_subjectFragment_to_subjectTimelineFragment"
+            app:destination="@id/subjectTimelineFragment" />
     </fragment>
     <fragment
         android:id="@+id/editSubjectFragment"
@@ -84,4 +87,13 @@
         android:name="black.old.spacedrepetitionowl.settingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/subjectTimelineFragment"
+        android:name="black.old.spacedrepetitionowl.SubjectTimelineFragment"
+        android:label="Timeline"
+        tools:layout="@layout/fragment_subject_timeline" >
+        <action
+            android:id="@+id/action_subjectTimelineFragment_to_addSubjectDialogFragment"
+            app:destination="@id/addSubjectDialogFragment" />
+    </fragment>
 </navigation>

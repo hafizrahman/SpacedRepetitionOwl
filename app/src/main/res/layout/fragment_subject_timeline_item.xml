@@ -17,8 +17,8 @@
         android:background="@color/design_default_color_secondary_variant">
 
         <TextView
-            android:id="@+id/content_test"
-            android:text="Dummy Text"
+            android:id="@+id/subject_timeline_item_text"
+            android:text="Dumm22y Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"

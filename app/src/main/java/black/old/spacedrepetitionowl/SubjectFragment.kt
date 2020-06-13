@@ -188,17 +188,15 @@ class SubjectFragment : Fragment() {
     }
 
     private fun reminderIsClicked(currentReminder: Reminder) {
-        Log.d("Clicker", currentReminder.toString() + " is being clicked")
-        // TODO:
+        Log.d("Clicker", "$currentReminder is being clicked")
         // Toggle Reminder's checked status and save to db
-        if (currentReminder.checked == true) {
+        if (currentReminder.checked) {
             currentReminder.checked = false
-        }
-        else {
+        } else {
             currentReminder.checked = true
         }
         mainViewModel.updateReminder(currentReminder)
-        Log.d("Clicker", "Update result " + currentReminder.toString())
+        Log.d("Clicker", "Update result $currentReminder")
         adapter.notifyDataSetChanged()
     }
 

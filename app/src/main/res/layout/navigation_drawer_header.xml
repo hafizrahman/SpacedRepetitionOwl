@@ -14,12 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:text="Spaced \nRepetition \nOwl"
-        android:textSize="56dp"
+        android:textSize="48dp"
         android:letterSpacing="-0.03"
-        android:lineHeight="50dp"
+        android:lineHeight="42dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="#ffffff"
+        android:paddingTop="128dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

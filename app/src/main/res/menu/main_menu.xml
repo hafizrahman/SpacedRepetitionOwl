@@ -15,11 +15,11 @@
         android:id="@+id/group_lists"
         android:checkableBehavior="single">
         <item
-        android:id="@id/subjectFragment"
-        android:title="List View" />
+            android:id="@id/subjectFragment"
+            android:title="List View" />
 
         <item
-            android:id="@id/subjectFragment"
+            android:id="@id/subjectTimelineFragment"
             android:title="Timeline View" />
 
         <item
@@ -28,7 +28,7 @@
     </group>
 
     <group
-        android:id="@+id/group_miscs"
+        android:id="@+id/group_misc"
         android:checkableBehavior="single">
         <item
             android:id="@id/settingsFragment"
