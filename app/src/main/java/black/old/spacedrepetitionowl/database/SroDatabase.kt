@@ -8,7 +8,7 @@ import black.old.spacedrepetitionowl.models.*
 
 @Database(
     entities    = [Subject::class, Reminder::class],
-    version     = 3)
+    version     = 1)
 abstract class SroDatabase : RoomDatabase() {
     abstract val subjectDao: SubjectDao
     abstract val reminderDao: ReminderDao
@@ -27,7 +27,7 @@ abstract class SroDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     SroDatabase::class.java,
-                    "sro_database")
+                    "sro_database_2")
                     // Wipes and rebuilds instead of migrating
                     // if no Migration object
                     .fallbackToDestructiveMigration()

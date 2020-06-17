@@ -38,9 +38,10 @@ class AddSubjectDialogFragment : DialogFragment() {
         val submitButton : View = view.add_subject_dialog_submit
         val subjectField = view.add_subject_dialog_subject
         val subjectUrl = view.add_subject_dialog_uri
+        val subjectNotes = view.add_subject_dialog_notes
         submitButton.setOnClickListener { view ->
             Log.d("DIALOGSUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
-            mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString())
+            mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString(), subjectNotes.text.toString())
         }
 
         // Cancel button

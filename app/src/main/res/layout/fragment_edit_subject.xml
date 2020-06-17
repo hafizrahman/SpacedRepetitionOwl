@@ -50,6 +50,27 @@
             android:hint="Add URI (optional)"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutAddNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutAddUri"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/layoutInputAddNotes"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#ffffff"
+            android:hint="Add Notes (optional)"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:singleLine="false" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/add_subject_submit_button"
         android:layout_width="wrap_content"
@@ -58,7 +79,7 @@
         android:layout_marginEnd="20dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutAddUri" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutAddNotes" />
 
     <Button
         android:id="@+id/nuke_db_button"
@@ -69,5 +90,5 @@
         android:backgroundTint="#F31212"
         android:text="DELETE DB DATA"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutAddUri" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutAddNotes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

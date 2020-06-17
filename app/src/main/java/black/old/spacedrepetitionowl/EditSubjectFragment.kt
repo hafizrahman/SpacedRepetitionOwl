@@ -53,17 +53,20 @@ class EditSubjectFragment : Fragment() {
         val submitButton = view.add_subject_submit_button
         val subjectField = view.layoutInputAddSubject
         val subjectUrl = view.layoutInputAddUri
+        val subjectNotes = view.layoutInputAddNotes
 
         // fill in existing data
         mainViewModel.getSubject(args.subjectId).observe(viewLifecycleOwner,
             Observer { currentSubject ->
                 subjectField.setText(currentSubject.content)
                 subjectUrl.setText(currentSubject.url)
+                subjectNotes.setText(currentSubject.notes)
 
                 submitButton.setOnClickListener { view ->
                     val subjectToUpdate = Subject(
                         subjectField.text.toString(),
                         subjectUrl.text.toString(),
+                        subjectNotes.text.toString(),
                         currentSubject.startDateTimestamp,
                         currentSubject.id
                         )

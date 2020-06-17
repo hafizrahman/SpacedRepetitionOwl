@@ -1,5 +1,6 @@
 package black.old.spacedrepetitionowl.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import black.old.spacedrepetitionowl.database.ReminderDao
 import black.old.spacedrepetitionowl.database.SubjectDao
@@ -13,7 +14,8 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
     }
 
     suspend fun updateSubject(subject: Subject) {
-        subjectDao.update(subject)
+        Log.d("HIKARU-REPO", "Updating these: $subject")
+        return subjectDao.update(subject)
     }
 
     suspend fun deleteSubjectBySubjectId(subject_id: Long) {

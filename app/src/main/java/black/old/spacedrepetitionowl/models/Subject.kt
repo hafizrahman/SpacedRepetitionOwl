@@ -19,6 +19,7 @@ import androidx.room.PrimaryKey
 data class Subject (
     var content: String,
     var url: String,
+    var notes: String,
     var startDateTimestamp: Long,
 
     // The field below is used for primary key and automatically generated, so I'm giving it
