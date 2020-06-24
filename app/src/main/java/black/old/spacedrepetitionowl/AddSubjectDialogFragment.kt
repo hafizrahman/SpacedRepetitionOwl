@@ -10,8 +10,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
 import kotlinx.android.synthetic.main.fragment_add_subject_dialog.view.*
+import kotlinx.android.synthetic.main.main_content_area.*
 
 /**
  * A simple [Fragment] subclass.
@@ -39,16 +41,38 @@ class AddSubjectDialogFragment : DialogFragment() {
         val subjectField = view.add_subject_dialog_subject
         val subjectUrl = view.add_subject_dialog_uri
         val subjectNotes = view.add_subject_dialog_notes
+        var customTimestamp = 0L
+
+
         submitButton.setOnClickListener { view ->
             Log.d("DIALOGSUSI", subjectField.text.toString() + " " + subjectUrl.text.toString())
-            mainViewModel.insertSubject(subjectField.text.toString(), subjectUrl.text.toString(), subjectNotes.text.toString())
+            Log.d("picker: ", customTimestamp.toString())
+            mainViewModel.insertSubject(subjectField.text.toString(),
+                subjectUrl.text.toString(),
+                subjectNotes.text.toString(),
+                customTimestamp
+            )
+            findNavController().popBackStack()
         }
 
         // Cancel button
         val cancelButton = view.add_subject_dialog_cancel
         cancelButton.setOnClickListener { view ->
-            //findNavController().popBackStack()
-            findNavController().navigate(R.id.action_addSubjectDialogFragment_to_subjectsBottomDialogFragment)
+            findNavController().popBackStack()
+        }
+
+        val builder = MaterialDatePicker.Builder.datePicker()
+        val picker = builder.build()
+
+        val dateButton = view.add_subject_change_date
+        dateButton.setOnClickListener {view ->
+            picker.show(activity!!.supportFragmentManager, picker.toString())
+        }
+
+        val dateText = view.add_subject_date
+        picker.addOnPositiveButtonClickListener {
+            dateText.text = it.toString()
+            customTimestamp = it
         }
 
         // Inflate the layout for this fragment

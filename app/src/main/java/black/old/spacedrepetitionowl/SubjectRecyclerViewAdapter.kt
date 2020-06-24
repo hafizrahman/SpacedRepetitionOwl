@@ -35,8 +35,12 @@ class SubjectRecyclerViewAdapter(
         }
     }
 
+    // This method fills in the data to be used by the list. The data will be pulled from elsewhere
+    // first, in the SubjectFragment in this case.
     fun setData(subjectsList: List<Subject>, remindersList: List<Reminder>) {
-        subjects = subjectsList
+        // We want subjects to be sorted by starting date by default.
+        subjects = subjectsList.sortedBy { it.startDateTimestamp }
+
         reminders = remindersList
         remindersOrderedByDate = orderRemindersByUpcomingDate()
         Log.d("SRIRI A", subjects.toString())

@@ -33,11 +33,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Entering
-    fun insertSubject(subjectText: String, uriText: String, subjectNotes: String) {
+    fun insertSubject(subjectText: String, uriText: String, subjectNotes: String, customTimestamp: Long = 0) {
         val dateNow = Date()
         val simpleDateFormat = SimpleDateFormat("dHHmmsss")
 
-        val nowTimestamp = System.currentTimeMillis()
+        var nowTimestamp: Long
+        if(customTimestamp == 0L) {
+            nowTimestamp = System.currentTimeMillis()
+        }
+        else {
+            nowTimestamp = customTimestamp
+        }
 
         // Generate one dummy Subject
         val subjectToEnter = Subject(
