@@ -110,6 +110,13 @@ class SubjectRecyclerViewAdapter(
                 // Get Reminders related to current Subject ID
                 val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
 
+                // This checker is needed because due to the async nature of the reminder saving,
+                // onBindViewHolder already gets called when not all reminders are generated yet.
+                // We only want to process more things once all Reminders are created.
+                //
+                // Check with the Log below to see the constantly updated number of reminderList
+                // size while onBindViewHolder is being called.
+                // Log.d("onBindViewHolder", "reminderList size " + reminderListForCurrentSubject.size )
                 if(reminderListForCurrentSubject.size == 4) {
 
                     holder.reminder0.text =
@@ -155,18 +162,18 @@ class SubjectRecyclerViewAdapter(
                     else
                         holder.reminder3.setBackgroundColor((Color.parseColor("#FFFFFF")))
 
-                }
 
-                // First, generate SubjectPackage class to send to mainClickListener
-                val currentSubjectPackage = SubjectPackage(
-                    currentSubject,
-                    reminderListForCurrentSubject[0],
-                    reminderListForCurrentSubject[1],
-                    reminderListForCurrentSubject[2],
-                    reminderListForCurrentSubject[3]
-                )
-                // Here we bind mainClickListener to the LinearLayout to make it clickable.
-                holder.mainBar.setOnClickListener { mainClickListener(currentSubjectPackage) }
+                    // Generate a SubjectPackage object to be used by mainClickListener
+                    val currentSubjectPackage = SubjectPackage(
+                        currentSubject,
+                        reminderListForCurrentSubject[0],
+                        reminderListForCurrentSubject[1],
+                        reminderListForCurrentSubject[2],
+                        reminderListForCurrentSubject[3]
+                    )
+                    // Next, bind mainClickListener to the LinearLayout to make it clickable.
+                    holder.mainBar.setOnClickListener { mainClickListener(currentSubjectPackage) }
+                }
             }
         }
         else if(holder is ViewHolderTest) {
