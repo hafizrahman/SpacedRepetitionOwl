@@ -78,6 +78,7 @@ class EditSubjectFragment : Fragment() {
                         subjectNotes.text.toString(),
                         //currentSubject.startDateTimestamp,
                         if( customTimestamp != 0L) customTimestamp else selectedSubject.subject.startDateTimestamp,
+                        false,
                         selectedSubject.subject.id
                     )
                     mainViewModel.updateSubject(subjectToUpdate)

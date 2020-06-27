@@ -27,7 +27,7 @@ abstract class SroDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     SroDatabase::class.java,
-                    "sro_database_2")
+                    "sro_db_test_1")
                     // Wipes and rebuilds instead of migrating
                     // if no Migration object
                     .fallbackToDestructiveMigration()

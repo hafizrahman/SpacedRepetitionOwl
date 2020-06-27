@@ -21,7 +21,7 @@ data class Subject (
     var url: String,
     var notes: String,
     var startDateTimestamp: Long,
-
+    var archived: Boolean = false,
     // The field below is used for primary key and automatically generated, so I'm giving it
     // a default value of 0 so that the object creation can ignore this parameter.
     @PrimaryKey(autoGenerate = true) val id: Long = 0
