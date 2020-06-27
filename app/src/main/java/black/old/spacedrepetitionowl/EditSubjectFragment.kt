@@ -1,7 +1,6 @@
 package black.old.spacedrepetitionowl
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
+import kotlinx.android.synthetic.main.fragment_edit_subject.*
 import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
+import kotlinx.android.synthetic.main.fragment_edit_subject.view.edit_subject_date
+import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,36 +58,83 @@ class EditSubjectFragment : Fragment() {
         val subjectField = view.layoutInputAddSubject
         val subjectUrl = view.layoutInputAddUri
         val subjectNotes = view.layoutInputAddNotes
+        val subjectTimestamp = view.edit_subject_date
 
-        // fill in existing data
-        mainViewModel.getSubject(args.subjectId).observe(viewLifecycleOwner,
-            Observer { currentSubject ->
-                subjectField.setText(currentSubject.content)
-                subjectUrl.setText(currentSubject.url)
-                subjectNotes.setText(currentSubject.notes)
+        var customTimestamp = 0L
+
+        // Fill in existing data
+        mainViewModel.selectedSubject.observe(viewLifecycleOwner,
+            Observer { selectedSubject ->
+                subjectField.setText(selectedSubject.subject.content)
+                subjectUrl.setText(selectedSubject.subject.url)
+                subjectNotes.setText(selectedSubject.subject.notes)
+                subjectTimestamp.setText(selectedSubject.subject.startDateTimestamp.toString())
 
                 submitButton.setOnClickListener { view ->
+                    // Update Subject
                     val subjectToUpdate = Subject(
                         subjectField.text.toString(),
                         subjectUrl.text.toString(),
                         subjectNotes.text.toString(),
-                        currentSubject.startDateTimestamp,
-                        currentSubject.id
-                        )
-                    Log.d("HIKARU", "Updating these: $subjectToUpdate")
+                        //currentSubject.startDateTimestamp,
+                        if( customTimestamp != 0L) customTimestamp else selectedSubject.subject.startDateTimestamp,
+                        selectedSubject.subject.id
+                    )
                     mainViewModel.updateSubject(subjectToUpdate)
+
+                    // If the Subject's start date is changed, update all the reminder dates too.
+                    if( customTimestamp != 0L ) {
+                        var currentReminder : Reminder
+                        val repDays = intArrayOf(1, 7, 16, 35)
+                        val reminderIds = longArrayOf(
+                            selectedSubject.reminder1.id,
+                            selectedSubject.reminder2.id,
+                            selectedSubject.reminder3.id,
+                            selectedSubject.reminder4.id
+                        )
+                        for(i in 0..3) {
+                            val dateTimestamp = customTimestamp + dayToMilliseconds(repDays[i])
+                            currentReminder = Reminder(
+                                selectedSubject.subject.id,
+                                dateTimestamp,
+                                false, // If we're editing dates, reset all checked states
+                                reminderIds[i]
+                            )
+                            mainViewModel.updateReminder(currentReminder)
+                        }
+                    }
+                    // All done, head back to previous fragment.
                     findNavController().popBackStack()
                 }
             })
-
 
         val nukeDbButton = view.nuke_db_button
         nukeDbButton.setOnClickListener { view ->
             mainViewModel.deleteAllData()
         }
 
+        // Date Picker
+        val builder = MaterialDatePicker.Builder.datePicker()
+        val picker = builder.build()
+        val dateButton = view.edit_subject_change_date
+
+        dateButton.setOnClickListener {view ->
+            picker.show(activity!!.supportFragmentManager, picker.toString())
+        }
+        picker.addOnPositiveButtonClickListener {
+            edit_subject_date.text = it.toString()
+            customTimestamp = it
+        }
+
+
         return view
     }
+
+
+    fun dayToMilliseconds(day: Int) : Long {
+        return TimeUnit.DAYS.toMillis(day.toLong())
+    }
+
 
     companion object {
         /**

@@ -14,7 +14,6 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
     }
 
     suspend fun updateSubject(subject: Subject) {
-        Log.d("HIKARU-REPO", "Updating these: $subject")
         return subjectDao.update(subject)
     }
 
@@ -42,7 +41,7 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return reminderDao.getAllReminders()
     }
 
-    fun getReminderBySubject(subjectId: Long) : LiveData<List<Reminder>>? {
+    fun getRemindersBySubject(subjectId: Long) : LiveData<List<Reminder>>? {
         return reminderDao.getRemindersBySubject(subjectId)
     }
 

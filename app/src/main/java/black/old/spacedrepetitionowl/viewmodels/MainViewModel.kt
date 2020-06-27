@@ -13,6 +13,7 @@ import black.old.spacedrepetitionowl.database.SroDatabase
 import black.old.spacedrepetitionowl.models.CombinedSubjectReminders
 import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
+import black.old.spacedrepetitionowl.models.SubjectPackage
 import black.old.spacedrepetitionowl.repositories.SroRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -24,12 +25,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private lateinit var sroRepository: SroRepository
     private lateinit var context: Context
+    val selectedSubject = MutableLiveData<SubjectPackage>()
 
     init {
         val subjectDao = SroDatabase.getDatabase(application).subjectDao
         val reminderDao = SroDatabase.getDatabase(application).reminderDao
         sroRepository = SroRepository(subjectDao, reminderDao)
         context = application.applicationContext
+    }
+
+    fun saveSelected(subjectPackage: SubjectPackage) {
+        selectedSubject.value = subjectPackage
     }
 
     // Entering
@@ -146,7 +152,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getRemindersBySubjectId(subject_id: Long):LiveData<List<Reminder>>? {
-        return sroRepository.getReminderBySubject(subject_id)
+        return sroRepository.getRemindersBySubject(subject_id)
     }
 
     fun getAllData(): CombinedSubjectReminders? {

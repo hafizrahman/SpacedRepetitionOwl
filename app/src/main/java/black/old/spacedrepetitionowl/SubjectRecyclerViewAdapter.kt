@@ -13,13 +13,14 @@ import black.old.spacedrepetitionowl.models.Reminder
 import kotlinx.android.synthetic.main.fragment_subject.view.*
 import black.old.spacedrepetitionowl.SubjectFragment.OnListFragmentInteractionListener
 import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
+import black.old.spacedrepetitionowl.models.SubjectPackage
 import kotlinx.android.synthetic.main.fragment_subject_test.view.*
 import java.text.SimpleDateFormat
 
 class SubjectRecyclerViewAdapter(
     var sortingType: Int,
     val listener: OnListFragmentInteractionListener?,
-    val mainClickListener: (Subject) -> Unit,                // clicklistener for the main card area.
+    val mainClickListener: (SubjectPackage) -> Unit,                // clicklistener for the main card area.
     val reminderClickListener: (Reminder) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val onClickListener: View.OnClickListener
@@ -156,37 +157,22 @@ class SubjectRecyclerViewAdapter(
 
                 }
 
-                // bind mainClickListener to the LinearLayout to make it clickable
-                holder.mainBar.setOnClickListener { mainClickListener(currentSubject) }
+                // First, generate SubjectPackage class to send to mainClickListener
+                val currentSubjectPackage = SubjectPackage(
+                    currentSubject,
+                    reminderListForCurrentSubject[0],
+                    reminderListForCurrentSubject[1],
+                    reminderListForCurrentSubject[2],
+                    reminderListForCurrentSubject[3]
+                )
+                // Here we bind mainClickListener to the LinearLayout to make it clickable.
+                holder.mainBar.setOnClickListener { mainClickListener(currentSubjectPackage) }
             }
         }
         else if(holder is ViewHolderTest) {
             val currentReminder = remindersOrderedByDate[position]
             holder.contentTestView.text = dateStringFormatter(currentReminder.dateTimestamp) + " -- " + currentReminder.subjectId.toString()
         }
-
-/*
-
-
-        val currentSubject = subjects[position]
-        // TODO: Fill in Reminders data
-        holder.contentView.text = currentSubject.content
-
-        // Get Reminders related to current Subject ID
-        val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
-        Log.d("SROacnh ->", reminderListForCurrentSubject.elementAt(0).toString())
-
-        holder.reminder_0.text =  dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
-        holder.reminder_1.text =  dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
-        holder.reminder_2.text =  dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
-        holder.reminder_3.text =  dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
-
-        with(holder.view) {
-            // TODO: Set click listener here?
-
-        }
-
- */
     }
 
     inner class ViewHolderReal(val view: View) : RecyclerView.ViewHolder(view) {

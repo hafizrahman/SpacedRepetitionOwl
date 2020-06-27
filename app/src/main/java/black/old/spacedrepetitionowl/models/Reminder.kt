@@ -33,5 +33,4 @@ data class Reminder(
     // The field below is used for primary key and automatically generated, so I'm giving it
     // a default value of 0 so that the object creation can ignore this parameter.
     @PrimaryKey(autoGenerate = true) val id: Long = 0
-
 )

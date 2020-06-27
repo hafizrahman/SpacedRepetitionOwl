@@ -5,24 +5,17 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
-import black.old.spacedrepetitionowl.constants.SORTBY_REMINDER
-import black.old.spacedrepetitionowl.dummy.DummyContent
 import black.old.spacedrepetitionowl.dummy.DummyContent.DummyItem
 import black.old.spacedrepetitionowl.models.Reminder
-import black.old.spacedrepetitionowl.models.Subject
+import black.old.spacedrepetitionowl.models.SubjectPackage
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_subject.view.*
 import kotlinx.android.synthetic.main.fragment_subject_list.*
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
@@ -53,7 +46,7 @@ class SubjectFragment : Fragment() {
         adapter = SubjectRecyclerViewAdapter(
             SORTBY_DEFAULT,
             listener,
-            { subject : Subject -> mainSubjectBarClicked(subject) },
+            { subject : SubjectPackage -> mainSubjectBarClicked(subject) },
             { reminder : Reminder -> reminderIsClicked(reminder) }
         )
         view.sro_subject_list.adapter = adapter
@@ -179,10 +172,18 @@ class SubjectFragment : Fragment() {
     }
 
     // The actual action that needs to be done when a main subject bar is clicked.
-    private fun mainSubjectBarClicked(currentSubject : Subject) {
+    private fun mainSubjectBarClicked(currentSubject : SubjectPackage) {
         Log.d("CLICKER", currentSubject.toString() + " is being clicked")
-        val subject_id = currentSubject.id
-        val subject_text = currentSubject.content
+
+        // We're saving the currently selected subject's SubjectPackage data so subsequent
+        // fragments (e.g: Edit Subject fragment) can use that data.
+        mainViewModel.saveSelected(currentSubject)
+
+        // Even though we're already saving SubjectPackage data in the ViewModel, we're also
+        // using the simpler navigation action parameter below to send data during navigation
+        // action, for learning purposes.
+        val subject_id = currentSubject.subject.id
+        val subject_text = currentSubject.subject.content
         val action = SubjectFragmentDirections.actionSubjectFragmentToSubjectsBottomDialogFragment(subject_id, subject_text)
        findNavController().navigate(action)
     }
