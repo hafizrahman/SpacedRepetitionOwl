@@ -21,14 +21,14 @@
         android:name="black.old.spacedrepetitionowl.SubjectFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".SubjectFragment"
         tools:listitem="@layout/fragment_subject"
         android:paddingTop="8dp"
         android:paddingBottom="160dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#f0f0f0"/>
         <!-- ^ Adding a high bottom padding and clipToPadding to false is
         necessary to make the FAB not cover the last item in the list.
         This is from: https://stackoverflow.com/a/45408853 -->

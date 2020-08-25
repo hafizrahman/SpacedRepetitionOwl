@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -53,6 +54,11 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
             "SRO CHANNEL NAME IS HERE",
             "Spaced Repetition Owl notification channel."
         )
+
+        // Color the status bar
+        // see: https://stackoverflow.com/a/54686103
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+
     }
 
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {

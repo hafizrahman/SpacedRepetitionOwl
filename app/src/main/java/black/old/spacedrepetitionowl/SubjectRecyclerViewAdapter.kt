@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.models.Subject
 import black.old.spacedrepetitionowl.models.Reminder
@@ -106,6 +108,12 @@ class SubjectRecyclerViewAdapter(
 
             if(currentSubject != null) {
                 holder.contentView.text = currentSubject.content
+                holder.startingDate.text = dateStringFormatter(currentSubject.startDateTimestamp)
+
+                if(currentSubject.url.isNotEmpty()) {
+                    holder.urlView.text = currentSubject.url
+                    holder.urlView.visibility = View.VISIBLE
+                }
 
                 // Get Reminders related to current Subject ID
                 val reminderListForCurrentSubject = getRemindersListBySubject(currentSubject.id)
@@ -119,49 +127,48 @@ class SubjectRecyclerViewAdapter(
                 // Log.d("onBindViewHolder", "reminderList size " + reminderListForCurrentSubject.size )
                 if(reminderListForCurrentSubject.size == 4) {
 
-                    holder.reminder0.text =
-                        dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
-                    holder.reminder0.setOnClickListener {
+                    /* Attach button click listeners */
+                    holder.reminderBtn0.setOnClickListener {
                         reminderClickListener(reminderListForCurrentSubject[0])
                     }
-
-                    if(reminderListForCurrentSubject[0].checked)
-                        holder.reminder0.setBackgroundColor((Color.parseColor("#00FF00")))
-                    else
-                        holder.reminder0.setBackgroundColor((Color.parseColor("#FFFFFF")))
-
-                    holder.reminder1.text =
-                        dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
-                    holder.reminder1.setOnClickListener {
+                    holder.reminderBtn1.setOnClickListener {
                         reminderClickListener(reminderListForCurrentSubject[1])
                     }
-
-                    if(reminderListForCurrentSubject[1].checked)
-                        holder.reminder1.setBackgroundColor((Color.parseColor("#00FF00")))
-                    else
-                        holder.reminder1.setBackgroundColor((Color.parseColor("#FFFFFF")))
-
-                    holder.reminder2.text =
-                        dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
-                    holder.reminder2.setOnClickListener {
+                    holder.reminderBtn2.setOnClickListener {
                         reminderClickListener(reminderListForCurrentSubject[2])
                     }
-                    if(reminderListForCurrentSubject[2].checked)
-                        holder.reminder2.setBackgroundColor((Color.parseColor("#00FF00")))
-                    else
-                        holder.reminder2.setBackgroundColor((Color.parseColor("#FFFFFF")))
-
-                    holder.reminder3.text =
-                        dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
-                    holder.reminder3.setOnClickListener {
+                    holder.reminderBtn3.setOnClickListener {
                         reminderClickListener(reminderListForCurrentSubject[3])
                     }
 
-                    if(reminderListForCurrentSubject[3].checked)
-                        holder.reminder3.setBackgroundColor((Color.parseColor("#00FF00")))
+                    /* Populate and style buttons content */
+                    holder.reminderBtn0.text =
+                        dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+                    if(reminderListForCurrentSubject[0].checked)
+                        toggleReminderButtonChecked(holder.reminderBtn0)
                     else
-                        holder.reminder3.setBackgroundColor((Color.parseColor("#FFFFFF")))
+                        toggleReminderButtonUnchecked(holder.reminderBtn0)
 
+                    holder.reminderBtn1.text =
+                        dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+                    if(reminderListForCurrentSubject[1].checked)
+                        toggleReminderButtonChecked(holder.reminderBtn1)
+                    else
+                        toggleReminderButtonUnchecked(holder.reminderBtn1)
+
+                    holder.reminderBtn2.text =
+                        dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+                    if(reminderListForCurrentSubject[2].checked)
+                        toggleReminderButtonChecked(holder.reminderBtn2)
+                    else
+                        toggleReminderButtonUnchecked(holder.reminderBtn2)
+
+                    holder.reminderBtn3.text =
+                        dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+                    if(reminderListForCurrentSubject[3].checked)
+                        toggleReminderButtonChecked(holder.reminderBtn3)
+                    else
+                        toggleReminderButtonUnchecked(holder.reminderBtn3)
 
                     // Generate a SubjectPackage object to be used by mainClickListener
                     val currentSubjectPackage = SubjectPackage(
@@ -184,10 +191,12 @@ class SubjectRecyclerViewAdapter(
 
     inner class ViewHolderReal(val view: View) : RecyclerView.ViewHolder(view) {
         val contentView: TextView = view.content
-        val reminder0: TextView = view.reminder_0
-        val reminder1: TextView = view.reminder_1
-        val reminder2: TextView = view.reminder_2
-        val reminder3: TextView = view.reminder_3
+        val startingDate: TextView = view.subject_card_starting_date
+        val reminderBtn0: Button = view.subject_card_reminder_button_0
+        val reminderBtn1: Button = view.subject_card_reminder_button_1
+        val reminderBtn2: Button = view.subject_card_reminder_button_2
+        val reminderBtn3: Button = view.subject_card_reminder_button_3
+        val urlView: TextView = view.subject_card_url
         val mainBar: LinearLayout = view.main_subject_bar
     }
 
@@ -207,5 +216,32 @@ class SubjectRecyclerViewAdapter(
     private fun dateStringFormatter(timestamp: Long) : String {
         val pattern = "d MMM"
         return SimpleDateFormat(pattern).format(timestamp)
+    }
+
+    private fun toggleReminderButtonChecked(button: Button) {
+        button.setBackgroundColor((Color.parseColor("#00FF00")))
+        button.setBackgroundColor(
+            ContextCompat.getColor(button.context, R.color.colorPrimary ))
+        button.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            0,
+            0,
+            0,
+            R.drawable.ic_baseline_check_24
+        )
+        button.setTextColor(
+            ContextCompat.getColor(button.context, R.color.colorWhite ))
+    }
+
+    private fun toggleReminderButtonUnchecked(button: Button) {
+        button.setBackgroundColor(
+            ContextCompat.getColor(button.context, R.color.colorWhite ))
+        button.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            0,
+            0,
+            0,
+            R.drawable.ic_baseline_clear_24
+        )
+        button.setTextColor(
+            ContextCompat.getColor(button.context, R.color.colorDarkGray ))
     }
 }

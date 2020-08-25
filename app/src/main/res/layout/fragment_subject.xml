@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="7dp"
-    card_view:cardBackgroundColor="@color/colorCard"
-    card_view:cardCornerRadius="7dp"
-    card_view:cardElevation="1dp"
-    app:strokeColor="@color/colorCardHeading"
-    app:strokeWidth="1dp">
+    android:layout_marginBottom="8dp"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardElevation="3dp"
+    app:strokeColor="#f0f0f0"
+    app:strokeWidth="5dp"
+    android:layout_marginHorizontal="@dimen/card_margin_horizontal"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,78 +23,60 @@
             android:id="@+id/main_subject_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="0dp"
-            android:background="@color/colorCardHeading">
+            android:background="#fdfdfd">
 
             <TextView
                 android:id="@+id/content"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
-                android:background="@color/colorCardHeading"
-                android:padding="16dp"
-                android:text="Dummy text"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textSize="16dp"
+                android:layout_weight="1"
                 android:gravity="left"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/textview_dot_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="&#8942;"
-                android:textAppearance="?android:textAppearanceLarge"
-                android:gravity="right"
-                android:layout_weight="1"
-                android:paddingRight="16dp"
-                android:textSize="16dp"
-                android:textColor="@color/colorPrimaryDark" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/lblExpenseCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Next study time: "
-                android:textColor="#404040"
-                android:padding="8dp"
-                android:textSize="18dp" />
-
-            <!-- ADDED SPACER VIEW -->
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:paddingHorizontal="18dp"
+                android:paddingTop="18dp"
+                android:text="Dummy text"
+                style="@style/reminder_name"
                 />
 
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/subject_card_starting_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="0dp"
                 android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="8dp"
-                android:layout_gravity="right"
+                android:text="March 15, 2020"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                android:textAllCaps="true"
+                android:fontFamily="@font/montserrat"
+                android:textColor="#999999"
                 />
 
         </LinearLayout>
 
 
         <View
-            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#ffffff"
+            android:background="#f0f0f0"
+            android:layout_marginBottom="8dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:text="Scheduled"
+            android:fontFamily="@font/montserrat"
+            android:textColor="#999999"
+            android:textAllCaps="true"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
+            android:textSize="12sp"
+            android:visibility="gone"
             />
 
         <LinearLayout
@@ -101,65 +84,55 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingVertical="8dp"
             android:visibility="visible">
 
-            <TextView
-                android:id="@+id/reminder_0"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="8dp"
-                android:paddingVertical="16dp"
-                android:textAlignment="center"/>
+            <Button
+                android:id="@+id/subject_card_reminder_button_0"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+                android:text="Jan 11" />
 
-            <TextView
-                android:id="@+id/reminder_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="8dp"
-                android:paddingVertical="16dp"
-                android:textAlignment="center"/>
+            <Button
+                android:id="@+id/subject_card_reminder_button_1"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
 
-            <TextView
-                android:id="@+id/reminder_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="8dp"
-                android:paddingVertical="16dp"
-                android:textAlignment="center"/>
+                />
+            <Button
+                android:id="@+id/subject_card_reminder_button_2"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
 
-            <TextView
-                android:id="@+id/reminder_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="Jan 1, 20"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:padding="8dp"
-                android:paddingVertical="16dp"
-                android:textAlignment="center"/>
+                />
+            <Button
+                android:id="@+id/subject_card_reminder_button_3"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+                />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/subject_card_url"
+            android:drawableStart="@drawable/ic_baseline_link_24"
+            android:drawableTint="#999999"
+            android:drawablePadding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:autoLink="web"
+            android:text="https://wordpress.com/"
+            android:paddingBottom="12dp"
+            android:paddingHorizontal="16dp"
+            android:fontFamily="@font/montserrat"
+            android:textColor="#999999"
+            android:textColorLink="#999999"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
-
 
 </com.google.android.material.card.MaterialCardView>
 
