@@ -25,7 +25,7 @@
         tools:context=".SubjectFragment"
         tools:listitem="@layout/fragment_subject"
         android:paddingTop="8dp"
-        android:paddingBottom="160dp"
+        android:paddingBottom="120dp"
         android:clipToPadding="false"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#f0f0f0"/>
@@ -44,5 +44,6 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_24dp" />
+        app:srcCompat="@drawable/ic_add_24dp"
+        app:borderWidth="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

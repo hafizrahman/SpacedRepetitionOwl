@@ -24,7 +24,9 @@
         android:gravity="center"
         android:text="Manage Subject"
         android:layout_marginHorizontal="24dp"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
 
     <View
         android:layout_width="match_parent"
@@ -40,7 +42,9 @@
         android:layout_marginStart="24dp"
         android:gravity="start|center_vertical"
         android:text="View details"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:drawableStart="@drawable/ic_baseline_subject_24"
+        android:drawablePadding="8dp"/>
 
     <TextView
         android:id="@+id/subjects_bottom_dialog_edit"
@@ -49,7 +53,9 @@
         android:layout_marginStart="24dp"
         android:gravity="start|center_vertical"
         android:text="Edit subject..."
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:drawableStart="@drawable/ic_baseline_edit_24"
+        android:drawablePadding="8dp"/>
 
 
     <TextView
@@ -59,6 +65,8 @@
         android:layout_marginStart="24dp"
         android:gravity="start|center_vertical"
         android:text="Delete subject"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:drawableStart="@drawable/ic_baseline_delete_24"
+        android:drawablePadding="8dp"/>
 
 </LinearLayout>

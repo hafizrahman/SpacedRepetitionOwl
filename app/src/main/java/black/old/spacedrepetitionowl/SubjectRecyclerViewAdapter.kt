@@ -108,7 +108,7 @@ class SubjectRecyclerViewAdapter(
 
             if(currentSubject != null) {
                 holder.contentView.text = currentSubject.content
-                holder.startingDate.text = dateStringFormatter(currentSubject.startDateTimestamp)
+                holder.startingDate.text = formatSubjectCardStartDate(currentSubject.startDateTimestamp)
 
                 if(currentSubject.url.isNotEmpty()) {
                     holder.urlView.text = currentSubject.url
@@ -122,7 +122,7 @@ class SubjectRecyclerViewAdapter(
                 // onBindViewHolder already gets called when not all reminders are generated yet.
                 // We only want to process more things once all Reminders are created.
                 //
-                // Check with the Log below to see the constantly updated number of reminderList
+                // Enable Log below to see the constantly updated number of reminderList
                 // size while onBindViewHolder is being called.
                 // Log.d("onBindViewHolder", "reminderList size " + reminderListForCurrentSubject.size )
                 if(reminderListForCurrentSubject.size == 4) {
@@ -215,6 +215,11 @@ class SubjectRecyclerViewAdapter(
 
     private fun dateStringFormatter(timestamp: Long) : String {
         val pattern = "d MMM"
+        return SimpleDateFormat(pattern).format(timestamp)
+    }
+
+    private fun formatSubjectCardStartDate(timestamp: Long) : String {
+        val pattern = "d MMMM YYYY"
         return SimpleDateFormat(pattern).format(timestamp)
     }
 
