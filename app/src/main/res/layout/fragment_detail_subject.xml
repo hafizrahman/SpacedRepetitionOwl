@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/sro_detail_subject_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#ffffff"
-        app:title="Subject Details"
-        app:titleTextColor="@color/colorPrimaryDark"/>
 
     <LinearLayout
         android:id="@+id/sro_detail_subject_main"
-        app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -27,116 +22,86 @@
             android:id="@+id/sro_detail_subject_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Subject Title" />
+            android:text="Subject Title"
+            style="@style/reminder_name" />
+
+        <TextView
+            android:id="@+id/sro_detail_starting_date"
+            android:text="January 20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:paddingVertical="8dp"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#999999"
+            />
+
+        <View style="@style/separator_line" />
+
+        <TextView
+            android:text="Reminders"
+            style="@style/reminder_small_label"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/sro_detail_reminder_button_0"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+                android:text="Jan 11" />
+
+            <Button
+                android:id="@+id/sro_detail_reminder_button_1"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+
+                />
+            <Button
+                android:id="@+id/sro_detail_reminder_button_2"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+
+                />
+            <Button
+                android:id="@+id/sro_detail_reminder_button_3"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+                />
+        </LinearLayout>
+
+        <View style="@style/separator_line" />
+
+        <TextView
+            android:text="Notes"
+            style="@style/reminder_small_label"
+            />
 
         <TextView
             android:id="@+id/sro_detail_subject_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Subject URL" />
+            style="@style/reminder_clickable_link"
+            android:paddingLeft="8dp"
+            />
 
         <TextView
+            android:id="@+id/sro_detail_subject_notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reminders" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/sro_detail_subject_reminders">
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:paddingHorizontal="8dp"
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_date_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reminder Date 1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/sro_detail_subject_reminders_1"
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"
-                app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:paddingHorizontal="8dp"
-
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_date_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reminder Date 2"
-                app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_1"
-                app:layout_constraintLeft_toRightOf="@id/sro_detail_subject_reminders_2"
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3"
-                app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_2"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:paddingHorizontal="8dp"
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_date_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reminder Date 3"
-                app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_2"
-                app:layout_constraintLeft_toRightOf="@id/sro_detail_subject_reminders_3"
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4"
-                app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_3"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:paddingHorizontal="8dp"
-                />
-            <TextView
-                android:id="@+id/sro_detail_subject_reminders_date_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reminder Date 4"
-                app:layout_constraintTop_toBottomOf="@id/sro_detail_subject_reminders_3"
-                app:layout_constraintLeft_toRightOf="@id/sro_detail_subject_reminders_4"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:text="No notes added."
+            style="@style/reminder_details_notes"
+            />
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/detail_subject_edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="20dp"
-        android:text="Edit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sro_detail_subject_main" />
-
-    <Button
-        android:id="@+id/detail_subject_delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#F31212"
-        android:text="Delete"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sro_detail_subject_main" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

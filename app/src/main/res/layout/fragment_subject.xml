@@ -55,7 +55,6 @@
 
         </LinearLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -116,20 +115,10 @@
 
         <TextView
             android:id="@+id/subject_card_url"
-            android:drawableStart="@drawable/ic_baseline_link_24"
-            android:drawableTint="#999999"
-            android:drawablePadding="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:autoLink="web"
-            android:text="https://wordpress.com/"
+            style="@style/reminder_clickable_link"
+            android:visibility="gone"
             android:paddingBottom="12dp"
             android:paddingHorizontal="16dp"
-            android:fontFamily="@font/montserrat"
-            android:textColor="#999999"
-            android:textColorLink="#999999"
-            android:visibility="gone"
             />
 
     </LinearLayout>

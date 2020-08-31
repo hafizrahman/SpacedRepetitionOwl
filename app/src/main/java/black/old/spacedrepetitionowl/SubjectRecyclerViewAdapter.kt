@@ -244,7 +244,7 @@ class SubjectRecyclerViewAdapter(
             0,
             0,
             0,
-            R.drawable.ic_baseline_clear_24
+            R.drawable.ic_baseline_alarm_on_24
         )
         button.setTextColor(
             ContextCompat.getColor(button.context, R.color.colorDarkGray ))

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/subjectFragment"
         android:name="black.old.spacedrepetitionowl.SubjectFragment"
-        android:label="Spaced Repetition Owl: Subjects"
+        android:label="Subjects to remember"
         tools:layout="@layout/fragment_subject_list" >
         <action
             android:id="@+id/action_subjectFragment_to_editSubjectDialogFragment"
@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/detailSubjectFragment"
         android:name="black.old.spacedrepetitionowl.DetailSubjectFragment"
-        android:label="DetailSubjectFragment"
+        android:label="Subject details"
         tools:layout="@layout/fragment_detail_subject" >
         <argument
             android:name="subject_id"
