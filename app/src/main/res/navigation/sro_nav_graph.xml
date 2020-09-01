@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_subjects_bottom_dialog">
         <action
             android:id="@+id/action_subjectsBottomDialogFragment_to_editSubjectFragment"
-            app:destination="@id/editSubjectFragment" />
+            app:destination="@id/subjectViewEditFragment" />
         <argument
             android:name="subject_id"
             app:argType="long" />
@@ -95,5 +95,17 @@
         <action
             android:id="@+id/action_subjectTimelineFragment_to_addSubjectDialogFragment"
             app:destination="@id/addSubjectDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectViewEditFragment"
+        android:name="black.old.spacedrepetitionowl.SubjectViewEditFragment"
+        tools:layout="@layout/fragment_subject_view_edit"
+        android:label="{title}">
+        <argument
+            android:name="subject_id"
+            app:argType="long" />
+        <argument
+            android:name="title"
+            app:argType="string" />
     </fragment>
 </navigation>

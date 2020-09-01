@@ -1,19 +1,13 @@
 package black.old.spacedrepetitionowl
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_subjects_bottom_dialog.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -60,7 +54,7 @@ class SubjectsBottomDialogFragment() : BottomSheetDialogFragment() {
         val editSubjectText = view.subjects_bottom_dialog_edit
         editSubjectText.setOnClickListener { view ->
             val action = SubjectsBottomDialogFragmentDirections
-                .actionSubjectsBottomDialogFragmentToEditSubjectFragment(args.subjectId)
+                .actionSubjectsBottomDialogFragmentToEditSubjectFragment(args.subjectId, args.subjectText)
             findNavController().navigate(action)
         }
 
