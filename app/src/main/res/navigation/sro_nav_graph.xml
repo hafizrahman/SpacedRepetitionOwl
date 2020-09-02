@@ -53,7 +53,7 @@
         android:label="SubjectsBottomDialogFragment"
         tools:layout="@layout/fragment_subjects_bottom_dialog">
         <action
-            android:id="@+id/action_subjectsBottomDialogFragment_to_editSubjectFragment"
+            android:id="@+id/action_subjectsBottomDialogFragment_to_ViewEditSubjectFragment"
             app:destination="@id/subjectViewEditFragment" />
         <argument
             android:name="subject_id"
@@ -64,6 +64,18 @@
         <action
             android:id="@+id/action_subjectsBottomDialogFragment_to_detailSubjectFragment"
             app:destination="@id/detailSubjectFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/subjectURLBottomDialogFragment"
+        android:name="black.old.spacedrepetitionowl.SubjectURLBottomDialogFragment"
+        android:label="SubjectURLBottomDialogFragment"
+        tools:layout="@layout/fragment_subject_url_bottom_dialog">
+        <argument
+            android:name="subject_id"
+            app:argType="long" />
+        <argument
+            android:name="subject_url"
+            app:argType="string" />
     </dialog>
     <fragment
         android:id="@+id/detailSubjectFragment"
@@ -107,5 +119,8 @@
         <argument
             android:name="title"
             app:argType="string" />
+        <action
+            android:id="@+id/action_subjectViewEditFragment_to_subjectURLBottomDialogFragment"
+            app:destination="@id/subjectURLBottomDialogFragment" />
     </fragment>
 </navigation>

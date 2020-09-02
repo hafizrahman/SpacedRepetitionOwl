@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="12dp">
+
         <TextView
             android:id="@+id/sro_detail_subject_title"
             android:layout_width="match_parent"

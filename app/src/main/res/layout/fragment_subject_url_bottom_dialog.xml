@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:paddingBottom="8dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="18dp"
+        android:text="Manage URL"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <View style="@style/separator_line" />
+
+
+    <EditText
+        android:id="@+id/subject_url_bottom_dialog_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Example URL"
+        android:drawableStart="@drawable/ic_baseline_link_24"
+        android:drawablePadding="12dp"
+        android:paddingBottom="24dp"
+        android:layout_marginStart="12dp"
+        />
+
+    <TextView
+        android:id="@+id/subject_url_bottom_dialog_open"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:gravity="start|center_vertical"
+        android:text="Open link..."
+        android:textSize="16sp"
+        android:drawableStart="@drawable/ic_baseline_open_in_browser_24"
+        android:drawablePadding="12dp"/>
+</LinearLayout>

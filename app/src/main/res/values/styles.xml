@@ -47,18 +47,35 @@
     </style>
 
     <style name="reminder_clickable_link">
-    <item name="android:drawableStart">@drawable/ic_baseline_link_24</item>
-    <item name="android:drawableTint">#999999</item>
-    <item name="android:drawablePadding">8dp</item>
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_margin">0dp</item>
-    <item name="android:autoLink">web</item>
-    <item name="android:text">https://old.black/</item>
-    <item name="android:fontFamily">@font/montserrat</item>
-    <item name="android:textColor">#999999</item>
-    <item name="android:textColorLink">#999999</item>
-</style>
+        <item name="android:drawableStart">@drawable/ic_baseline_link_24</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:autoLink">web</item>
+        <item name="android:text">https://old.black/</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:textColorLink">#999999</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="reminder_non_clickable_link">
+        <item name="android:drawableStart">@drawable/ic_baseline_link_24</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:text">https://old.black/</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:textColorLink">#999999</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+    </style>
 
     <style name="separator_line">
         <item name="android:layout_width">match_parent</item>
