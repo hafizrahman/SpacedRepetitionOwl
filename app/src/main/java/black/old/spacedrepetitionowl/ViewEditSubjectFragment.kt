@@ -72,6 +72,15 @@ class SubjectViewEditFragment : Fragment() {
                     sro_viewedit_subject_notes.text = currentSubject.notes
                 }
 
+                sro_viewedit_subject_notes.setOnClickListener { view ->
+                    val action = SubjectViewEditFragmentDirections
+                        .actionSubjectViewEditFragmentToSubjectNoteEditFragment(
+                            currentSubject.id,
+                            currentSubject.notes
+                        )
+                    findNavController().navigate(action)
+                }
+
                 sro_viewedit_starting_date.setOnClickListener {view ->
                     picker.show(activity!!.supportFragmentManager, picker.toString())
                 }

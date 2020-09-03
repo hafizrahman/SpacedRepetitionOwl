@@ -122,5 +122,20 @@
         <action
             android:id="@+id/action_subjectViewEditFragment_to_subjectURLBottomDialogFragment"
             app:destination="@id/subjectURLBottomDialogFragment" />
+        <action
+            android:id="@+id/action_subjectViewEditFragment_to_subjectNoteEditFragment"
+            app:destination="@id/subjectNoteEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectNoteEditFragment"
+        android:name="black.old.spacedrepetitionowl.SubjectNoteEditFragment"
+        android:label="Edit note"
+        tools:layout="@layout/fragment_subject_note_edit">
+        <argument
+            android:name="subject_id"
+            app:argType="long" />
+        <argument
+            android:name="subject_note"
+            app:argType="string" />
     </fragment>
 </navigation>
