@@ -26,6 +26,12 @@ interface SubjectDao {
     @Query("UPDATE sro_subjects SET notes = :subject_notes where id == :subject_id")
     suspend fun updateSubjectNotes(subject_id: Long, subject_notes: String)
 
+    @Query("UPDATE sro_subjects SET startDateTimestamp = :subject_timestamp where id == :subject_id")
+    suspend fun updateSubjectStartDate(subject_id: Long, subject_timestamp: Long)
+
+    @Query("UPDATE sro_subjects SET url = :url where id == :subject_id")
+    suspend fun updateSubjectUrl(subject_id: Long, url: String)
+
     @Query("SELECT * FROM sro_subjects")
     fun getAllSubjects(): LiveData<List<Subject>>
 

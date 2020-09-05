@@ -140,6 +140,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateSubjectStartDate(subject_id: Long, timestamp: Long) {
+        viewModelScope.launch {
+            sroRepository.updateSubjectStartDate(subject_id, timestamp)
+        }
+    }
+
+    fun updateSubjectUrl(subject_id: Long, url: String) {
+        viewModelScope.launch {
+            sroRepository.updateSubjectUrl(subject_id, url)
+        }
+    }
+
     fun getSubject(subject_id: Long): LiveData<Subject> {
         return sroRepository.getSubject(subject_id)
     }

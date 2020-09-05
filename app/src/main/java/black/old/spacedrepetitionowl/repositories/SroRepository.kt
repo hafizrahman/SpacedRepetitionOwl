@@ -21,6 +21,14 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return subjectDao.updateSubjectNotes(subject_id, notes)
     }
 
+    suspend fun updateSubjectStartDate(subject_id: Long, timestamp: Long) {
+        return subjectDao.updateSubjectStartDate(subject_id, timestamp)
+    }
+
+    suspend fun updateSubjectUrl(subject_id: Long, url: String) {
+        return subjectDao.updateSubjectUrl(subject_id, url)
+    }
+
     suspend fun deleteSubjectBySubjectId(subject_id: Long) {
         subjectDao.deleteBySubjectId(subject_id)
     }
