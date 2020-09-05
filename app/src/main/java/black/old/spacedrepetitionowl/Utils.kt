@@ -3,6 +3,7 @@ package black.old.spacedrepetitionowl
 import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import java.text.SimpleDateFormat
 
 // Function for hiding keyboard, mostly used when a keyboard is opened then user pressed back/up.
 // Usage: hideKeyboard(activity as MainActivity)
@@ -16,5 +17,13 @@ fun hideKeyboard(activity: Activity) {
     currentFocusedView?.let {
         inputMethodManager.hideSoftInputFromWindow(
             currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+}
+
+fun dateStringFormatter(timestamp: Long, withYear: Boolean = false) : String {
+    return if(withYear) {
+        SimpleDateFormat("d MMM, YYYY").format(timestamp)
+    } else {
+        SimpleDateFormat("d MMM").format(timestamp)
     }
 }

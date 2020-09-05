@@ -2,12 +2,15 @@ package black.old.spacedrepetitionowl
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,10 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import kotlinx.android.synthetic.main.fragment_detail_subject.*
-import kotlinx.android.synthetic.main.fragment_edit_subject.*
 import kotlinx.android.synthetic.main.fragment_subject_view_edit.*
-import java.text.SimpleDateFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,6 +56,8 @@ class SubjectViewEditFragment : Fragment() {
                 sro_viewedit_subject_title_editable.setText(currentSubject.content)
                 sro_viewedit_starting_date.text = dateStringFormatter(currentSubject.startDateTimestamp, true)
 
+                val startDateTimestamp = currentSubject.startDateTimestamp
+
                 if(currentSubject.url.isNotEmpty()) {
                     sro_viewedit_subject_url.text = currentSubject.url
                 }
@@ -84,8 +86,38 @@ class SubjectViewEditFragment : Fragment() {
                 sro_viewedit_starting_date.setOnClickListener {view ->
                     picker.show(activity!!.supportFragmentManager, picker.toString())
                 }
-                picker.addOnPositiveButtonClickListener {
-                    sro_viewedit_starting_date.text = dateStringFormatter(it, true)
+                picker.addOnPositiveButtonClickListener { selectedTimestamp ->
+                    // TODO Add alert here asking for confirmation to save the date changes.
+                    // Confirmation is needed because a date change by default resets all
+                    // progresses.
+
+                    val builder = AlertDialog.Builder(requireActivity())
+                    builder.setTitle("Change Starting Date")
+                    builder.setMessage("Save new starting date? This will reset all progress.")
+
+                    // Positive button
+                    builder.setPositiveButton("YES") { dialog, which ->
+                        mainViewModel.updateSubjectStartDate(args.subjectId, selectedTimestamp)
+                        sro_viewedit_starting_date.text = dateStringFormatter(
+                            selectedTimestamp,
+                            true)
+                        Toast.makeText(requireActivity(),"New date saved.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+
+                    // Neutral button
+                    builder.setNeutralButton("Cancel") { dialog, which ->
+                        // Do nothing here, just dismiss the alert.
+                    }
+
+                    // Finally, make the alert dialog using builder
+                    val dialog: AlertDialog = builder.create()
+
+                    // Show the alert only if the selected date from picker differs from the current
+                    // date.
+                    if(selectedTimestamp != startDateTimestamp) {
+                        dialog.show()
+                    }
                 }
             })
         // fill in existing data for the reminders
@@ -129,13 +161,6 @@ class SubjectViewEditFragment : Fragment() {
     }
     private fun saveSubjectTitleChange(view: View) {
 
-    }
-    private fun dateStringFormatter(timestamp: Long, withYear: Boolean = false) : String {
-        return if(withYear) {
-            SimpleDateFormat("d MMM, YYYY").format(timestamp)
-        } else {
-            SimpleDateFormat("d MMM").format(timestamp)
-        }
     }
 
     private fun toggleReminderButtonChecked(button: Button) {
