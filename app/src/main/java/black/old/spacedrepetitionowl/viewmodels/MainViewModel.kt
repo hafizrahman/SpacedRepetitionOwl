@@ -133,6 +133,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             sroRepository.updateSubject(subject)
         }
     }
+
+    fun updateSubjectNotes(subject_id: Long, notes: String) {
+        viewModelScope.launch {
+            sroRepository.updateSubjectNotes(subject_id, notes)
+        }
+    }
+
     fun getSubject(subject_id: Long): LiveData<Subject> {
         return sroRepository.getSubject(subject_id)
     }

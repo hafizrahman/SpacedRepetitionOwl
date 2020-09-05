@@ -124,7 +124,9 @@
             app:destination="@id/subjectURLBottomDialogFragment" />
         <action
             android:id="@+id/action_subjectViewEditFragment_to_subjectNoteEditFragment"
-            app:destination="@id/subjectNoteEditFragment" />
+            app:destination="@id/subjectNoteEditFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/subjectNoteEditFragment"

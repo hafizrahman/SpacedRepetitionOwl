@@ -3,11 +3,18 @@ package black.old.spacedrepetitionowl
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_subject_note_edit.view.*
 import kotlinx.android.synthetic.main.fragment_subject_url_bottom_dialog.view.*
 
@@ -34,6 +41,55 @@ class SubjectNoteEditFragment : Fragment() {
             false)
 
         view.subject_note_edit.setText(args.subjectNote)
+
+
+        // The ViewModel is already created on the Activity level (inside MainActivity.kt),
+        // so here we are using the Activity's context
+        val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            // Handle the back button event
+            Log.d("Hafiz yay", "DO DO DO")
+
+            // build alert dialog
+            // Initialize a new instance of
+            val builder = AlertDialog.Builder(requireActivity())
+
+            // Set the alert dialog title
+            builder.setTitle("Subject Notes")
+
+            // Display a message on alert dialog
+            builder.setMessage("Save note changes?")
+
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("YES"){ dialog, which ->
+                // Do something when user press the positive button
+                Toast.makeText(requireActivity(),"OK, saving notes here. Going up...",Toast.LENGTH_SHORT).show()
+                // Save note changes here, then go back.
+                mainViewModel.updateSubjectNotes(args.subjectId, view.subject_note_edit.text.toString() )
+                findNavController().popBackStack()
+            }
+
+            // Display a negative button on alert dialog
+            // Nothing to do here, just go back.
+            builder.setNegativeButton("No"){ dialog, which ->
+                // Toast.makeText(requireActivity(),"Not saving changes. Going up...",Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
+
+            // Display a neutral button on alert dialog
+            builder.setNeutralButton("Cancel"){ _, _ ->
+                //Toast.makeText(requireActivity(),"Cancel going up...",Toast.LENGTH_SHORT).show()
+                // Do nothing here, just dismiss the alert.
+            }
+
+            // Finally, make the alert dialog using builder
+            val dialog: AlertDialog = builder.create()
+
+            // Display the alert dialog on app interface
+            dialog.show()
+        }
+        callback.isEnabled = true
 
         return view
     }

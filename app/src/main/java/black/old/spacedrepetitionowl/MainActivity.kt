@@ -2,6 +2,7 @@ package black.old.spacedrepetitionowl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -58,7 +59,6 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
         // Color the status bar
         // see: https://stackoverflow.com/a/54686103
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
-
     }
 
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
@@ -67,8 +67,25 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
 
     // Necessary to make the hamburger icon show the drawer when tapped.
     // Thanks Carson at https://stackoverflow.com/a/54447011 for the hint.
+
+    // It's also used to handle up button pressing in the Subject Note Edit fragment.
+    // In this use case, if the app see note changes then user presses back or up button, it has to
+    // ask whether user wants to save or not. The back button action is handled in
+    // SubjectNoteEditFragment.kt, however that does not affect Up button, so we need to add
+    // that here. See also https://stackoverflow.com/a/55930024
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
+
+        // Handle Up button on Subject Note Edit fragment.
+        // We already have the algorithm for this in SubjectNoteEditFragment's back button
+        // callback, so here we just need to call that.
+        if(navController.currentDestination?.id == R.id.subjectNoteEditFragment) {
+            onBackPressedDispatcher.onBackPressed()
+            // Returning true here because the actual going back/up action is already handled in
+            // the back button callback as well.
+            return true
+        }
+
         // need to use appBarConfiguration as parameter here so that the custom top level
         // destinations are obeyed, and for the drawer to show up correctly when hamburger icon
         // is tapped on the non-home top level destinations.

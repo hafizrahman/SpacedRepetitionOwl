@@ -23,6 +23,9 @@ interface SubjectDao {
     @Query("SELECT * from sro_subjects WHERE id == :subject_id")
     fun getSubject(subject_id: Long): LiveData<Subject>
 
+    @Query("UPDATE sro_subjects SET notes = :subject_notes where id == :subject_id")
+    suspend fun updateSubjectNotes(subject_id: Long, subject_notes: String)
+
     @Query("SELECT * FROM sro_subjects")
     fun getAllSubjects(): LiveData<List<Subject>>
 
