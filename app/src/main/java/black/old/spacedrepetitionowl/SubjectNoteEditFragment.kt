@@ -50,7 +50,7 @@ class SubjectNoteEditFragment : Fragment() {
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
             // Build alert dialog
             val builder = AlertDialog.Builder(requireActivity())
-            builder.setTitle("Subject Notes")
+            builder.setTitle("Note edited")
             builder.setMessage("Save note changes?")
 
             // Positive button
@@ -59,6 +59,7 @@ class SubjectNoteEditFragment : Fragment() {
                 Toast.makeText(requireActivity(),"OK, saving notes here. Going up...",Toast.LENGTH_SHORT).show()
                 // Save note changes here, then go back.
                 mainViewModel.updateSubjectNotes(args.subjectId, view.subject_note_edit.text.toString() )
+                hideKeyboard(activity as MainActivity)
                 findNavController().popBackStack()
             }
 
@@ -66,6 +67,7 @@ class SubjectNoteEditFragment : Fragment() {
             // Nothing to do here, just go back.
             builder.setNegativeButton("No"){ dialog, which ->
                 // Toast.makeText(requireActivity(),"Not saving changes. Going up...",Toast.LENGTH_SHORT).show()
+                hideKeyboard(activity as MainActivity)
                 findNavController().popBackStack()
             }
 
@@ -78,8 +80,18 @@ class SubjectNoteEditFragment : Fragment() {
             // Finally, make the alert dialog using builder
             val dialog: AlertDialog = builder.create()
 
-            // Display the alert dialog on app interface
-            dialog.show()
+
+            Log.d("hafiz", args.subjectNote)
+            Log.d("hafiz2", view.subject_note_edit.text.toString())
+
+            // Display alert when we detect note changes, otherwise go back right away.
+            if(args.subjectNote != view.subject_note_edit.text.toString()) {
+                dialog.show()
+            }
+            else {
+                hideKeyboard(activity as MainActivity)
+                findNavController().popBackStack()
+            }
         }
         callback.isEnabled = true
 
