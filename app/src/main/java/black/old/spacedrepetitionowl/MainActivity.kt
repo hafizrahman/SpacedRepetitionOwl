@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
         // We already have the algorithm for this in SubjectNoteEditFragment's back button
         // callback, so here we just need to call that.
         if(navController.currentDestination?.id == R.id.subjectNoteEditFragment) {
-            onBackPressedDispatcher.onBackPressed()
+            onBackPressedDispatcher.onBackPressed() // See https://stackoverflow.com/a/55905155
             // Returning true here because the actual going back/up action is already handled in
             // the back button callback as well.
             return true

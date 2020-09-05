@@ -42,26 +42,18 @@ class SubjectNoteEditFragment : Fragment() {
 
         view.subject_note_edit.setText(args.subjectNote)
 
-
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
         val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
+        // Handle the back button event
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            // Handle the back button event
-            Log.d("Hafiz yay", "DO DO DO")
-
-            // build alert dialog
-            // Initialize a new instance of
+            // Build alert dialog
             val builder = AlertDialog.Builder(requireActivity())
-
-            // Set the alert dialog title
             builder.setTitle("Subject Notes")
-
-            // Display a message on alert dialog
             builder.setMessage("Save note changes?")
 
-            // Set a positive button and its click listener on alert dialog
+            // Positive button
             builder.setPositiveButton("YES"){ dialog, which ->
                 // Do something when user press the positive button
                 Toast.makeText(requireActivity(),"OK, saving notes here. Going up...",Toast.LENGTH_SHORT).show()
@@ -70,16 +62,16 @@ class SubjectNoteEditFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
-            // Display a negative button on alert dialog
+            // Negative button
             // Nothing to do here, just go back.
             builder.setNegativeButton("No"){ dialog, which ->
                 // Toast.makeText(requireActivity(),"Not saving changes. Going up...",Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             }
 
-            // Display a neutral button on alert dialog
-            builder.setNeutralButton("Cancel"){ _, _ ->
-                //Toast.makeText(requireActivity(),"Cancel going up...",Toast.LENGTH_SHORT).show()
+            // Neutral button
+            builder.setNeutralButton("Cancel"){ dialog, which ->
+                // Toast.makeText(requireActivity(),"Cancel going up...",Toast.LENGTH_SHORT).show()
                 // Do nothing here, just dismiss the alert.
             }
 
