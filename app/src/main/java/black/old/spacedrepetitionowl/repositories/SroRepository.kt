@@ -58,6 +58,10 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return reminderDao.getRemindersBySubject(subjectId)
     }
 
+    suspend fun resetRemindersCheckedStateForSubject(subject_id: Long) {
+        return reminderDao.resetRemindersCheckedStateForSubject(subject_id)
+    }
+
     suspend fun deleteAllData()  {
         subjectDao.deleteAll()
         reminderDao.deleteAll()

@@ -4,16 +4,10 @@ import android.app.AlarmManager
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import black.old.spacedrepetitionowl.AlarmScheduler
 import black.old.spacedrepetitionowl.database.SroDatabase
-import black.old.spacedrepetitionowl.models.CombinedSubjectReminders
-import black.old.spacedrepetitionowl.models.Reminder
-import black.old.spacedrepetitionowl.models.Subject
-import black.old.spacedrepetitionowl.models.SubjectPackage
+import black.old.spacedrepetitionowl.models.*
 import black.old.spacedrepetitionowl.repositories.SroRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -36,6 +30,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun saveSelected(subjectPackage: SubjectPackage) {
         selectedSubject.value = subjectPackage
+    }
+
+    fun updateSelectedSubjectText(text: String) {
+        selectedSubject.value?.subject?.content = text
     }
 
     // Entering
@@ -174,6 +172,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return sroRepository.getRemindersBySubject(subject_id)
     }
 
+    fun resetRemindersCheckedStateForSubject(subject_id: Long) {
+        viewModelScope.launch {
+            sroRepository.resetRemindersCheckedStateForSubject(subject_id)
+        }
+    }
+
     fun getAllData(): CombinedSubjectReminders? {
         var ldSubjects = getSubjects()
         var ldReminders = getReminders()
@@ -182,6 +186,28 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             return CombinedSubjectReminders(ldSubjects, ldReminders)
         }
         return null
+    }
+
+    // This is part of the method used to create a MutableLiveData that contains multiple type
+    // of data sources (in this case, (1) the Room query for single Subject and (2) the Room query
+    // for the Reminders tied to that single Subject.
+    // This method is outlined further on:
+    // https://code.luasoftware.com/tutorials/android/use-mediatorlivedata-to-query-and-merge-different-data-type/
+    fun getSingleSubjectReminders(subject_id: Long) : MediatorLiveData<SingleSubjectReminders> {
+        val singleSubjectReminders = MediatorLiveData<SingleSubjectReminders>()
+        singleSubjectReminders.addSource(getSubject(subject_id)) {
+            if( it != null ) {
+                singleSubjectReminders.value = singleSubject(it)
+            }
+        }
+        getRemindersBySubjectId(subject_id)?.let { ldRemindersList ->
+            singleSubjectReminders.addSource(ldRemindersList) { reminderList ->
+                if( reminderList != null ) {
+                    singleSubjectReminders.value = singleReminders(reminderList)
+                }
+            }
+        }
+        return singleSubjectReminders
     }
 
     fun deleteAllData() = viewModelScope.launch {

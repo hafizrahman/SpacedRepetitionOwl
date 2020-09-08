@@ -5,7 +5,7 @@ package black.old.spacedrepetitionowl.models
 // with all the Reminders tied to it.
 data class SubjectPackage(
     val subject: Subject,
+    val reminder0: Reminder,
     val reminder1: Reminder,
     val reminder2: Reminder,
-    val reminder3: Reminder,
-    val reminder4: Reminder)
+    val reminder3: Reminder)

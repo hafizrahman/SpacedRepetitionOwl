@@ -63,6 +63,7 @@ class EditSubjectFragment : Fragment() {
         var customTimestamp = 0L
 
         // Fill in existing data
+
         mainViewModel.selectedSubject.observe(viewLifecycleOwner,
             Observer { selectedSubject ->
                 subjectField.setText(selectedSubject.subject.content)
@@ -88,10 +89,10 @@ class EditSubjectFragment : Fragment() {
                         var currentReminder : Reminder
                         val repDays = intArrayOf(1, 7, 16, 35)
                         val reminderIds = longArrayOf(
+                            selectedSubject.reminder0.id,
                             selectedSubject.reminder1.id,
                             selectedSubject.reminder2.id,
-                            selectedSubject.reminder3.id,
-                            selectedSubject.reminder4.id
+                            selectedSubject.reminder3.id
                         )
                         for(i in 0..3) {
                             val dateTimestamp = customTimestamp + dayToMilliseconds(repDays[i])

@@ -33,23 +33,24 @@ class SubjectURLBottomDialogFragment : BottomSheetDialogFragment() {
 
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
-        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         view.subject_url_bottom_dialog_url.setText(args.subjectUrl)
 
+        // Option to open the URL on a browser
         view.subject_url_bottom_dialog_open.setOnClickListener { view ->
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(args.subjectUrl)
             startActivity(intent)
         }
-
         return view
     }
 
+    // Saving on onCancel because we want things to be fast and have no save button.
+    // This is inspired by the same functionality in Microsoft To-do App.
     override fun onCancel(dialog: DialogInterface) {
         // Save the URL if the URL is changed
         if(view?.subject_url_bottom_dialog_url?.text.toString() != args.subjectUrl) {
-            Log.d("hafiz", "lets save the URL here")
             mainViewModel.updateSubjectUrl(
                 args.subjectId,
                 view?.subject_url_bottom_dialog_url?.text.toString()
