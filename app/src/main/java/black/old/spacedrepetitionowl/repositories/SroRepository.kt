@@ -62,6 +62,10 @@ class SroRepository(private val subjectDao: SubjectDao, private val reminderDao:
         return reminderDao.resetRemindersCheckedStateForSubject(subject_id)
     }
 
+    suspend fun updateDateTimestampAndReset(reminder_id: Long, new_timestamp: Long) {
+        reminderDao.updateDateTimestampAndReset(reminder_id, new_timestamp)
+    }
+
     suspend fun deleteAllData()  {
         subjectDao.deleteAll()
         reminderDao.deleteAll()

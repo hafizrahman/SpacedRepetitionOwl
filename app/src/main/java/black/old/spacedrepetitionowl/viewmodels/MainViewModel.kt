@@ -178,6 +178,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateDateTimestampAndReset(reminder_id: Long, new_timestamp: Long) {
+        viewModelScope.launch {
+            sroRepository.updateDateTimestampAndReset(reminder_id, new_timestamp)
+        }
+
+    }
+
     fun getAllData(): CombinedSubjectReminders? {
         var ldSubjects = getSubjects()
         var ldReminders = getReminders()

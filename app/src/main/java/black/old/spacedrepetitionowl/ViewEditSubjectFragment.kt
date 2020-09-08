@@ -21,11 +21,6 @@ import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_subject_view_edit.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [SubjectViewEditFragment.newInstance] factory method to
@@ -33,7 +28,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class SubjectViewEditFragment : Fragment() {
     val args: SubjectViewEditFragmentArgs by navArgs()
-   // lateinit var reminders: MutableList<Reminder>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,18 +45,18 @@ class SubjectViewEditFragment : Fragment() {
         val builder = MaterialDatePicker.Builder.datePicker()
         val picker = builder.build()
 
-        // Fill in existing data
-
         var currentSubject: Subject? = null
         var currentReminders: List<Reminder>? = null
-
         mainViewModel.getSingleSubjectReminders(args.subjectId)?.observe(
             viewLifecycleOwner,
             Observer { singleSubjectReminders ->
+
+                // Populate local variables with various data from MutableLiveData
                 when(singleSubjectReminders) {
                     is singleSubject -> currentSubject = singleSubjectReminders.subject
                     is singleReminders -> currentReminders = singleSubjectReminders.reminders
                 }
+
                 // Check and work on everything only when both data are available
                 if(currentSubject != null && currentReminders != null) {
                     // Display data //
@@ -117,12 +111,17 @@ class SubjectViewEditFragment : Fragment() {
                             )
 
                             // Reset progress on all subsequent reminders.
-                            mainViewModel.resetRemindersCheckedStateForSubject(args.subjectId)
+                            // mainViewModel.resetRemindersCheckedStateForSubject(args.subjectId)
 
-                            // TODO update new reminder dates based on new starting date
-                            // We have all four reminder id's, so now we need to:
-                            // - recalculate dates
-                            // - update all four reminders
+                            // Update new reminder dates based on new starting date
+                            // TODO this does not seem to save properly 🤔 Debug soon.
+                            val reminderDates = getReminderDates(selectedTimestamp)
+                            reminderDates.forEachIndexed { index, value ->
+                                mainViewModel.updateDateTimestampAndReset(
+                                    currentReminders!![index].id,
+                                    value
+                                )
+                            }
 
                             // TODO delete existing notifications with the old dates
 

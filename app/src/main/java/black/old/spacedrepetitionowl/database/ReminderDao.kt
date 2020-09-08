@@ -32,6 +32,11 @@ interface ReminderDao {
     @Query("UPDATE sro_reminders SET checked = 0 where subjectId == :subject_id")
     suspend fun resetRemindersCheckedStateForSubject(subject_id: Long)
 
+    // Change timestamp on an individual reminder. When this happens, we want to reset the
+    // checked state, too.
+    @Query("UPDATE sro_reminders SET dateTimestamp = :new_timestamp, checked = 0 where id == :reminder_id")
+    suspend fun updateDateTimestampAndReset(reminder_id: Long, new_timestamp: Long)
+
 
     // Empty out table
     @Query("DELETE FROM sro_reminders")
