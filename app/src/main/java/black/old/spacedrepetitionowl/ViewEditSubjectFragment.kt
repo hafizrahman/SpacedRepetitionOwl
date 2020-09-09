@@ -1,6 +1,8 @@
 package black.old.spacedrepetitionowl
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -157,7 +158,7 @@ class SubjectViewEditFragment : Fragment() {
                         }
                     }
 
-                    // - Edit URL
+                    // - Edit and open URL
                     sro_viewedit_subject_url.setOnClickListener { view ->
                         val action = SubjectViewEditFragmentDirections
                             .actionSubjectViewEditFragmentToDialogViewEditSubjectElementFragment(
@@ -167,6 +168,12 @@ class SubjectViewEditFragment : Fragment() {
                             )
                         findNavController().navigate(action)
                     }
+                    sro_viewedit_subject_url_view.setOnClickListener { view ->
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse(currentSubject!!.url)
+                        startActivity(intent)
+                    }
+
                     // - Edit notes
                     sro_viewedit_subject_notes.setOnClickListener { view ->
                         val action = SubjectViewEditFragmentDirections

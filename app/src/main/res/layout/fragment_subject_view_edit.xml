@@ -6,118 +6,143 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-            android:id="@+id/sro_viewedit_subject_main"
-            app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/sro_viewedit_subject_main"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/sro_viewedit_subject_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
-            <TextView
-                android:id="@+id/sro_viewedit_subject_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subject Title Subject Title Subject Title Subject TitleSubject Title Subject Title Subject Title Subject Title"
-                style="@style/reminder_name"
-                android:drawableStart="@drawable/ic_baseline_subject_24"
-                android:drawablePadding="12dp"
-                android:layout_marginTop="16dp"
-                android:visibility="gone"
-                android:clickable="true"
-                android:focusableInTouchMode="true"
-                />
-            <TextView
-                android:id="@+id/sro_viewedit_subject_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subject Title Subject Title Subject Title Subject TitleSubject Title Subject Title Subject Title Subject Title"
-                android:drawableStart="@drawable/ic_baseline_subject_24"
-                android:drawablePadding="12dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#f0f0f0"
-                android:paddingBottom="24dp"
-                android:layout_marginLeft="-3dp" />
-            <TextView
-                android:id="@+id/sro_viewedit_starting_date"
-                android:drawableStart="@drawable/ic_baseline_calendar_24"
-                android:drawablePadding="12dp"
-                android:layout_marginTop="16dp"
-                android:text="January 20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="#999999"
-                android:gravity="center_vertical"
-                />
+            android:text="Subject Title Subject Title Subject Title Subject TitleSubject Title Subject Title Subject Title Subject Title"
+            style="@style/reminder_name"
+            android:drawableStart="@drawable/ic_baseline_subject_24"
+            android:drawablePadding="12dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/sro_viewedit_subject_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subject Title Subject Title Subject Title Subject TitleSubject Title Subject Title Subject Title Subject Title"
+            android:drawableStart="@drawable/ic_baseline_subject_24"
+            android:drawablePadding="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#f0f0f0"
+            android:paddingBottom="24dp"
+            android:layout_marginLeft="-3dp" />
 
         <View style="@style/separator_line" />
 
         <TextView
+            android:id="@+id/sro_viewedit_starting_date"
+            android:drawableStart="@drawable/ic_baseline_calendar_24"
+            android:drawablePadding="12dp"
+            android:layout_marginTop="16dp"
+            android:text="January 20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#999999"
+            android:gravity="center_vertical"
+            />
+
+        <View style="@style/separator_line" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
                 android:id="@+id/sro_viewedit_subject_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 style="@style/reminder_non_clickable_link"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
                 android:text="No link added"
                 android:textAllCaps="true"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="8dp"/>
+
+
+            <ImageButton
+                android:id="@+id/sro_viewedit_subject_url_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_open_in_browser_24"
+                android:background="#ffffff"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         <View style="@style/separator_line" />
 
-            <TextView
-                android:text="Reminders"
-                style="@style/reminder_small_label"
+        <TextView
+            android:text="Reminders"
+            style="@style/reminder_small_label"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/sro_viewedit_reminder_button_0"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+                android:text="Jan 11" />
+
+            <Button
+                android:id="@+id/sro_viewedit_reminder_button_1"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
+
                 />
+            <Button
+                android:id="@+id/sro_viewedit_reminder_button_2"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                android:paddingBottom="8dp">
-
-                <Button
-                    android:id="@+id/sro_viewedit_reminder_button_0"
-                    style="@style/reminder_card_button"
-                    android:layout_marginHorizontal="4dp"
-                    android:text="Jan 11" />
-
-                <Button
-                    android:id="@+id/sro_viewedit_reminder_button_1"
-                    android:text="Jan 11"
-                    style="@style/reminder_card_button"
-                    android:layout_marginHorizontal="4dp"
-
-                    />
-                <Button
-                    android:id="@+id/sro_viewedit_reminder_button_2"
-                    android:text="Jan 11"
-                    style="@style/reminder_card_button"
-                    android:layout_marginHorizontal="4dp"
-
-                    />
-                <Button
-                    android:id="@+id/sro_viewedit_reminder_button_3"
-                    android:text="Jan 11"
-                    style="@style/reminder_card_button"
-                    android:layout_marginHorizontal="4dp"
-                    />
-            </LinearLayout>
-
-            <View style="@style/separator_line" />
-
-            <TextView
-                android:text="Notes"
-                style="@style/reminder_small_label"
                 />
-
-            <TextView
-                android:id="@+id/sro_viewedit_subject_notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No notes added."
-                style="@style/reminder_details_notes"
+            <Button
+                android:id="@+id/sro_viewedit_reminder_button_3"
+                android:text="Jan 11"
+                style="@style/reminder_card_button"
+                android:layout_marginHorizontal="4dp"
                 />
         </LinearLayout>
+
+        <View style="@style/separator_line" />
+
+        <TextView
+            android:text="Notes"
+            style="@style/reminder_small_label"
+            />
+
+        <TextView
+            android:id="@+id/sro_viewedit_subject_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No notes added."
+            style="@style/reminder_details_notes"
+            />
+    </LinearLayout>
 </ScrollView>

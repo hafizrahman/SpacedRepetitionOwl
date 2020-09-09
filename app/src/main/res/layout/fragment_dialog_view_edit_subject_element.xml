@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        style="@style/reminder_small_label" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/sro_viewedit_element_layout"
