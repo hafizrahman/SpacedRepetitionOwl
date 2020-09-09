@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_subjects_bottom_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_dialog_subjects_bottom.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,7 +39,7 @@ class SubjectsBottomDialogFragment() : BottomSheetDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(
-            R.layout.fragment_subjects_bottom_dialog,
+            R.layout.fragment_dialog_subjects_bottom,
             container,
             false)
         view.subjects_bottom_dialog_title.text = args.subjectText

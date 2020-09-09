@@ -61,7 +61,7 @@ class SubjectViewEditFragment : Fragment() {
                 if(currentSubject != null && currentReminders != null) {
                     // Display data //
                     sro_viewedit_subject_title.text = currentSubject!!.content
-                    sro_viewedit_subject_title_editable.setText(currentSubject!!.content)
+                    sro_viewedit_subject_content.text = currentSubject!!.content
                     sro_viewedit_starting_date.text = dateStringFormatter(
                         currentSubject!!.startDateTimestamp,
                         true
@@ -88,7 +88,17 @@ class SubjectViewEditFragment : Fragment() {
 
                     // Edit data //
 
-                    // TODO - edit subject title
+                    // edit subject content
+                    sro_viewedit_subject_content.setOnClickListener { view ->
+                        val action = SubjectViewEditFragmentDirections
+                            .actionSubjectViewEditFragmentToDialogViewEditSubjectElementFragment(
+                                currentSubject!!.id,
+                                currentSubject!!.content,
+                                1
+                            )
+                        Log.d("Hafiz", "subject title is clicked for sure")
+                        findNavController().navigate(action)
+                    }
 
                     // - Edit starting date
                     sro_viewedit_starting_date.setOnClickListener { view ->
@@ -150,9 +160,10 @@ class SubjectViewEditFragment : Fragment() {
                     // - Edit URL
                     sro_viewedit_subject_url.setOnClickListener { view ->
                         val action = SubjectViewEditFragmentDirections
-                            .actionSubjectViewEditFragmentToSubjectURLBottomDialogFragment(
+                            .actionSubjectViewEditFragmentToDialogViewEditSubjectElementFragment(
                                 currentSubject!!.id,
-                                currentSubject!!.url
+                                currentSubject!!.url,
+                                2
                             )
                         findNavController().navigate(action)
                     }

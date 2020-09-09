@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_subject_note_edit.view.*
-import kotlinx.android.synthetic.main.fragment_subject_url_bottom_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_dialog_subject_url_bottom.view.*
 
 /**
  * A simple [Fragment] subclass.

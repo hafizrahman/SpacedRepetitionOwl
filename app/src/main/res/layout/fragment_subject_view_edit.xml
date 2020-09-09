@@ -22,9 +22,11 @@
                 android:drawablePadding="12dp"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
                 />
-            <EditText
-                android:id="@+id/sro_viewedit_subject_title_editable"
+            <TextView
+                android:id="@+id/sro_viewedit_subject_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Subject Title Subject Title Subject Title Subject TitleSubject Title Subject Title Subject Title Subject Title"
@@ -33,7 +35,7 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#f0f0f0"
                 android:paddingBottom="24dp"
-                android:layout_marginLeft="-3dp"/>
+                android:layout_marginLeft="-3dp" />
             <TextView
                 android:id="@+id/sro_viewedit_starting_date"
                 android:drawableStart="@drawable/ic_baseline_calendar_24"

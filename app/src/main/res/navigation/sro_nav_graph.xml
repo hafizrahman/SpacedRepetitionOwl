@@ -17,9 +17,6 @@
             app:exitAnim="@android:anim/fade_out"
             />
         <action
-            android:id="@+id/action_subjectFragment_to_subjectsBottomDialogFragment"
-            app:destination="@id/subjectsBottomDialogFragment" />
-        <action
             android:id="@+id/action_subjectFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
         <action
@@ -28,6 +25,9 @@
         <action
             android:id="@+id/action_subjectFragment_to_subjectTimelineFragment"
             app:destination="@id/subjectTimelineFragment" />
+        <action
+            android:id="@+id/action_subjectFragment_to_subjectsBottomDialogFragment"
+            app:destination="@id/subjectsBottomDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/editSubjectFragment"
@@ -40,9 +40,9 @@
     </fragment>
     <dialog
         android:id="@+id/addSubjectDialogFragment"
-        android:name="black.old.spacedrepetitionowl.AddSubjectDialogFragment"
+        android:name="black.old.spacedrepetitionowl.DialogAddSubjectFragment"
         android:label="AddSubjectDialogFragment"
-        tools:layout="@layout/fragment_add_subject_dialog">
+        tools:layout="@layout/fragment_dialog_add_subject">
         <action
             android:id="@+id/action_addSubjectDialogFragment_to_subjectsBottomDialogFragment"
             app:destination="@id/subjectsBottomDialogFragment" />
@@ -51,7 +51,7 @@
         android:id="@+id/subjectsBottomDialogFragment"
         android:name="black.old.spacedrepetitionowl.SubjectsBottomDialogFragment"
         android:label="SubjectsBottomDialogFragment"
-        tools:layout="@layout/fragment_subjects_bottom_dialog">
+        tools:layout="@layout/fragment_dialog_subjects_bottom">
         <action
             android:id="@+id/action_subjectsBottomDialogFragment_to_ViewEditSubjectFragment"
             app:destination="@id/subjectViewEditFragment" />
@@ -69,7 +69,7 @@
         android:id="@+id/subjectURLBottomDialogFragment"
         android:name="black.old.spacedrepetitionowl.SubjectURLBottomDialogFragment"
         android:label="SubjectURLBottomDialogFragment"
-        tools:layout="@layout/fragment_subject_url_bottom_dialog">
+        tools:layout="@layout/fragment_dialog_subject_url_bottom">
         <argument
             android:name="subject_id"
             app:argType="long" />
@@ -112,7 +112,7 @@
         android:id="@+id/subjectViewEditFragment"
         android:name="black.old.spacedrepetitionowl.SubjectViewEditFragment"
         tools:layout="@layout/fragment_subject_view_edit"
-        android:label="{title}">
+        android:label="Subject Details">
         <argument
             android:name="subject_id"
             app:argType="long" />
@@ -127,6 +127,9 @@
             app:destination="@id/subjectNoteEditFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_subjectViewEditFragment_to_dialogViewEditSubjectElementFragment"
+            app:destination="@id/dialogViewEditSubjectElementFragment" />
     </fragment>
     <fragment
         android:id="@+id/subjectNoteEditFragment"
@@ -140,4 +143,18 @@
             android:name="subject_note"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/dialogViewEditSubjectElementFragment"
+        android:name="black.old.spacedrepetitionowl.DialogViewEditSubjectElementFragment"
+        android:label="DialogViewEditSubjectElementFragment" >
+        <argument
+            android:name="subject_id"
+            app:argType="long" />
+        <argument
+            android:name="subject_element_to_edit"
+            app:argType="string" />
+        <argument
+            android:name="subject_element_type"
+            app:argType="integer" />
+    </dialog>
 </navigation>

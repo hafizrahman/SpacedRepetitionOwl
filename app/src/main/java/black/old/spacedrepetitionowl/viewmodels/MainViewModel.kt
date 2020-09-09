@@ -132,6 +132,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateSubjectContent(subject_id: Long, content: String) {
+        viewModelScope.launch {
+            sroRepository.updateSubjectContent(subject_id, content)
+        }
+    }
+
     fun updateSubjectNotes(subject_id: Long, notes: String) {
         viewModelScope.launch {
             sroRepository.updateSubjectNotes(subject_id, notes)

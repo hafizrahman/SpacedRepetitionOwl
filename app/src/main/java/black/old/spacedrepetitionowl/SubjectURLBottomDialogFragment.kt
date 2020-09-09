@@ -4,7 +4,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_subject_url_bottom_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_dialog_subject_url_bottom.view.*
 
 class SubjectURLBottomDialogFragment : BottomSheetDialogFragment() {
     val args: SubjectURLBottomDialogFragmentArgs by navArgs()
@@ -27,7 +26,7 @@ class SubjectURLBottomDialogFragment : BottomSheetDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(
-            R.layout.fragment_subject_url_bottom_dialog,
+            R.layout.fragment_dialog_subject_url_bottom,
             container,
             false)
 

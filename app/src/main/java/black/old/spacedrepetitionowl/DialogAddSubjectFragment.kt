@@ -11,16 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import kotlinx.android.synthetic.main.fragment_edit_subject.view.*
-import kotlinx.android.synthetic.main.fragment_add_subject_dialog.view.*
-import kotlinx.android.synthetic.main.main_content_area.*
+import kotlinx.android.synthetic.main.fragment_dialog_add_subject.view.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AddSubjectDialogFragment.newInstance] factory method to
+ * Use the [DialogAddSubjectFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AddSubjectDialogFragment : DialogFragment() {
+class DialogAddSubjectFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +28,13 @@ class AddSubjectDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_add_subject_dialog, container, false)
+        val view = inflater.inflate(R.layout.fragment_dialog_add_subject, container, false)
         // Dismiss dialog if user touched outside of the dialog
         // ref: https://stackoverflow.com/a/8761729
         dialog?.setCanceledOnTouchOutside(true)
 
         // Data submission
-        val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        val mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         val submitButton : View = view.add_subject_dialog_submit
         val subjectField = view.add_subject_dialog_subject
         val subjectUrl = view.add_subject_dialog_uri
@@ -95,24 +93,5 @@ class AddSubjectDialogFragment : DialogFragment() {
 
     override fun getTheme(): Int {
         return R.style.fullscreen_dialog
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddSubjectDialogFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddSubjectDialogFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
     }
 }
