@@ -14,23 +14,7 @@
         tools:context=".SubjectFragment"
         tools:listitem="@layout/fragment_subject_timeline_item"
         android:paddingTop="8dp"
-        android:paddingBottom="160dp"
+        android:paddingBottom="16dp"
         android:clipToPadding="false"
         app:layout_constraintTop_toTopOf="parent"/>
-    <!-- ^ Adding a high bottom padding and clipToPadding to false is
-    necessary to make the FAB not cover the last item in the list.
-    This is from: https://stackoverflow.com/a/45408853 -->
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/timeline_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

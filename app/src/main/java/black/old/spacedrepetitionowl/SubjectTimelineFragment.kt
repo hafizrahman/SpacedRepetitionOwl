@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 import kotlinx.android.synthetic.main.fragment_subject_list.view.fab
 import kotlinx.android.synthetic.main.fragment_subject_timeline.*
 import kotlinx.android.synthetic.main.fragment_subject_timeline.view.*
-import kotlinx.android.synthetic.main.fragment_subject_timeline.view.timeline_fab
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,33 +51,14 @@ class SubjectTimelineFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_subject_timeline, container, false)
 
-        // TODO: setup adapter
         adapter = SubjectTimelineRecyclerViewAdapter()
         view.sro_subject_timeline_list.adapter = adapter
 
         view.sro_subject_timeline_list.layoutManager = LinearLayoutManager(context)
 
-        // FAB click listener
-        val addSubjectFab: View = view.timeline_fab
-        addSubjectFab.setOnClickListener { view ->
-            findNavController().navigate(R.id.action_subjectTimelineFragment_to_addSubjectDialogFragment)
-        }
-        // Hide fab during scroll, and show again after scroll is finished.
-        // source: https://stackoverflow.com/a/39813266
-        view.sro_subject_timeline_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 || dy < 0 && fab.isShown) timeline_fab.hide()
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) timeline_fab.show()
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
-
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
-        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         // New observer
         mainViewModel.getAllData()?.observe(viewLifecycleOwner,

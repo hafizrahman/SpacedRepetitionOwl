@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_subject.view.*
 import black.old.spacedrepetitionowl.SubjectFragment.OnListFragmentInteractionListener
 import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
 import black.old.spacedrepetitionowl.models.SubjectPackage
-import kotlinx.android.synthetic.main.fragment_subject_test.view.*
+import kotlinx.android.synthetic.main.fragment_timeline_single_subject.view.*
 import java.text.SimpleDateFormat
 
 class SubjectRecyclerViewAdapter(
@@ -73,7 +73,7 @@ class SubjectRecyclerViewAdapter(
         if (sortingType == SORTBY_DEFAULT)
             return R.layout.fragment_subject
         else
-            return R.layout.fragment_subject_test
+            return R.layout.fragment_timeline_single_subject
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -83,7 +83,7 @@ class SubjectRecyclerViewAdapter(
         }
         else {
             return ViewHolderTest(LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_subject_test, parent, false))
+                .inflate(R.layout.fragment_timeline_single_subject, parent, false))
 
         }
 
