@@ -173,7 +173,7 @@ class SubjectFragment : Fragment() {
 
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : SubjectPackage) {
-        Log.d("CLICKER", currentSubject.toString() + " is being clicked")
+        Log.d("CLICKER", "$currentSubject is being clicked")
 
         // We're saving the currently selected subject's SubjectPackage data so subsequent
         // fragments (e.g: Edit Subject fragment) can use that data.

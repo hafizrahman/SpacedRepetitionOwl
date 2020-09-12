@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--
-
-    <item
-        android:id="@+id/menu_sortby_default"
-        android:title="Sort by subject name" />
-    <item
-        android:id="@+id/menu_sortby_reminder"
-        android:title="Show upcoming reminders" />
-        -->
 
     <group
         android:id="@+id/group_lists"
@@ -22,9 +13,11 @@
             android:id="@id/subjectTimelineFragment"
             android:title="Timeline View" />
 
+        <!-- TODO: Add Archived subject option
         <item
             android:id="@id/subjectFragment"
             android:title="Archived" />
+        -->
     </group>
 
     <group

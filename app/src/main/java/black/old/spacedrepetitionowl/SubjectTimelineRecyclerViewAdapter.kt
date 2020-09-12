@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
 import black.old.spacedrepetitionowl.models.Reminder
@@ -38,7 +39,11 @@ class SubjectTimelineRecyclerViewAdapter() : RecyclerView.Adapter<SubjectTimelin
     }
 
     inner class ViewHolderTimelineItem(val view: View) : RecyclerView.ViewHolder(view) {
-        val contentTestView: TextView = view.subject_timeline_item_text
+        val contentTimelineView: TextView = view.timeline_item_content
+        val ddmmTextView: TextView = view.timeline_item_date_mmdd
+        val yyyyTextView: TextView = view.timeline_item_date_yyyy
+        // TODO attach click listener here to open the card details info
+        val card: CardView = view.timeline_card
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -56,7 +61,17 @@ class SubjectTimelineRecyclerViewAdapter() : RecyclerView.Adapter<SubjectTimelin
 
     override fun onBindViewHolder(holder: SubjectTimelineRecyclerViewAdapter.ViewHolderTimelineItem, position: Int) {
         val currentReminder = remindersOrderedByDate[position]
-        holder.contentTestView.text = dateStringFormatter(currentReminder.dateTimestamp) + " -- " + currentReminder.subjectId
+        val currentSubject = subjects.find { subject ->
+            subject.id.equals(currentReminder.subjectId)
+        }
+
+        if ( currentSubject != null ) {
+            holder.contentTimelineView.text = currentSubject.content
+            holder.ddmmTextView.text = formatTimestamp(currentReminder.dateTimestamp, "dd MMM")
+            holder.yyyyTextView.text = formatTimestamp(currentReminder.dateTimestamp, "YYYY")
+        }
+
+
 
     }
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
 
 // Function for hiding keyboard, mostly used when a keyboard is opened then user pressed back/up.
 // Usage: hideKeyboard(activity as MainActivity)
@@ -27,6 +28,10 @@ fun dateStringFormatter(timestamp: Long, withYear: Boolean = false) : String {
     } else {
         SimpleDateFormat("d MMM").format(timestamp)
     }
+}
+
+fun formatTimestamp(timestamp: Long, pattern: String) : String {
+    return SimpleDateFormat(pattern).format(timestamp)
 }
 
 fun getReminderDates(startDate: Long): Array<Long> {
