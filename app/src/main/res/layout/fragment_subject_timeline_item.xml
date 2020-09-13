@@ -26,8 +26,9 @@
             android:text="12 SEP"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             style="@style/timeline_date"
+            android:textSize="12sp"
             />
 
         <TextView
@@ -37,9 +38,10 @@
             android:text="2020"
             card_view:layout_constraintTop_toBottomOf="@id/timeline_item_date_mmdd"
             card_view:layout_constraintStart_toStartOf="parent"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:textAllCaps="true"
             style="@style/timeline_date"
+            android:layout_marginTop="4dp"
             />
 
 
@@ -53,7 +55,23 @@
             style="@style/reminder_name"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/timeline_item_date_mmdd"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeline_item_repetition_number"
+            android:text="Repetition #3"
+            card_view:layout_constraintTop_toBottomOf="@+id/timeline_item_content"
+            card_view:layout_constraintStart_toEndOf="@+id/timeline_item_date_mmdd"
+            android:layout_marginTop="2dp"
+            style="@style/timeline_date"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:paddingHorizontal="12dp"
+            android:layout_marginVertical="8dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

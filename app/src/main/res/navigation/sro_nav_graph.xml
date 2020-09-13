@@ -81,8 +81,8 @@
         android:label="Timeline"
         tools:layout="@layout/fragment_subject_timeline" >
         <action
-            android:id="@+id/action_subjectTimelineFragment_to_addSubjectDialogFragment"
-            app:destination="@id/addSubjectDialogFragment" />
+            android:id="@+id/action_subjectTimelineFragment_to_subjectViewEditFragment"
+            app:destination="@id/subjectViewEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/subjectViewEditFragment"

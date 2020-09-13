@@ -182,9 +182,12 @@ class SubjectFragment : Fragment() {
         // Even though we're already saving SubjectPackage data in the ViewModel, we're also
         // using the simpler navigation action parameter below to send data during navigation
         // action, for learning purposes.
-        val subject_id = currentSubject.subject.id
-        val subject_text = currentSubject.subject.content
-        val action = SubjectFragmentDirections.actionSubjectFragmentToSubjectsBottomDialogFragment(subject_id, subject_text)
+        val subjectId = currentSubject.subject.id
+        val subjectText = currentSubject.subject.content
+        val action = SubjectFragmentDirections
+            .actionSubjectFragmentToSubjectsBottomDialogFragment(
+                subjectId,
+                subjectText)
        findNavController().navigate(action)
     }
 
