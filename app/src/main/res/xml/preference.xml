@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat
+        android:key="pref_enable_same_hour"
+        android:title="Enable identical notification time."
+        android:summary="Set the same hour for notifications on all subjects. If disabled, notification hours are set based on Subject creation time."/>
+
+    <black.old.spacedrepetitionowl.TimepickerPreference
+        android:key="pref_notification_time"
+        android:title="Notification time"
+        android:summary="This will programmatically show current notification time."
+        android:defaultValue="90"
+        android:dependency="pref_enable_same_hour" />
+
+</androidx.preference.PreferenceScreen>
