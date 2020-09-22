@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -14,7 +13,6 @@ object NotificationHelper {
     fun createNotificationChannel(context: Context, importance: Int, showBadge: Boolean,
                                   name: String, description: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Log.d("NOTINOTI", "I am creating notification channel")
 
             //val channelId = "${context.packageName}-$name"
             val channelId = "SRO CHANNEL ID"
@@ -44,6 +42,5 @@ object NotificationHelper {
         }
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(1237, notificationBuilder.build())
-        Log.d("NOTINOTI", "I am beiing called")
     }
 }

@@ -3,12 +3,9 @@ package black.old.spacedrepetitionowl
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 
 class AlarmBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("FIFTEEN", "inside AlarmBroadcastReceiver")
-
         NotificationHelper.createSampleDataNotification(
             context,
             "It's time to learn!",

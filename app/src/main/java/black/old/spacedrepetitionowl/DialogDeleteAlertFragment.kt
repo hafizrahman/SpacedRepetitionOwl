@@ -3,7 +3,6 @@ package black.old.spacedrepetitionowl
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +20,6 @@ class DialogDeleteAlertFragment(private val subjectToDeleteId: Long): DialogFrag
 
                     // Get the viewmodel and make it do the deletion
                     val mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
-                    Log.d("LOVELIFE", "we about to delete subject id $subjectToDeleteId")
                     mainViewModel.deleteSubjectBySubjectId(subjectToDeleteId)
 
                     // TODO Show a toaster to confirm that subject has been deleted

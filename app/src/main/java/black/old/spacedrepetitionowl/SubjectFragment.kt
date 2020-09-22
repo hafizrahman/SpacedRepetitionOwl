@@ -3,7 +3,6 @@ package black.old.spacedrepetitionowl
 import android.app.AlarmManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -79,7 +78,6 @@ class SubjectFragment : Fragment() {
         // New observer
          mainViewModel.getAllData()?.observe(viewLifecycleOwner,
             Observer { subjectsAndRemindersPair ->
-                Log.d("SRObert", subjectsAndRemindersPair.toString())
                 adapter.setData(
                     subjectsAndRemindersPair.first,
                     subjectsAndRemindersPair.second)
@@ -142,8 +140,6 @@ class SubjectFragment : Fragment() {
 
     fun setNotification15sFromNow() {
         val fifteenSecsFromNow = System.currentTimeMillis() + (5*1000)
-        Log.d("FIFTEEN", System.currentTimeMillis().toString())
-        Log.d("FIFTEEN", fifteenSecsFromNow.toString())
         val alarmManager = activity!!.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         AlarmScheduler.scheduleAlarm(
@@ -173,7 +169,6 @@ class SubjectFragment : Fragment() {
 
     // The actual action that needs to be done when a main subject bar is clicked.
     private fun mainSubjectBarClicked(currentSubject : SubjectPackage) {
-        Log.d("CLICKER", "$currentSubject is being clicked")
 
         // We're saving the currently selected subject's SubjectPackage data so subsequent
         // fragments (e.g: Edit Subject fragment) can use that data.
@@ -192,7 +187,6 @@ class SubjectFragment : Fragment() {
     }
 
     private fun reminderIsClicked(currentReminder: Reminder) {
-        Log.d("Clicker", "$currentReminder is being clicked")
         // Toggle Reminder's checked status and save to db
         if (currentReminder.checked) {
             currentReminder.checked = false
@@ -200,7 +194,6 @@ class SubjectFragment : Fragment() {
             currentReminder.checked = true
         }
         mainViewModel.updateReminder(currentReminder)
-        Log.d("Clicker", "Update result $currentReminder")
         adapter.notifyDataSetChanged()
     }
 

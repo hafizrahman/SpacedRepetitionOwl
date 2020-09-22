@@ -1,6 +1,5 @@
 package black.old.spacedrepetitionowl
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -1,9 +1,6 @@
 package black.old.spacedrepetitionowl
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -79,10 +76,6 @@ class SubjectNoteEditFragment : Fragment() {
 
             // Finally, make the alert dialog using builder
             val dialog: AlertDialog = builder.create()
-
-
-            Log.d("hafiz", args.subjectNote)
-            Log.d("hafiz2", view.subject_note_edit.text.toString())
 
             // Display alert when we detect note changes, otherwise go back right away.
             if(args.subjectNote != view.subject_note_edit.text.toString()) {

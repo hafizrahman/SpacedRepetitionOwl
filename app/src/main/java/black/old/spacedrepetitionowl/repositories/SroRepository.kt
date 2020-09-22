@@ -1,6 +1,5 @@
 package black.old.spacedrepetitionowl.repositories
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import black.old.spacedrepetitionowl.database.ReminderDao
 import black.old.spacedrepetitionowl.database.SubjectDao

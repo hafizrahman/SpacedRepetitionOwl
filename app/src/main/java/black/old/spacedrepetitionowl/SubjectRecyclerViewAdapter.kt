@@ -1,7 +1,6 @@
 package black.old.spacedrepetitionowl
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,9 +45,6 @@ class SubjectRecyclerViewAdapter(
 
         reminders = remindersList
         remindersOrderedByDate = orderRemindersByUpcomingDate()
-        Log.d("SRIRI A", subjects.toString())
-        Log.d("SRIRI B", reminders.toString())
-        Log.d("SRIRI C", remindersOrderedByDate.toString())
         notifyDataSetChanged()
     }
 
@@ -214,12 +210,12 @@ class SubjectRecyclerViewAdapter(
     }
 
     private fun dateStringFormatter(timestamp: Long) : String {
-        val pattern = "d MMM"
+        val pattern = "d MMM HH:mm"
         return SimpleDateFormat(pattern).format(timestamp)
     }
 
     private fun formatSubjectCardStartDate(timestamp: Long) : String {
-        val pattern = "d MMMM YYYY"
+        val pattern = "d MMMM YYYY HH:mm"
         return SimpleDateFormat(pattern).format(timestamp)
     }
 

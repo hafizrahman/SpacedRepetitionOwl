@@ -3,7 +3,6 @@ package black.old.spacedrepetitionowl.viewmodels
 import android.app.AlarmManager
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.*
 import black.old.spacedrepetitionowl.AlarmScheduler
 import black.old.spacedrepetitionowl.database.SroDatabase
@@ -63,9 +62,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             // Insert subject to database, and get subject id from the database that was
             // automatically generated.
-            Log.d("SRIROTI", "entering this subject to db: $subjectToEnter")
             val generatedSubjectId = sroRepository.insertSubject(subjectToEnter)
-            Log.d("SRIROTI", "generated subject id from db: $generatedSubjectId")
 
             // Generate four Reminders based on the Subject, make sure to enter the
             // generatedSubjectId for foreign key purposes.
@@ -87,9 +84,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 dateTimestamp
                 )
                 val currentReminderGeneratedId = sroRepository.insertReminder(currentReminder)
-
-                Log.d("HIOWL",
-                    "Alarm: $subjectText for $repDays[$i] ($currentReminderGeneratedId)")
 
                 addReminderNotification(context,
                     subjectText,
@@ -224,9 +218,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun deleteAllData() = viewModelScope.launch {
-        Log.d("SRO", "Deleting everything in the DB...")
         sroRepository.deleteAllData()
-        Log.d("SRO", "All deleted.")
     }
 
 }
