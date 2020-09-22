@@ -65,6 +65,7 @@ fun minutesFromMidnightToHourlyTime(minutes: Int): String {
 
 // Function 1 : We're using LocalDate because we want to ignore the hours and add it later on
 // based on default value or preferences.
+// See: http://www.java2s.com/Tutorials/Java/Data_Type_How_to/Date_Convert/Convert_long_type_timestamp_to_LocalDate_and_LocalDateTime.htm
 fun timestampToLocalDate(timestamp: Long): LocalDate {
     val localTimezone = ZoneId.systemDefault()
     return LocalDateTime
@@ -73,6 +74,7 @@ fun timestampToLocalDate(timestamp: Long): LocalDate {
 }
 
 // Function 2 : Get the epoch timestamp of a localDate at the start of the day.
+// See: https://www.concretepage.com/java/java-8/convert-between-java-localdate-epoch#Epoch-Milliseconds
 fun timestampFromLocalDateAtStartOfDay(localDate: LocalDate): Long {
     val localTimezone = ZoneId.systemDefault()
     val startofdayInstant = localDate.atStartOfDay(localTimezone).toInstant()
