@@ -80,3 +80,30 @@ fun timestampFromLocalDateAtStartOfDay(localDate: LocalDate): Long {
     val startofdayInstant = localDate.atStartOfDay(localTimezone).toInstant()
     return startofdayInstant.toEpochMilli()
 }
+
+// Function 1b:
+// This app uses MaterialDatePicker, which has a "gotcha" where if someone picks a date from it,
+// the resulting Long value is actually the timestamp that equals to UTC+0 date at 00:00.
+// So for example, if someone with Hawaii as system timezone (UTC-10) picks a December 25 on the
+// picker, the returned value from the picker is actually December 25 at 00:00 UTC+0 time,
+// *not* December 25 at 00:00 UTC-10 time.
+//
+// This can cause issue because if the returned value is then displayed on the UI according to
+// system's timezone (for example using SimpleDateFormat()), then the formatted string will
+// actually say December 24, 14:00, which is not what the user picked in the first place.
+//
+// Because of this, we can't just use the picker return value as is. Instead we need to grab
+// only the day/month/year using the function below, then run function 2 above to convert it back
+// to the timezone-correct timestamp.
+fun timestampUTCToLocalDate(timestampUtc: Long): LocalDate {
+    val localTimezone = ZoneId.of("UTC")
+    return LocalDateTime
+        .ofInstant(Instant.ofEpochMilli(timestampUtc), localTimezone)
+        .toLocalDate()
+}
+
+// Combination from function 1b and function 2 above:
+// convert start day UTC in millis, to start day system timezone in millis
+fun convertStartDayUTCMillisToStartDaySystemTimezoneMillis(timestampUtc: Long): Long {
+    return timestampFromLocalDateAtStartOfDay(timestampUTCToLocalDate(timestampUtc))
+}
