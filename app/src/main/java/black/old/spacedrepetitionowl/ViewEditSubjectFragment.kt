@@ -111,6 +111,11 @@ class SubjectViewEditFragment : Fragment() {
                         builder.setTitle("Change Starting Date")
                         builder.setMessage("Save new starting date? This will reset all progress.")
 
+                        // Reminder: selectedTimestamp from the picker is the value of the selected
+                        // day on 00:00 at UTC+0. Here we wrangle that so the selected date
+                        // matches the user's timezone instead. More information in Utils.txt
+                        // for the startDayUTCMillisToStartDaySystemTimezoneMillis()
+                        // function.
                         val userTimezoneMillis =
                             startDayUTCMillisToStartDaySystemTimezoneMillis(selectedTimestamp)
 
