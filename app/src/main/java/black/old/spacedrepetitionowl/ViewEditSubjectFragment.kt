@@ -111,11 +111,14 @@ class SubjectViewEditFragment : Fragment() {
                         builder.setTitle("Change Starting Date")
                         builder.setMessage("Save new starting date? This will reset all progress.")
 
+                        val userTimezoneMillis =
+                            convertStartDayUTCMillisToStartDaySystemTimezoneMillis(selectedTimestamp)
+
                         // Positive button
                         builder.setPositiveButton("YES") { dialog, which ->
-                            mainViewModel.updateSubjectStartDate(args.subjectId, selectedTimestamp)
+                            mainViewModel.updateSubjectStartDate(args.subjectId, userTimezoneMillis)
                             sro_viewedit_starting_date.text = dateStringFormatter(
-                                selectedTimestamp,
+                                userTimezoneMillis,
                                 true
                             )
 
@@ -123,8 +126,7 @@ class SubjectViewEditFragment : Fragment() {
                             // mainViewModel.resetRemindersCheckedStateForSubject(args.subjectId)
 
                             // Update new reminder dates based on new starting date
-                            // TODO this does not seem to save properly 🤔 Debug soon.
-                            val reminderDates = getReminderDates(selectedTimestamp)
+                            val reminderDates = getReminderDates(userTimezoneMillis)
                             reminderDates.forEachIndexed { index, value ->
                                 mainViewModel.updateDateTimestampAndReset(
                                     currentReminders!![index].id,
@@ -151,7 +153,7 @@ class SubjectViewEditFragment : Fragment() {
                         val dialog: AlertDialog = builder.create()
                         // Show the alert only if the selected date from picker differs from the current
                         // date.
-                        if (selectedTimestamp != currentSubject!!.startDateTimestamp) {
+                        if (userTimezoneMillis != currentSubject!!.startDateTimestamp) {
                             dialog.show()
                         }
                     }
