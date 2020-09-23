@@ -112,7 +112,7 @@ class SubjectViewEditFragment : Fragment() {
                         builder.setMessage("Save new starting date? This will reset all progress.")
 
                         val userTimezoneMillis =
-                            convertStartDayUTCMillisToStartDaySystemTimezoneMillis(selectedTimestamp)
+                            startDayUTCMillisToStartDaySystemTimezoneMillis(selectedTimestamp)
 
                         // Positive button
                         builder.setPositiveButton("YES") { dialog, which ->

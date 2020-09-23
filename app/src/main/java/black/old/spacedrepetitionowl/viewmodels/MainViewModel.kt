@@ -4,7 +4,8 @@ import android.app.AlarmManager
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
-import black.old.spacedrepetitionowl.AlarmScheduler
+import androidx.preference.PreferenceManager
+import black.old.spacedrepetitionowl.*
 import black.old.spacedrepetitionowl.database.SroDatabase
 import black.old.spacedrepetitionowl.models.*
 import black.old.spacedrepetitionowl.repositories.SroRepository
@@ -16,8 +17,8 @@ import java.util.concurrent.TimeUnit
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private lateinit var sroRepository: SroRepository
-    private lateinit var context: Context
+    private var sroRepository: SroRepository
+    private var context: Context
     val selectedSubject = MutableLiveData<SubjectPackage>()
 
     init {
@@ -42,9 +43,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         var nowTimestamp: Long
         if(customTimestamp == 0L) {
-            nowTimestamp = System.currentTimeMillis()
+            // When customTimestamp is 0, it means we want to use the value of "now" for
+            // starting date. However, the app also has a preference where a user can pick a time
+            // (hh:mm) for the notifications to show up. This time will likely not match the "now"
+            // time.
+            // So, what we want to do here is to grab the correct day/month/year only, then set
+            // the timestamp millis for it to be at start of the day, and finally add the hour
+            // preference count to that millis, so the end result is a timestamp at the correct
+            // day/month/year, *plus* the correct hour/minute.
+            //
+            // To recap:
+            // 1) get current now millis,
+            // 2) run timestampToLocalDate() on it, get correct timezone LocalDate that ignores time
+            // 3) convert that result back to millis at start of the day with
+            //    timestampFromLocalDateAtStartOfDay()
+            // 3) check notification preference and add the correct millis from it
+            // 4) save this value as nowTimestamp
+            val localDateNow = timestampToLocalDate(System.currentTimeMillis())
+            val startDateNowMillis = timestampFromLocalDateAtStartOfDay(localDateNow)
+            val sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(getApplication())
+            val notifTimePreferenceInMinutes = sharedPreferences.getInt(
+                "pref_notification_time",
+                TimepickerPreference.DEFAULT_MINUTES_FROM_MIDNIGHT)
+
+            val notifTimePreferenceInMillis = notifTimePreferenceInMinutes * 60000
+            nowTimestamp = startDateNowMillis + notifTimePreferenceInMillis
         }
         else {
+            // At the current version of the app, this case never appears because we don't allow
+            // picking custom date on new subject creation, only during edits.
             nowTimestamp = customTimestamp
         }
 
@@ -89,7 +117,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     subjectText,
                     currentReminderGeneratedId,
                     dateTimestamp)
-
             }
         }
     }

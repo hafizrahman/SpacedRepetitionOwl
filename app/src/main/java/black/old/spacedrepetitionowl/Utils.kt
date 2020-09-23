@@ -96,14 +96,14 @@ fun timestampFromLocalDateAtStartOfDay(localDate: LocalDate): Long {
 // only the day/month/year using the function below, then run function 2 above to convert it back
 // to the timezone-correct timestamp.
 fun timestampUTCToLocalDate(timestampUtc: Long): LocalDate {
-    val localTimezone = ZoneId.of("UTC")
+    val utcTimezone = ZoneId.of("UTC")
     return LocalDateTime
-        .ofInstant(Instant.ofEpochMilli(timestampUtc), localTimezone)
+        .ofInstant(Instant.ofEpochMilli(timestampUtc), utcTimezone)
         .toLocalDate()
 }
 
 // Combination from function 1b and function 2 above:
 // convert start day UTC in millis, to start day system timezone in millis
-fun convertStartDayUTCMillisToStartDaySystemTimezoneMillis(timestampUtc: Long): Long {
+fun startDayUTCMillisToStartDaySystemTimezoneMillis(timestampUtc: Long): Long {
     return timestampFromLocalDateAtStartOfDay(timestampUTCToLocalDate(timestampUtc))
 }
