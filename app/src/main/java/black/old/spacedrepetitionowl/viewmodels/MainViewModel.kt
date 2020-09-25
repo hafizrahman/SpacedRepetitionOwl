@@ -44,9 +44,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         var nowTimestamp: Long
         if(customTimestamp == 0L) {
             // When customTimestamp is 0, it means we want to use the value of "now" for
-            // starting date. However, the app also has a preference where a user can pick a time
-            // (hh:mm) for the notifications to show up. This time will likely not match the "now"
-            // time.
+            // starting date/time. However, the app also has a preference where a user can pick a
+            // time(hh:mm) for the notifications to show up. This time will likely not match the
+            // "now" time.
             // So, what we want to do here is to grab the correct day/month/year only, then set
             // the timestamp millis for it to be at start of the day, and finally add the hour
             // preference count to that millis, so the end result is a timestamp at the correct
@@ -112,6 +112,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 dateTimestamp
                 )
                 val currentReminderGeneratedId = sroRepository.insertReminder(currentReminder)
+
+                // TODO Add the correct notification here, instead of the dummy
 
                 addReminderNotification(context,
                     subjectText,

@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.preference.PreferenceManager
 import black.old.spacedrepetitionowl.models.*
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -119,11 +120,22 @@ class SubjectViewEditFragment : Fragment() {
                         val userTimezoneMillis =
                             startDayUTCMillisToStartDaySystemTimezoneMillis(selectedTimestamp)
 
+                        // After getting the start date on the correct timezone, add in the
+                        // correct time as set in the preference.
+                        val sharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(requireActivity())
+                        val notifTimePreferenceInMinutes = sharedPreferences.getInt(
+                            "pref_notification_time",
+                            TimepickerPreference.DEFAULT_MINUTES_FROM_MIDNIGHT)
+                        val notifTimePreferenceInMillis = notifTimePreferenceInMinutes * 60000
+                        val finalMillis = userTimezoneMillis + notifTimePreferenceInMillis
+
                         // Positive button
                         builder.setPositiveButton("YES") { dialog, which ->
-                            mainViewModel.updateSubjectStartDate(args.subjectId, userTimezoneMillis)
+                            mainViewModel.updateSubjectStartDate(args.subjectId, finalMillis)
+
                             sro_viewedit_starting_date.text = dateStringFormatter(
-                                userTimezoneMillis,
+                                finalMillis,
                                 true
                             )
 
@@ -131,7 +143,7 @@ class SubjectViewEditFragment : Fragment() {
                             // mainViewModel.resetRemindersCheckedStateForSubject(args.subjectId)
 
                             // Update new reminder dates based on new starting date
-                            val reminderDates = getReminderDates(userTimezoneMillis)
+                            val reminderDates = getReminderDates(finalMillis)
                             reminderDates.forEachIndexed { index, value ->
                                 mainViewModel.updateDateTimestampAndReset(
                                     currentReminders!![index].id,
