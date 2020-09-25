@@ -73,7 +73,7 @@ class SubjectFragment : Fragment() {
 
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),
         // so here we are using the Activity's context
-        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         // New observer
          mainViewModel.getAllData()?.observe(viewLifecycleOwner,
@@ -94,26 +94,7 @@ class SubjectFragment : Fragment() {
          */
         return view
     }
-/*
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var mainViewModel: MainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
-        when(item.itemId) {
-            R.id.menu_sortby_default -> {
-               // displaySampleNotification()
-                setNotification15sFromNow()
-                Log.d("FIFTEEN", "Setting notification alarm for 15 secs from now")
-                adapter.changeOrder(SORTBY_DEFAULT)
-                return true
-            }
-            R.id.menu_sortby_reminder -> {
-                displaySampleNotification()
-                adapter.changeOrder(SORTBY_REMINDER)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-*/
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {
@@ -128,24 +109,24 @@ class SubjectFragment : Fragment() {
         listener = null
     }
 
+    // These two are dummy functions that are not needed, but can be run to test notification.
     fun displaySampleNotification() {
         // Display example notification
         NotificationHelper.createSampleDataNotification(
-            activity!!.applicationContext,
+            requireActivity().applicationContext,
             "It's time to learn!",
             "How to make coffee",
             "How to make coffee -- 2nd Phase",
             true)
     }
-
     fun setNotification15sFromNow() {
         val fifteenSecsFromNow = System.currentTimeMillis() + (5*1000)
-        val alarmManager = activity!!.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val alarmManager = requireActivity().applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         AlarmScheduler.scheduleAlarm(
-            activity!!.applicationContext,
+            requireActivity().applicationContext,
             fifteenSecsFromNow,
-            AlarmScheduler.createPendingIntent(activity!!.applicationContext),
+            AlarmScheduler.createPendingIntent(requireActivity().applicationContext),
             alarmManager
         )
     }

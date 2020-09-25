@@ -76,7 +76,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             nowTimestamp = customTimestamp
         }
 
-        // Generate one dummy Subject
+        // Generate one Subject
         val subjectToEnter = Subject(
             subjectText,
             uriText,
@@ -113,29 +113,33 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 )
                 val currentReminderGeneratedId = sroRepository.insertReminder(currentReminder)
 
-                // TODO Add the correct notification here, instead of the dummy
-
-                addReminderNotification(context,
-                    subjectText,
-                    currentReminderGeneratedId,
-                    dateTimestamp)
+                createNotificationAlarm(
+                    context,
+                    subjectToEnter,
+                    currentReminder.dateTimestamp,
+                    currentReminderGeneratedId
+                )
             }
         }
     }
 
-    fun addReminderNotification(context: Context, subjectText: String, reminderId: Long, reminderTimestamp: Long) {
-        // Create the unique pending intent for the particular reminder
-        val pendingInt = AlarmScheduler.createPendingIntentForReminder(
+    private fun createNotificationAlarm(context: Context,
+                                        subject: Subject,
+                                        reminder_timestamp: Long,
+                                        reminder_id: Long
+    ) {
+        val notifPendingIntent = AlarmScheduler.createReminderPendingIntent(
             context,
-            subjectText,
-            reminderId)
+            subject,
+            reminder_timestamp,
+            reminder_id
+        )
 
-        // Submit pending intent to Alarm Manager to schedule it
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         AlarmScheduler.scheduleAlarm(
             context,
-            reminderTimestamp,
-            pendingInt,
+            reminder_timestamp,
+            notifPendingIntent,
             alarmManager
         )
     }

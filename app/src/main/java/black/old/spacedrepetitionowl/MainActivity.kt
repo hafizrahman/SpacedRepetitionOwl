@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
             this,
             NotificationManagerCompat.IMPORTANCE_HIGH,
             false,
-            //getString(R.string.app_name),
-            "SRO CHANNEL NAME IS HERE",
+            "Subject Reminders",
             "Spaced Repetition Owl notification channel."
         )
 

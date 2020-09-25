@@ -6,13 +6,26 @@ import android.content.Intent
 
 class AlarmBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        NotificationHelper.createSampleDataNotification(
-            context,
-            "It's time to learn!",
-            "How to make coffee",
-            "How to make coffee -- 2nd Phase",
-            true
-        )
+
+        if(context != null && intent != null && intent.action != null) {
+            if (intent.action!! == "ACTION_SEND_LEARNING_REMINDER") {
+                if (intent.extras != null) {
+                    val reminder_text = intent.extras!!.getString("notification_title")
+                    val reminder_id = intent.extras!!.getLong("notification_subject_id")
+                    if (reminder_text != null && reminder_id != null) {
+                        // 3
+                        NotificationHelper.createReminderNotification(
+                            context,
+                            reminder_id,
+                            "Spaced Repetition Owl: Time for learning",
+                            reminder_text,
+                            reminder_text,
+                            true
+                        )
+                    }
+                }
+            }
+        }
     }
 
 }

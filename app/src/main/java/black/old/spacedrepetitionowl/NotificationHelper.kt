@@ -9,13 +9,17 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
+// Most notification work is based on tutorial from:
+// https://www.raywenderlich.com/1214490-android-notifications-tutorial-getting-started
 object NotificationHelper {
-    fun createNotificationChannel(context: Context, importance: Int, showBadge: Boolean,
-                                  name: String, description: String) {
+    fun createNotificationChannel(context: Context,
+                                  importance: Int,
+                                  showBadge: Boolean,
+                                  name: String,
+                                  description: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            //val channelId = "${context.packageName}-$name"
-            val channelId = "SRO CHANNEL ID"
+            val channelId = "${context.packageName}-$name"
             val channel = NotificationChannel(channelId, name, importance)
             channel.description = description
             channel.setShowBadge(showBadge)
@@ -25,9 +29,12 @@ object NotificationHelper {
         }
     }
 
-    fun createSampleDataNotification(context: Context, title: String, message: String,
-                                     bigText: String, autoCancel: Boolean) {
-        val channelId = "SRO CHANNEL ID"
+    fun createSampleDataNotification(context: Context,
+                                     title: String,
+                                     message: String,
+                                     bigText: String,
+                                     autoCancel: Boolean) {
+        val channelId = "${context.packageName}"
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
             setSmallIcon(R.drawable.ic_add_24dp)
             setContentTitle(title)
@@ -42,5 +49,24 @@ object NotificationHelper {
         }
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(1237, notificationBuilder.build())
+    }
+
+    fun createReminderNotification(context: Context,
+                                   reminder_id: Long,
+                                   title: String,
+                                   message: String,
+                                   bigText: String,
+                                   autoCancel: Boolean) {
+        val channelId = "${context.packageName}"
+        val notifBuilder = NotificationCompat.Builder(context, channelId).apply {
+            setSmallIcon(R.drawable.ic_baseline_subject_24)
+            setContentTitle(title)
+            setContentText(message)
+            setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
+            priority = NotificationCompat.PRIORITY_DEFAULT
+            setAutoCancel(autoCancel)
+        }
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.notify(reminder_id.toInt(), notifBuilder.build())
     }
 }
