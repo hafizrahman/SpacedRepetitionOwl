@@ -1,5 +1,7 @@
 package black.old.spacedrepetitionowl
 
+import android.app.AlarmManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -149,11 +151,26 @@ class SubjectViewEditFragment : Fragment() {
                                     currentReminders!![index].id,
                                     value
                                 )
+
+                                // TODO update existing reminders with the new one
+                                // our pending intents is created using "PendingIntent.FLAG_UPDATE_CURRENT"
+                                // so it should be possible to update them with the new timestamps,
+                                // provided we enter them with AlarmManager.createReminderPendingIntent()
+                                // using identical parameters
+                                // The function below does not work yet, and in fact it
+                                // deletes everything :(
+                                /*
+                                updateNotificationAlarm(
+                                    requireActivity(),
+                                    currentSubject!!,
+                                    value,
+                                    currentReminders!![index].id
+                                    )
+
+                                 */
                             }
 
-                            // TODO delete existing notifications with the old dates
 
-                            // TODO create new notifications with the new dates
 
                             // Let user know
                             Toast.makeText(
@@ -239,5 +256,26 @@ class SubjectViewEditFragment : Fragment() {
         )
         button.setTextColor(
             ContextCompat.getColor(button.context, R.color.colorDarkGray ))
+    }
+
+    private fun updateNotificationAlarm(context: Context,
+                                        subject: Subject,
+                                        reminder_timestamp: Long,
+                                        reminder_id: Long
+    ) {
+        val notifPendingIntent = AlarmScheduler.createReminderPendingIntent(
+            context,
+            subject,
+            reminder_timestamp,
+            reminder_id
+        )
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        AlarmScheduler.scheduleAlarm(
+            context,
+            reminder_timestamp,
+            notifPendingIntent,
+            alarmManager
+        )
     }
 }

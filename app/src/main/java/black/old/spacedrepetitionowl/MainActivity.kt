@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
             this,
             NotificationManagerCompat.IMPORTANCE_HIGH,
             false,
-            "Subject Reminders",
+            "Spaced Repetition Owl Reminders",
             "Spaced Repetition Owl notification channel."
         )
 
