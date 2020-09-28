@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import black.old.spacedrepetitionowl.models.Reminder
 import black.old.spacedrepetitionowl.models.Subject
 
 object AlarmScheduler {
@@ -26,9 +25,9 @@ object AlarmScheduler {
                                     reminder_timestamp: Long,
                                     reminder_id: Long) : PendingIntent {
         val intent = Intent(context.applicationContext, AlarmBroadcastReceiver::class.java).apply {
-            action = "ACTION_SEND_LEARNING_REMINDER"
-            putExtra("notification_title", subject.content)
-            putExtra("notification_subject_id", reminder_id)
+            action = context.getString(R.string.key_bc_notif_action)
+            putExtra(context.getString(R.string.key_notif_title), subject.content)
+            putExtra(context.getString(R.string.key_notif_subject_id), reminder_id)
         }
 
         return PendingIntent.getBroadcast(

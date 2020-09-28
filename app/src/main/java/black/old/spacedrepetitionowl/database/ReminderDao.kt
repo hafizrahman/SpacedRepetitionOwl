@@ -28,7 +28,7 @@ interface ReminderDao {
     fun getRemindersBySubject(subjectId: Long): LiveData<List<Reminder>>
 
     // Reset all checked state back to false. Used when user is changing starting date.
-    // See ViewEditSubjectFragment.kt for more details.
+    // See SubjectViewEditFragment.kt for more details.
     @Query("UPDATE sro_reminders SET checked = 0 where subjectId == :subject_id")
     suspend fun resetRemindersCheckedStateForSubject(subject_id: Long)
 

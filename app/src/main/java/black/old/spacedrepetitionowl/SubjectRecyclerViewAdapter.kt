@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 class SubjectRecyclerViewAdapter(
     var sortingType: Int,
     val listener: OnListFragmentInteractionListener?,
-    val mainClickListener: (SubjectPackage) -> Unit,                // clicklistener for the main card area.
+    val mainClickListener: (SubjectPackage) -> Unit,       // clicklistener for the main card area.
     val reminderClickListener: (Reminder) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val onClickListener: View.OnClickListener

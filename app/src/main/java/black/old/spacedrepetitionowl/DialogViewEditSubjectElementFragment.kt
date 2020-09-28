@@ -1,7 +1,6 @@
 package black.old.spacedrepetitionowl
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +11,9 @@ import androidx.navigation.fragment.navArgs
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_dialog_view_edit_subject_element.view.*
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DialogViewEditSubjectElementFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DialogViewEditSubjectElementFragment : DialogFragment() {
 
     val args: DialogViewEditSubjectElementFragmentArgs by navArgs()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +33,9 @@ class DialogViewEditSubjectElementFragment : DialogFragment() {
         // so here we are using the Activity's context
         val mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-
         when(args.subjectElementType) {
-            1 -> view.sro_viewedit_element_heading.text = "Edit subject content"
-            2 -> view.sro_viewedit_element_heading.text = "Edit subject URL"
+            1 -> view.sro_viewedit_element_heading.text = getString(R.string.dialog_heading_edit_subject_content)
+            2 -> view.sro_viewedit_element_heading.text = getString(R.string.dialog_heading_edit_subject_url)
         }
 
         // populate the content
@@ -69,7 +57,7 @@ class DialogViewEditSubjectElementFragment : DialogFragment() {
             findNavController().popBackStack()
         }
 
-        // Clicklistener for the cancel button
+        // Click listener for the cancel button
         view.sro_viewedit_element_cancel.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -86,7 +74,9 @@ class DialogViewEditSubjectElementFragment : DialogFragment() {
         // ref: https://stackoverflow.com/a/8991860
         val currentDialog = dialog
         if(currentDialog != null) {
-            currentDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            currentDialog.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
         }
 
     }

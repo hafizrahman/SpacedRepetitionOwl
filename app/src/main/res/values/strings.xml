@@ -1,6 +1,35 @@
 <resources>
-    <string name="app_name">Spaced Repetition Owl</string>
+    <!-- Keys -->
+    <string name="key_bc_notif_action" translatable="false">ACTION_SEND_LEARNING_REMINDER</string>
+    <string name="key_notif_title" translatable="false">notification_title</string>
+    <string name="key_notif_subject_id" translatable="false">notification_subject_id</string>
+    <string name="key_tag_delete_dialog_alert" translatable="false">DELETE_DIALOG_TAG</string>
+    <string name="key_tag_dialog_fragment" translatable="false">TIMEPICKER_DIALOG_TAG</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Regular, translatable strings -->
+    <string name="app_name">Spaced Repetition Owl</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification_title">Spaced Repetition Owl: Time for learning</string>
+    <string name="delete_alert_title">Delete Subject?</string>
+    <string name="delete_alert_message">Subject will be deleted forever.</string>
+    <string name="button_label_delete">Delete Permanently</string>
+    <string name="button_label_cancel">Cancel</string>
+    <string name="toast_delete_success">Subject deleted</string>
+    <string name="dialog_heading_edit_subject_content">Edit subject content</string>
+    <string name="dialog_heading_edit_subject_url">Edit subject URL</string>
+    <string name="dialog_note_edited_alert_heading">Note edited</string>
+    <string name="dialog_note_edited_alert_message">Save note changes?</string>
+    <string name="dialog_note_edited_alert_positive">Save note</string>
+    <string name="dialog_note_edited_alert_positive_confirm">Note saved.</string>
+    <string name="dialog_note_edited_alert_negative">No</string>
+    <string name="dialog_note_edited_alert_neutral">Cancel</string>
+    <string name="dialog_date_edited_alert_heading">Change Starting Date</string>
+    <string name="dialog_date_edited_alert_message">Save new starting date? This will reset all progress.</string>
+    <string name="dialog_date_edited_alert_positive">Change date</string>
+    <string name="dialog_date_edited_alert_positive_confirm">New date saved.</string>
+    <string name="dialog_date_edited_alert_neutral">Cancel</string>
+
+
+    <string name="notification_channel_name">Spaced Repetition Owl Reminders</string>
+    <string name="notification_channel_description">Spaced Repetition Owl notification channel.</string>
 </resources>

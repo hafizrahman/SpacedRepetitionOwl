@@ -52,7 +52,9 @@ class SubjectTimelineRecyclerViewAdapter(
         return R.layout.fragment_subject_timeline_item
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectTimelineRecyclerViewAdapter.ViewHolderTimelineItem {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int): SubjectTimelineRecyclerViewAdapter.ViewHolderTimelineItem {
         return ViewHolderTimelineItem(LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_subject_timeline_item, parent, false))
     }

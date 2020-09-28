@@ -1,7 +1,6 @@
 package black.old.spacedrepetitionowl
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +11,7 @@ import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_dialog_add_subject.view.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DialogAddSubjectFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DialogAddSubjectFragment : DialogFragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,7 +50,7 @@ class DialogAddSubjectFragment : DialogFragment() {
 
         val dateButton = view.add_subject_change_date
         dateButton.setOnClickListener {view ->
-            picker.show(activity!!.supportFragmentManager, picker.toString())
+            picker.show(requireActivity().supportFragmentManager, picker.toString())
         }
 
         val dateText = view.add_subject_date
@@ -83,7 +72,9 @@ class DialogAddSubjectFragment : DialogFragment() {
         // ref: https://stackoverflow.com/a/8991860
         val currentDialog = dialog
         if(currentDialog != null) {
-            currentDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            currentDialog.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
         }
 
     }

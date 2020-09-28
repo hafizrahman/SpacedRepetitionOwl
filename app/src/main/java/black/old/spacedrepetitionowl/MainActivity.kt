@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
             this,
             NotificationManagerCompat.IMPORTANCE_HIGH,
             false,
-            "Spaced Repetition Owl Reminders",
-            "Spaced Repetition Owl notification channel."
+            getString(R.string.notification_channel_name),
+            getString(R.string.notification_channel_description)
         )
 
         // Color the status bar

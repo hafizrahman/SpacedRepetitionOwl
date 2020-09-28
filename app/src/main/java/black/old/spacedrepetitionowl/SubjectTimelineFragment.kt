@@ -13,11 +13,6 @@ import black.old.spacedrepetitionowl.models.SubjectPackage
 import black.old.spacedrepetitionowl.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_subject_timeline.view.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SubjectTimelineFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SubjectTimelineFragment : Fragment() {
     lateinit var adapter: SubjectTimelineRecyclerViewAdapter
     lateinit var mainViewModel: MainViewModel
@@ -32,11 +27,10 @@ class SubjectTimelineFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_subject_timeline, container, false)
 
-        adapter = SubjectTimelineRecyclerViewAdapter(
-            { subject : SubjectPackage -> mainSubjectBarClicked(subject) }
-        )
+        adapter = SubjectTimelineRecyclerViewAdapter {
+                subject : SubjectPackage -> mainSubjectBarClicked(subject)
+        }
         view.sro_subject_timeline_list.adapter = adapter
-
         view.sro_subject_timeline_list.layoutManager = LinearLayoutManager(context)
 
         // The ViewModel is already created on the Activity level (inside MainActivity.kt),

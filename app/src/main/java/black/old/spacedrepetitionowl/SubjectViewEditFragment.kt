@@ -111,8 +111,8 @@ class SubjectViewEditFragment : Fragment() {
                         // Confirmation is needed because a date change by default resets all
                         // progresses.
                         val builder = AlertDialog.Builder(requireActivity())
-                        builder.setTitle("Change Starting Date")
-                        builder.setMessage("Save new starting date? This will reset all progress.")
+                        builder.setTitle(getString(R.string.dialog_date_edited_alert_heading))
+                        builder.setMessage(getString(R.string.dialog_date_edited_alert_message))
 
                         // Reminder: selectedTimestamp from the picker is the value of the selected
                         // day on 00:00 at UTC+0. Here we wrangle that so the selected date
@@ -133,7 +133,8 @@ class SubjectViewEditFragment : Fragment() {
                         val finalMillis = userTimezoneMillis + notifTimePreferenceInMillis
 
                         // Positive button
-                        builder.setPositiveButton("YES") { dialog, which ->
+                        builder.setPositiveButton(
+                            getString(R.string.dialog_date_edited_alert_positive)) { dialog, which ->
                             mainViewModel.updateSubjectStartDate(args.subjectId, finalMillis)
 
                             sro_viewedit_starting_date.text = dateStringFormatter(
@@ -170,17 +171,17 @@ class SubjectViewEditFragment : Fragment() {
                                  */
                             }
 
-
-
                             // Let user know
                             Toast.makeText(
-                                requireActivity(), "New date saved.",
+                                requireActivity(),
+                                getString(R.string.dialog_date_edited_alert_positive_confirm),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
 
                         // Neutral button
-                        builder.setNeutralButton("Cancel") { dialog, which ->
+                        builder.setNeutralButton(
+                            getString(R.string.dialog_note_edited_alert_neutral)) { dialog, which ->
                             // Do nothing here, just dismiss the alert.
                         }
 
