@@ -16,7 +16,6 @@ import black.old.spacedrepetitionowl.SubjectFragment.OnListFragmentInteractionLi
 import black.old.spacedrepetitionowl.constants.SORTBY_DEFAULT
 import black.old.spacedrepetitionowl.models.SubjectPackage
 import kotlinx.android.synthetic.main.fragment_timeline_single_subject.view.*
-import java.text.SimpleDateFormat
 
 class SubjectRecyclerViewAdapter(
     var sortingType: Int,
@@ -104,7 +103,11 @@ class SubjectRecyclerViewAdapter(
 
             if(currentSubject != null) {
                 holder.contentView.text = currentSubject.content
-                holder.startingDate.text = formatSubjectCardStartDate(currentSubject.startDateTimestamp)
+                holder.startingDate.text = formatTimestamp(
+                    currentSubject.startDateTimestamp,
+                    "d MMMM YYYY"
+                )
+
 
                 if(currentSubject.url.isNotEmpty()) {
                     holder.urlView.text = currentSubject.url
@@ -138,29 +141,42 @@ class SubjectRecyclerViewAdapter(
                     }
 
                     /* Populate and style buttons content */
+                    val format = "d MMM"
                     holder.reminderBtn0.text =
-                        dateStringFormatter(reminderListForCurrentSubject[0].dateTimestamp)
+                        formatTimestamp(
+                            reminderListForCurrentSubject[0].dateTimestamp,
+                            format
+                        )
                     if(reminderListForCurrentSubject[0].checked)
                         toggleReminderButtonChecked(holder.reminderBtn0)
                     else
                         toggleReminderButtonUnchecked(holder.reminderBtn0)
 
                     holder.reminderBtn1.text =
-                        dateStringFormatter(reminderListForCurrentSubject[1].dateTimestamp)
+                        formatTimestamp(
+                            reminderListForCurrentSubject[1].dateTimestamp,
+                            format
+                        )
                     if(reminderListForCurrentSubject[1].checked)
                         toggleReminderButtonChecked(holder.reminderBtn1)
                     else
                         toggleReminderButtonUnchecked(holder.reminderBtn1)
 
                     holder.reminderBtn2.text =
-                        dateStringFormatter(reminderListForCurrentSubject[2].dateTimestamp)
+                        formatTimestamp(
+                            reminderListForCurrentSubject[2].dateTimestamp,
+                            format
+                        )
                     if(reminderListForCurrentSubject[2].checked)
                         toggleReminderButtonChecked(holder.reminderBtn2)
                     else
                         toggleReminderButtonUnchecked(holder.reminderBtn2)
 
                     holder.reminderBtn3.text =
-                        dateStringFormatter(reminderListForCurrentSubject[3].dateTimestamp)
+                        formatTimestamp(
+                            reminderListForCurrentSubject[3].dateTimestamp,
+                            format
+                        )
                     if(reminderListForCurrentSubject[3].checked)
                         toggleReminderButtonChecked(holder.reminderBtn3)
                     else
@@ -181,7 +197,8 @@ class SubjectRecyclerViewAdapter(
         }
         else if(holder is ViewHolderTest) {
             val currentReminder = remindersOrderedByDate[position]
-            holder.contentTestView.text = dateStringFormatter(currentReminder.dateTimestamp) + " -- " + currentReminder.subjectId.toString()
+            holder.contentTestView.text =
+                formatTimestamp(currentReminder.dateTimestamp, "d MMM") + " -- " + currentReminder.subjectId.toString()
         }
     }
 
@@ -207,16 +224,6 @@ class SubjectRecyclerViewAdapter(
             it.subjectId == subjectId
         }
         return currentReminders.sortedBy { it.dateTimestamp } // Sort list based on timestamp, oldest first
-    }
-
-    private fun dateStringFormatter(timestamp: Long) : String {
-        val pattern = "d MMM HH:mm"
-        return SimpleDateFormat(pattern).format(timestamp)
-    }
-
-    private fun formatSubjectCardStartDate(timestamp: Long) : String {
-        val pattern = "d MMMM YYYY HH:mm"
-        return SimpleDateFormat(pattern).format(timestamp)
     }
 
     private fun toggleReminderButtonChecked(button: Button) {
