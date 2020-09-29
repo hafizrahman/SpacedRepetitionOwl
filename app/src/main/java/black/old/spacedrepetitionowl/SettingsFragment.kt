@@ -7,8 +7,6 @@ import androidx.preference.PreferenceFragmentCompat
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    private val DIALOG_FRAGMENT_TAG = getString(R.string.key_tag_dialog_fragment)
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preference, rootKey)
     }
@@ -17,7 +15,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         if(preference is TimepickerPreference) {
             val timepickerdialog = TimePickerPreferenceDialog.newInstance(preference.key)
             timepickerdialog.setTargetFragment(this, 0)
-            timepickerdialog.show(parentFragmentManager, DIALOG_FRAGMENT_TAG)
+            timepickerdialog.show(parentFragmentManager, getString(R.string.key_tag_dialog_fragment))
         }
         else {
             super.onDisplayPreferenceDialog(preference)
