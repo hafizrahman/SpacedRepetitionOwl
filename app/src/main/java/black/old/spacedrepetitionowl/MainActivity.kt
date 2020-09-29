@@ -50,11 +50,14 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
         setSupportActionBar(sroToolbar)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.subjectFragment, R.id.subjectTimelineFragment, R.id.aboutFragment, R.id.settingsFragment),
+            setOf(
+                R.id.subjectFragment,
+                R.id.subjectTimelineFragment,
+                R.id.aboutFragment,
+                R.id.settingsFragment),
             drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-
 
         // create ViewModel at the Activity level.
         // the fragment (SubjectFragment in this case) can then re-use this ViewModel by

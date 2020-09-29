@@ -9,6 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="@string/about_text"
+        style="@style/reminder_details_notes"/>
 
 </FrameLayout>
