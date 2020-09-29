@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.lifecycle.*
 import androidx.preference.PreferenceManager
 import black.old.spacedrepetitionowl.*
+import black.old.spacedrepetitionowl.R
 import black.old.spacedrepetitionowl.database.SroDatabase
 import black.old.spacedrepetitionowl.models.*
 import black.old.spacedrepetitionowl.repositories.SroRepository
@@ -123,6 +124,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // Create example subjects
+    fun createExampleSubjects() {
+        insertSubject(
+            context.getString(R.string.example_subject_1_title),
+            context.getString(R.string.example_subject_1_url),
+            context.getString(R.string.example_subject_1_notes)
+        )
+
+        insertSubject(
+            context.getString(R.string.example_subject_2_title),
+            context.getString(R.string.example_subject_2_url),
+            context.getString(R.string.example_subject_2_notes)
+        )
+
+        insertSubject(
+            context.getString(R.string.example_subject_3_title),
+            context.getString(R.string.example_subject_3_url),
+            context.getString(R.string.example_subject_3_notes)
+        )
+    }
     private fun createNotificationAlarm(context: Context,
                                         subject: Subject,
                                         reminder_timestamp: Long,

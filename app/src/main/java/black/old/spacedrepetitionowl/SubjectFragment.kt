@@ -75,6 +75,21 @@ class SubjectFragment : Fragment() {
         // so here we are using the Activity's context
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
+        // If this is the first time the app is loaded, generate a few example Subjects.
+        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        val pref_key_first_time = getString(R.string.key_pref_app_first_time)
+        if(sharedPref.getBoolean(pref_key_first_time, true)) {
+            mainViewModel.createExampleSubjects()
+            with(sharedPref.edit()) {
+                putBoolean(
+                    pref_key_first_time,
+                    false
+                )
+                apply()
+            }
+
+        }
+
         // New observer
          mainViewModel.getAllData()?.observe(viewLifecycleOwner,
             Observer { subjectsAndRemindersPair ->

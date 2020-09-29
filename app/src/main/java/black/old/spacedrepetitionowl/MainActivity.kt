@@ -26,6 +26,20 @@ class MainActivity : AppCompatActivity(), SubjectFragment.OnListFragmentInteract
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Checker if the app is run for the first time.
+        // If it is, set it as true.
+        val sharedPref = getPreferences(MODE_PRIVATE)
+        if(!sharedPref.contains(getString(R.string.key_pref_app_first_time))) {
+            with(sharedPref.edit()) {
+                putBoolean(
+                    getString(R.string.key_pref_app_first_time),
+                    true
+                )
+                apply()
+            }
+        }
+
+
         drawerLayout = findViewById<DrawerLayout>(R.id.main_drawer_layout)
         val navView = findViewById<NavigationView>(R.id.main_navigation_view)
         val sroToolbar = findViewById<Toolbar>(R.id.main_toolbar)

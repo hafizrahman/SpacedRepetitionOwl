@@ -5,6 +5,7 @@
     <string name="key_notif_subject_id" translatable="false">notification_subject_id</string>
     <string name="key_tag_delete_dialog_alert" translatable="false">DELETE_DIALOG_TAG</string>
     <string name="key_tag_dialog_fragment" translatable="false">TIMEPICKER_DIALOG_TAG</string>
+    <string name="key_pref_app_first_time" translatable="false">pref_first_time_being_run</string>
 
     <!-- Regular, translatable strings -->
     <string name="app_name">Spaced Repetition Owl</string>
@@ -28,7 +29,15 @@
     <string name="dialog_date_edited_alert_positive">Change date</string>
     <string name="dialog_date_edited_alert_positive_confirm">New date saved.</string>
     <string name="dialog_date_edited_alert_neutral">Cancel</string>
-
+    <string name="example_subject_1_title">Learn how to make full wheat bread.</string>
+    <string name="example_subject_1_url">https://www.allrecipes.com/recipe/6773/simple-whole-wheat-bread/</string>
+    <string name="example_subject_1_notes">Requires a large bowl, stand mixer.</string>
+    <string name="example_subject_2_title">Learn Japanese Katakana</string>
+    <string name="example_subject_2_url" translatable="false"></string>
+    <string name="example_subject_2_notes">Starting from page 5 on the book.</string>
+    <string name="example_subject_3_title">Practice Blues scale on guitar</string>
+    <string name="example_subject_3_url" translatable="false">https://www.youtube.com/watch?v=BgRzzvVWBrU</string>
+    <string name="example_subject_3_notes">Clean up guitar strings when done.</string>
 
     <string name="notification_channel_name">Spaced Repetition Owl Reminders</string>
     <string name="notification_channel_description">Spaced Repetition Owl notification channel.</string>
